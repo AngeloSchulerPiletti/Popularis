@@ -13,14 +13,14 @@
       </div>
       <div class="bottom">
           <nav>
-                <Link :href="route('pautas.federal.all')">Pautas Federais</Link>
-                <div>
+                <Link :href="route('pautas.federal.all')" @mouseenter="show.federal = true" @mouseleave="show.federal = false">Pautas Federais</Link>
+                <div v-show="show.federal">
                     <Link :href="route('pautas.federal', {'type': 'atuais'})">Pautas Atuais</Link>
                     <Link :href="route('pautas.federal', {'type': 'passadas'})">Pautas Passadas</Link>
                     <Link :href="route('pautas.federal', {'type': 'futuras'})">Pautas Futuras</Link>
                 </div>
-                <Link :href="route('pautas.estadual.all')">Pautas Estaduais</Link>
-                <div>
+                <Link :href="route('pautas.estadual.all')" @mouseenter="show.estadual = true" @mouseleave="show.estadual = false">Pautas Estaduais</Link>
+                <div v-show="show.estadual">
                     <Link :href="route('pautas.estadual', {'type': 'atuais'})">Pautas Atuais</Link>
                     <Link :href="route('pautas.estadual', {'type': 'passadas'})">Pautas Passadas</Link>
                     <Link :href="route('pautas.estadual', {'type': 'futuras'})">Pautas Futuras</Link>
@@ -34,6 +34,14 @@
 import { Link } from '@inertiajs/inertia-vue3'
 
 export default {
+    data(){
+        return{
+            show:{
+                federal: false,
+                estadual: false,
+            }      
+        }
+    },
     components:{
         Link,
     }

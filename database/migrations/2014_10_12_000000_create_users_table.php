@@ -23,6 +23,23 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
+            $table->tinyInteger('CPF')->unique();
+            $table->tinyInteger('RG')->unique();
+            $table->tinyInteger('titulo_eleitoral')->unique();
+            /*+---------------------------------+
+              |        DADOS POLÍTICOS          |
+              +---------------------------------+*/
+            $table->boolean('politico')->default(false);
+            $table->integer('politico_tipo')->nullable(); // 1-Dep. Est. | 2-Dep. Fed. | 3-Senador
+            $table->string('UF'); // Estado (RS, RN, PB, BH, etc) 
+            $table->tinyText('partido')->nullable(); // Partido Político
+            /*+---------------------------------+
+              |      HISTÓRICO DE VOTAÇÕES      |
+              +---------------------------------+*/
+            $table->tinyText('neg_votes')->nullable(); // Votações negativas passadas. Formatação: ID-ID-ID. Exemplo: 34-56-45-32
+            $table->tinyText('pos_votes')->nullable(); // Votações positivas passadas.
+            
+        
         });
     }
 
