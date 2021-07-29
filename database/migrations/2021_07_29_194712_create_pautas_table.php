@@ -23,6 +23,13 @@ class CreatePautasTable extends Migration
             $table->tinyInteger('assunto'); 
             $table->mediumText('resumo');
             $table->longText('pauta');
+            /*+-------------------------------+
+              |      CONTAGEM DE VOTOS        |
+              +-------------------------------+*/
+            $table->tinyInteger('neg_votes')->default(0);
+            $table->tinyInteger('pos_votes')->default(0);
+            //STATUS DA VOTAÇÃO
+            $table->integer('status')->default(4); // 1-perdeu 2-venceu 3-em votação 4-futura
 
         });
     }
