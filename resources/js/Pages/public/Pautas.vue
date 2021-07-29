@@ -1,6 +1,6 @@
 <template>
   <app-public>
-      OLA
+      Pautas!
   </app-public>
 </template>
 

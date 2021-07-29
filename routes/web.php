@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PautasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,5 +17,19 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('inicio');
 
+
+//------------------------------ PAUTAS ----------------------------------\\
+Route::group(['as' => 'pautas.', 'prefix' => 'pautas'], function () {
+    Route::get('/', [PautasController::class, 'index'])->name('all');
+
+    Route::group(['prefix' => 'federal'], function () {
+        Route::get('/',         [PautasController::class, 'federal_all'])->name('federal.all');
+        Route::get('/{type}',   [PautasController::class, 'federal'])->name('federal');
+    });
+    Route::group(['prefix' => 'estadual'], function () {
+        Route::get('/',         [PautasController::class, 'estadual_all'])->name('estadual.all');
+        Route::get('/{type}',   [PautasController::class, 'estadual'])->name('estadual');
+    });
+});

@@ -1,6 +1,6 @@
 <template>
   <div>
-      <!-- HEADER  -->
+      <header-component/>
   </div>
   <main>
       <slot></slot>
@@ -8,8 +8,11 @@
 </template>
 
 <script>
+import Header from "@/Components/Header";
 export default {
-
+  components:{
+    'header-component': Header,
+  }
 }
 </script>
 
