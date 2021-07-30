@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PautasController;
+use App\Http\Controllers\PautaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,7 @@ Route::group(['as' => 'pautas.', 'prefix' => 'pautas'], function () {
         Route::get('/{type}',   [PautasController::class, 'estadual'])->name('estadual');
     });
 });
+
+
+//----------------------------- PAUTA ------------------------------\\
+Route::middleware('auth')->get('/pauta/{id}',       [PautaController::class, 'show'])->name('pauta.show');
