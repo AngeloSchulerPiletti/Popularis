@@ -6,7 +6,7 @@
 
         <section v-if="page.scope != ''">
             <div v-if="page.scope == 'fed'">
-
+                
             </div>
             <div v-else-if="page.scope == 'est'">
 

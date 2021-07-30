@@ -1,0 +1,36 @@
+@mixin Title1 {
+    font-weight: 900;
+    text-transform: uppercase;
+}
+@mixin Title2 {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+@mixin Title3 {
+    font-weight: 500;
+    text-transform: uppercase;
+}
+@mixin Font0 {
+    font-weight: 500;
+}
+@mixin Font1 {
+    font-weight: 400;
+}
+@mixin Font1_I {
+    font-weight: 400;
+    font-style: italic;
+}
+@mixin Font2 {
+    font-weight: 300;
+}
+@mixin Font2_I {
+    font-weight: 300;
+    font-style: italic;
+}
+@mixin Font3 {
+    font-weight: 100;
+}
+@mixin Font3_I {
+    font-weight: 100;
+    font-style: italic;
+}
