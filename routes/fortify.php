@@ -23,9 +23,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
 
     // Authentication...
     if ($enableViews) {
-        Route::get('/login', [AuthenticatedSessionController::class, 'create'])
+        Route::get('/entrar', [AuthenticatedSessionController::class, 'create'])
             ->middleware(['guest:'.config('fortify.guard')])
-            ->name('login');
+            ->name('entrar');
     }
 
     $limiter = config('fortify.limiters.login');
@@ -64,9 +64,9 @@ Route::group(['middleware' => config('fortify.middleware', ['web'])], function (
     // Registration...
     if (Features::enabled(Features::registration())) {
         if ($enableViews) {
-            Route::get('/register', [RegisteredUserController::class, 'create'])
+            Route::get('/cadastro', [RegisteredUserController::class, 'create'])
                 ->middleware(['guest:'.config('fortify.guard')])
-                ->name('register');
+                ->name('cadastro');
         }
 
         Route::post('/register', [RegisteredUserController::class, 'store'])
