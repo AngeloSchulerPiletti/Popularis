@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="header_container">
       <header-component/>
   </div>
   <main>
@@ -17,5 +17,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+#header_container{
+  position: relative;
+  z-index: 1000;
+}
 </style>

@@ -128,7 +128,6 @@ export default {
 <style lang="scss" scoped>
 header {
     position: relative;
-    margin-bottom: 7vw;
 
     background-color: $white;
     box-shadow: 0px 0px 15px 0px $black;
@@ -197,6 +196,7 @@ header {
         left: 0;
         bottom: 0;
         transform: translateY(100%);
+        
 
         background: linear-gradient(
             165deg,
