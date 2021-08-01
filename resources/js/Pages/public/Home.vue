@@ -84,12 +84,12 @@ export default {
     },
     mounted() {
         let data = this.notices_data;
-        this.notices =
-            typeof data !== "undefined"
-                ? data.length > 0
-                    ? data
-                    : false
-                : false;
+        // this.notices =
+        //     typeof data !== "undefined"
+        //         ? data.length > 0
+        //             ? data
+        //             : false
+        //         : false;
 
         //--------------- ABOUT THE SCROLL ---------------- 
         var sections = document.querySelectorAll("section");
@@ -99,6 +99,7 @@ export default {
             scroll_JS.scrollCheck(sections);
         });
         //--------------- ABOUT THE SCROLL ---------------- 
+
     },
     components: {
         AppPublic,
@@ -151,6 +152,13 @@ export default {
             }
         }
     }
+    
+    opacity: 0;
+    transition: opacity 200ms;
+
+    &.anim_it{
+        opacity: 1;
+    }
 }
 #sec2 {
     display: flex;
@@ -185,6 +193,13 @@ export default {
         &::before {
             content: "\201c";
         }
+    }
+
+    opacity: 0;
+    transition: opacity 500ms;
+
+    &.anim_it{
+        opacity: 1;
     }
 }
 #sec3 {
@@ -226,6 +241,15 @@ export default {
             }
         }
     }
+
+    opacity: 0.3;
+    transform: translateY(50%);
+    transition: opacity 600ms, transform 500ms;
+
+    &.anim_it{
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 #sec4 {
     h4 {
@@ -235,6 +259,9 @@ export default {
         margin: 2vw 0vw 2.5vw 0vw;
         color: $blue;
         text-align: center;
+
+        opacity: 0.2;
+        transition: opacity 300ms;
     }
     .notice_container {
         width: 80%;
@@ -274,6 +301,20 @@ export default {
                 // color: ;
                 font-size: 15px;
             }
+
+            opacity: 0;
+            transform: translateX(-30%);
+            transition: opacity 500ms 100ms, transform 500ms 100ms;
+        }
+    }
+
+    &.anim_it{
+        h4{
+            opacity: 1;
+        }
+        .notice_card{
+            opacity: 1;
+            transform: translateX(0);
         }
     }
 }
