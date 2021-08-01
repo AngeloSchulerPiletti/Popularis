@@ -1,24 +1,41 @@
 <template>
-  <div id="header_container">
-      <header-component/>
-  </div>
-  <main>
-      <slot></slot>
-  </main>
+    <div id="website">
+        <div id="header_container">
+            <header-component />
+        </div>
+        <main>
+            <slot></slot>
+        </main>
+        <div id="footer_container">
+            <footer-component />
+        </div>
+    </div>
 </template>
 
 <script>
 import Header from "@/Components/Header";
+import Footer from "@/Components/Footer";
+
 export default {
-  components:{
-    'header-component': Header,
-  }
-}
+    components: {
+        "header-component": Header,
+        "footer-component": Footer,
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-#header_container{
-  position: relative;
-  z-index: 1000;
+#website {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    #header_container {
+        position: relative;
+        z-index: 1000;
+    }
+    #footer_container {
+        margin-top: auto;
+    }
 }
 </style>
