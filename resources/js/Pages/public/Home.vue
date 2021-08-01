@@ -65,6 +65,7 @@
 <script>
 import AppPublic from "@/Layouts/AppPublic";
 import { Link } from "@inertiajs/inertia-vue3";
+import { scrollF } from "@/Pages/scripts/scrolling";
 
 // SVGs
 import Com from "@/Components/SVGs/Inicio/Com";
@@ -75,21 +76,49 @@ export default {
     data() {
         return {
             card: ["", "", ""],
-            notices: [
-                [
-                    "Um exemplo de título que pode ter",
-                    "Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá. Manduma pindureta quium dia nois paga. Diuretics paradis num copo é motivis de denguis. Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl.",
-                ],
-                [
-                    "Esse aqui é outro exemplo",
-                    "Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá. Manduma pindureta quium dia nois paga. Diuretics paradis num copo é motivis de denguis. Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl.",
-                ],
-            ],
+            notices: [],
         };
     },
-    created() {
+    methods:{
+        //--------------- ABOUT THE SCROLL ---------------- 
+        scrollCheck: function(sections){
+            var scroll_data = {
+                'html_height':    document.body.scrollHeight,
+                'screen_height':  window.innerHeight,
+                'Ytop_value':     window.pageYOffset,
+                'Ybottom_value':  window.pageYOffset + window.innerHeight,
+            };
+            sections.forEach((sec) => {
+                if (
+                    sec.offsetTop <
+                    3 * (scroll_data.screen_height / 4) +
+                        scroll_data.Ytop_value
+                ) {
+                    sec.classList.add("anim_it");
+                }
+            });
+        }
+        //--------------- ABOUT THE SCROLL ---------------- 
+
+    },
+    mounted() {
         let data = this.notices_data;
-        // this.notices = typeof data !== 'undefined' ? (data.length > 0 ? data : false) : false;
+        this.notices =
+            typeof data !== "undefined"
+                ? data.length > 0
+                    ? data
+                    : false
+                : false;
+
+        //--------------- ABOUT THE SCROLL ---------------- 
+        var sections = document.querySelectorAll("section"),
+            vm = this;
+
+        this.scrollCheck(sections);
+        document.addEventListener("scroll", function(){
+            vm.scrollCheck(sections);
+        });
+        //--------------- ABOUT THE SCROLL ---------------- 
     },
     components: {
         AppPublic,
@@ -155,7 +184,7 @@ export default {
         object-fit: cover;
         border-radius: 0.7vw;
     }
-    p{
+    p {
         color: $blue;
         font-size: 18px;
     }

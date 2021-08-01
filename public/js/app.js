@@ -18658,6 +18658,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {//
+    };
+  },
+  methods: {//
+  },
   components: {
     "header-component": _Components_Header__WEBPACK_IMPORTED_MODULE_0__.default,
     "footer-component": _Components_Footer__WEBPACK_IMPORTED_MODULE_1__.default
@@ -19765,9 +19771,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _Layouts_AppPublic__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppPublic */ "./resources/js/Layouts/AppPublic.vue");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _Components_SVGs_Inicio_Com__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Components/SVGs/Inicio/Com */ "./resources/js/Components/SVGs/Inicio/Com.vue");
-/* harmony import */ var _Components_SVGs_Inicio_Faq__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/SVGs/Inicio/Faq */ "./resources/js/Components/SVGs/Inicio/Faq.vue");
-/* harmony import */ var _Components_SVGs_Inicio_Rep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/SVGs/Inicio/Rep */ "./resources/js/Components/SVGs/Inicio/Rep.vue");
+/* harmony import */ var _Pages_scripts_scrolling__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @/Pages/scripts/scrolling */ "./resources/js/Pages/scripts/scrolling.js");
+/* harmony import */ var _Components_SVGs_Inicio_Com__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Components/SVGs/Inicio/Com */ "./resources/js/Components/SVGs/Inicio/Com.vue");
+/* harmony import */ var _Components_SVGs_Inicio_Faq__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Components/SVGs/Inicio/Faq */ "./resources/js/Components/SVGs/Inicio/Faq.vue");
+/* harmony import */ var _Components_SVGs_Inicio_Rep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Components/SVGs/Inicio/Rep */ "./resources/js/Components/SVGs/Inicio/Rep.vue");
+
 
  // SVGs
 
@@ -19778,18 +19786,43 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       card: ["", "", ""],
-      notices: [["Um exemplo de título que pode ter", "Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá. Manduma pindureta quium dia nois paga. Diuretics paradis num copo é motivis de denguis. Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl."], ["Esse aqui é outro exemplo", "Mussum Ipsum, cacilds vidis litro abertis. Casamentiss faiz malandris se pirulitá. Manduma pindureta quium dia nois paga. Diuretics paradis num copo é motivis de denguis. Mauris nec dolor in eros commodo tempor. Aenean aliquam molestie leo, vitae iaculis nisl."]]
+      notices: []
     };
   },
-  created: function created() {
-    var data = this.notices_data; // this.notices = typeof data !== 'undefined' ? (data.length > 0 ? data : false) : false;
+  methods: {
+    //--------------- ABOUT THE SCROLL ---------------- 
+    scrollCheck: function scrollCheck(sections) {
+      var scroll_data = {
+        'html_height': document.body.scrollHeight,
+        'screen_height': window.innerHeight,
+        'Ytop_value': window.pageYOffset,
+        'Ybottom_value': window.pageYOffset + window.innerHeight
+      };
+      sections.forEach(function (sec) {
+        if (sec.offsetTop < 3 * (scroll_data.screen_height / 4) + scroll_data.Ytop_value) {
+          sec.classList.add("anim_it");
+        }
+      });
+    } //--------------- ABOUT THE SCROLL ---------------- 
+
+  },
+  mounted: function mounted() {
+    var data = this.notices_data;
+    this.notices = typeof data !== "undefined" ? data.length > 0 ? data : false : false; //--------------- ABOUT THE SCROLL ---------------- 
+
+    var sections = document.querySelectorAll("section"),
+        vm = this;
+    this.scrollCheck(sections);
+    document.addEventListener("scroll", function () {
+      vm.scrollCheck(sections);
+    }); //--------------- ABOUT THE SCROLL ---------------- 
   },
   components: {
     AppPublic: _Layouts_AppPublic__WEBPACK_IMPORTED_MODULE_0__.default,
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link,
-    Faq: _Components_SVGs_Inicio_Faq__WEBPACK_IMPORTED_MODULE_3__.default,
-    Rep: _Components_SVGs_Inicio_Rep__WEBPACK_IMPORTED_MODULE_4__.default,
-    Com: _Components_SVGs_Inicio_Com__WEBPACK_IMPORTED_MODULE_2__.default
+    Faq: _Components_SVGs_Inicio_Faq__WEBPACK_IMPORTED_MODULE_4__.default,
+    Rep: _Components_SVGs_Inicio_Rep__WEBPACK_IMPORTED_MODULE_5__.default,
+    Com: _Components_SVGs_Inicio_Com__WEBPACK_IMPORTED_MODULE_3__.default
   },
   props: {
     notices_data: Array
@@ -24646,6 +24679,35 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   });
 }
+
+/***/ }),
+
+/***/ "./resources/js/Pages/scripts/scrolling.js":
+/*!*************************************************!*\
+  !*** ./resources/js/Pages/scripts/scrolling.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "scrollF": () => (/* binding */ scrollF)
+/* harmony export */ });
+var scrollF = {
+  scroll_JS: function scroll_JS() {
+    var scroll_data = {
+      'html_height': document.body.scrollHeight,
+      'screen_height': window.innerHeight,
+      'Ytop_value': window.pageYOffset,
+      'Ybottom_value': window.pageYOffset + window.innerHeight
+    };
+    return scroll_data; // var height = {'body_sh': body.scrollHeight, 
+    //             'body_oh': body.offsetHeight, 
+    //             'html_ch':html.clientHeight,    
+    //             'html_sh':html.scrollHeight,    
+    //             'html_oh':html.offsetHeight};
+  }
+};
 
 /***/ }),
 
