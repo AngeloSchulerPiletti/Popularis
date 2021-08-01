@@ -19789,32 +19789,16 @@ __webpack_require__.r(__webpack_exports__);
       notices: []
     };
   },
-  methods: {
-    //--------------- ABOUT THE SCROLL ---------------- 
-    scrollCheck: function scrollCheck(sections) {
-      var scroll_data = {
-        'html_height': document.body.scrollHeight,
-        'screen_height': window.innerHeight,
-        'Ytop_value': window.pageYOffset,
-        'Ybottom_value': window.pageYOffset + window.innerHeight
-      };
-      sections.forEach(function (sec) {
-        if (sec.offsetTop < 3 * (scroll_data.screen_height / 4) + scroll_data.Ytop_value) {
-          sec.classList.add("anim_it");
-        }
-      });
-    } //--------------- ABOUT THE SCROLL ---------------- 
-
+  methods: {//
   },
   mounted: function mounted() {
     var data = this.notices_data;
     this.notices = typeof data !== "undefined" ? data.length > 0 ? data : false : false; //--------------- ABOUT THE SCROLL ---------------- 
 
-    var sections = document.querySelectorAll("section"),
-        vm = this;
-    this.scrollCheck(sections);
+    var sections = document.querySelectorAll("section");
+    _Pages_scripts_scrolling__WEBPACK_IMPORTED_MODULE_2__.scroll_JS.scrollCheck(sections);
     document.addEventListener("scroll", function () {
-      vm.scrollCheck(sections);
+      _Pages_scripts_scrolling__WEBPACK_IMPORTED_MODULE_2__.scroll_JS.scrollCheck(sections);
     }); //--------------- ABOUT THE SCROLL ---------------- 
   },
   components: {
@@ -24691,21 +24675,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "scrollF": () => (/* binding */ scrollF)
+/* harmony export */   "scroll_JS": () => (/* binding */ scroll_JS)
 /* harmony export */ });
-var scrollF = {
-  scroll_JS: function scroll_JS() {
+var scroll_JS = {
+  scrollCheck: function scrollCheck(sections) {
     var scroll_data = {
       'html_height': document.body.scrollHeight,
       'screen_height': window.innerHeight,
       'Ytop_value': window.pageYOffset,
       'Ybottom_value': window.pageYOffset + window.innerHeight
     };
-    return scroll_data; // var height = {'body_sh': body.scrollHeight, 
-    //             'body_oh': body.offsetHeight, 
-    //             'html_ch':html.clientHeight,    
-    //             'html_sh':html.scrollHeight,    
-    //             'html_oh':html.offsetHeight};
+    sections.forEach(function (sec) {
+      if (sec.offsetTop < 3 * (scroll_data.screen_height / 4) + scroll_data.Ytop_value) {
+        sec.classList.add("anim_it");
+      }
+    });
   }
 };
 
