@@ -76,7 +76,7 @@ export default {
     data() {
         return {
             card: ["", "", ""],
-            notices: [],
+            notices: [[]],
         };
     },
     methods:{
@@ -136,7 +136,7 @@ export default {
             right: 10%;
             bottom: 20%;
 
-            @include Title3;
+            @include Title4;
             font-size: 21px;
             color: $white;
             background-color: $blue;
@@ -208,7 +208,7 @@ export default {
     gap: 5vw;
 
     .card {
-        width: 16vw;
+        width: 20vw;
         border: 2px solid $blue;
         padding: 2vw;
         border-radius: 1vw;
@@ -216,7 +216,7 @@ export default {
         cursor: pointer;
 
         .icon {
-            width: 80%;
+            width: 65%;
             margin: auto;
         }
         legend {
@@ -253,7 +253,7 @@ export default {
 }
 #sec4 {
     h4 {
-        @include Title2;
+        @include Title4;
         text-transform: capitalize;
         font-size: 25px;
         margin: 2vw 0vw 2.5vw 0vw;

@@ -154,7 +154,7 @@ header {
         }
         #title {
             h1 {
-                @include Title2;
+                @include Title3;
                 font-size: 50px;
                 color: $blue;
                 #govbr {

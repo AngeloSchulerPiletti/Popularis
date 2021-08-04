@@ -142,7 +142,7 @@ export default {
                 terms: false,
             }),
             cpf_char_count: 0,
-            titulo_char_counter: 0,
+            titulo_eleitoral_char_count: 0,
         };
     },
 
@@ -154,31 +154,31 @@ export default {
             if (counter > 14) {
                 this.form.titulo_eleitoral =
                     this.form.titulo_eleitoral.substring(0, counter - 1);
-                Math.abs(this.titulo_char_count) - Math.abs(counter) < 2
+                Math.abs(this.titulo_eleitoral_char_count) - Math.abs(counter) <
+                2
                     ? counter--
                     : null;
-            }
-            if (value.match(/[0-9]{1}$/)) {
-                this.form.titulo_eleitoral =
-                    counter == 5 || counter == 10
-                        ? [value.slice(0, -1), " ", value.slice(-1)].join("")
-                        : this.form.titulo_eleitoral;
             }
             if (value.match(/.*[a-zA-Z]+/)) {
                 this.form.titulo_eleitoral =
                     this.form.titulo_eleitoral.substring(0, counter - 1);
-                Math.abs(this.titulo_char_count) - Math.abs(counter) < 2
+                Math.abs(this.titulo_eleitoral_char_count) - Math.abs(counter) <
+                2
                     ? counter--
                     : null;
             }
-            if (counter > this.titulo_char_count) {
-                this.$data.form.titulo_eleitoral +=
-                    counter == 5 || counter == 10
-                        ? " "
-                        : "";
+
+
+            if (value.match(/[0-9]{1}$/) && (counter == 5 || counter == 10)) {
+                this.form.titulo_eleitoral = [value.slice(0, -1), " ", value.slice(-1)].join("");
+                counter++;
+            }
+            if (counter > this.titulo_eleitoral_char_count && (counter == 5 || counter == 10)) {
+                this.$data.form.titulo_eleitoral += " ";
+                counter++;
             }
 
-            this.titulo_char_counter = counter;
+            this.titulo_eleitoral_char_count = counter;
         },
         cpf_mask: function () {
             var value = this.form.cpf;
