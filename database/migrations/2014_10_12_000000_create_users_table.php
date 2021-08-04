@@ -23,8 +23,8 @@ class CreateUsersTable extends Migration
             $table->foreignId('current_team_id')->nullable();
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamps();
-            $table->tinyInteger('cpf')->unique();
-            $table->tinyInteger('titulo_eleitoral')->unique();
+            $table->string('cpf')->unique();
+            $table->string('titulo_eleitoral')->unique();
             /*+---------------------------------+
               |        DADOS POLÍTICOS          |
               +---------------------------------+*/

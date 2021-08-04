@@ -19526,6 +19526,12 @@ __webpack_require__.r(__webpack_exports__);
     Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_5__.Link,
     AppPublic: _Layouts_AppPublic__WEBPACK_IMPORTED_MODULE_0__.default
   },
+  created: function created() {
+    console.log(this.$page.props);
+  },
+  updated: function updated() {
+    console.log(this.$page.props);
+  },
   data: function data() {
     return {
       form: this.$inertia.form({
@@ -19594,12 +19600,8 @@ __webpack_require__.r(__webpack_exports__);
       this.cpf_char_count = counter;
     },
     submit: function submit() {
-      var _this = this;
-
-      this.form.post(this.route("register"), {
-        onFinish: function onFinish() {
-          return _this.form.reset("password", "password_confirmation");
-        }
+      this.form.post(this.route("register"), {// onFinish: () =>
+        //     this.form.reset("password", "password_confirmation"),
       });
     }
   }

@@ -44,8 +44,12 @@ Route::middleware('auth')->get('/pauta/{id}',       [PautaController::class, 'sh
 
 
 //----------------------------- TÉCNICO ------------------------------\\
-Route::middleware('tecnico')->get('/area-do-tecnico', [TecnicoController::class, 'index'])->name("tecnico");
+Route::group(['middleware' => 'tecnico', 'as' => 'tecnico.', 'prefix' => 'area-do-tecnico'], function () {
+    Route::get('/', [TecnicoController::class, 'index'])->name('show');
+});
 
 //----------------------------- POLÍTICO ------------------------------\\
-Route::middleware('politico')->get('/area-do-politico', [PoliticoController::class, 'index'])->name("politico");
+Route::group(['middleware' => 'politico', 'as' => 'politico.', 'prefix' => 'area-do-politico'], function () {
+    Route::get('/', [PoliticoController::class, 'index'])->name('show');
+});
 

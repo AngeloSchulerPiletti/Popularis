@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Providers\RouteServiceProvider;
 
 class PoliticoCheck
 {
@@ -16,6 +18,15 @@ class PoliticoCheck
      */
     public function handle(Request $request, Closure $next)
     {
-        return $next($request);
+        if (null !== Auth::user()) {
+            if (Auth::user()->politico) {
+                return $next($request);
+            }
+            return redirect(RouteServiceProvider::HOME);
+        }
+        else {
+            abort(403);
+        }
     }
 }
+

@@ -166,7 +166,12 @@ export default {
         Link,
         AppPublic,
     },
-
+    created(){
+        console.log(this.$page.props);
+    },
+    updated(){
+        console.log(this.$page.props);
+    },
     data() {
         return {
             form: this.$inertia.form({
@@ -261,8 +266,8 @@ export default {
         },
         submit() {
             this.form.post(this.route("register"), {
-                onFinish: () =>
-                    this.form.reset("password", "password_confirmation"),
+                // onFinish: () =>
+                //     this.form.reset("password", "password_confirmation"),
             });
         },
     },
