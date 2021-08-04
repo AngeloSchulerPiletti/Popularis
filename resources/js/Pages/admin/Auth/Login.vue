@@ -27,7 +27,7 @@
                 <div class="form_sec">
                     <label class="checkbox_label">
                         <input type="checkbox" name="remember" v-model="form.remember"/>
-                        <span>Remember me</span>
+                        <span>Lembre de mim</span>
                     </label>
                 </div>
 

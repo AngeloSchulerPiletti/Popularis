@@ -46,15 +46,29 @@
                     />
                 </div>
 
-                <div class="form_sec especial">
-                    <label for="cpf">CPF</label>
-                    <input
-                        type="text"
-                        name="cpf"
-                        id="cpf"
-                        v-model="form.cpf"
-                        @input="cpf_mask"
-                    />
+                <div class="especial">
+                    <div class="form_sec">
+                        <label for="cpf">CPF</label>
+                        <input
+                            type="text"
+                            name="cpf"
+                            id="cpf"
+                            v-model="form.cpf"
+                            @input="cpf_mask"
+                        />
+                    </div>
+                    <div class="form_sec">
+                        <label for="titulo_eleitoral"
+                            >Nº Título Eleitoral</label
+                        >
+                        <input
+                            type="text"
+                            name="titulo_eleitoral"
+                            id="titulo_eleitoral"
+                            v-model="form.titulo_eleitoral"
+                            @input="titulo_eleitoral_mask"
+                        />
+                    </div>
                 </div>
 
                 <div
@@ -124,35 +138,82 @@ export default {
                 password: "",
                 password_confirmation: "",
                 cpf: "",
-                rg: "",
                 titulo_eleitoral: "",
                 terms: false,
             }),
-            char_count: 0,
+            cpf_char_count: 0,
+            titulo_char_counter: 0,
         };
     },
 
     methods: {
-        cpf_mask: function () {
-            var input = document.querySelector("#cpf"),
-                value = this.form.cpf;
+        titulo_eleitoral_mask: function () {
+            var value = this.form.titulo_eleitoral;
             var counter = value.length;
 
-            if(value.match(/.*[a-zA-Z]+/)){
-                this.form.cpf
-                //CONTINUA DAQUI
+            if (counter > 14) {
+                this.form.titulo_eleitoral =
+                    this.form.titulo_eleitoral.substring(0, counter - 1);
+                Math.abs(this.titulo_char_count) - Math.abs(counter) < 2
+                    ? counter--
+                    : null;
+            }
+            if (value.match(/[0-9]{1}$/)) {
+                this.form.titulo_eleitoral =
+                    counter == 5 || counter == 10
+                        ? [value.slice(0, -1), " ", value.slice(-1)].join("")
+                        : this.form.titulo_eleitoral;
+            }
+            if (value.match(/.*[a-zA-Z]+/)) {
+                this.form.titulo_eleitoral =
+                    this.form.titulo_eleitoral.substring(0, counter - 1);
+                Math.abs(this.titulo_char_count) - Math.abs(counter) < 2
+                    ? counter--
+                    : null;
+            }
+            if (counter > this.titulo_char_count) {
+                this.$data.form.titulo_eleitoral +=
+                    counter == 5 || counter == 10
+                        ? " "
+                        : "";
             }
 
-            if (counter > this.char_count) {
-                if (value.length == 3 || value.length == 7) {
-                    this.$data.form.cpf += ".";
-                }
-                if (value.length == 11) {
-                    this.$data.form.cpf += "-";
-                }
+            this.titulo_char_counter = counter;
+        },
+        cpf_mask: function () {
+            var value = this.form.cpf;
+            var counter = value.length;
+
+            if (counter > 14) {
+                this.form.cpf = this.form.cpf.substring(0, counter - 1);
+                Math.abs(this.cpf_char_count) - Math.abs(counter) < 2
+                    ? counter--
+                    : null;
+            }
+            if (value.match(/[0-9]{1}$/)) {
+                this.form.cpf =
+                    counter == 12
+                        ? [value.slice(0, -1), "-", value.slice(-1)].join("")
+                        : counter == 4 || counter == 8
+                        ? [value.slice(0, -1), ".", value.slice(-1)].join("")
+                        : this.form.cpf;
+            }
+            if (value.match(/.*[a-zA-Z]+/)) {
+                this.form.cpf = this.form.cpf.substring(0, counter - 1);
+                Math.abs(this.cpf_char_count) - Math.abs(counter) < 2
+                    ? counter--
+                    : null;
+            }
+            if (counter > this.cpf_char_count) {
+                this.$data.form.cpf +=
+                    counter == 3 || counter == 7
+                        ? "."
+                        : counter == 11
+                        ? "-"
+                        : "";
             }
 
-            this.char_count = value.length;
+            this.cpf_char_count = counter;
         },
         submit() {
             this.form.post(this.route("register"), {
