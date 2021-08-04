@@ -175,6 +175,8 @@ article {
             p {
                 @include Font0;
                 font-size: 15px;
+                text-align: justify;
+                text-indent: 2em;
             }
             .topic {
                 margin: 1.4vw 0 1.4vw 1.5vw;
