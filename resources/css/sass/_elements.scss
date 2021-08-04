@@ -17,7 +17,7 @@
             flex-direction: column;
             gap: 0.2vw;
 
-            input:not([type="checkbox"]){
+            input:not([type="checkbox"]), select{
                 border-radius: 0.3vw;
             }
             input[type="checkbox"]{
@@ -47,6 +47,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
+            margin-top: 3vw;
 
             color: $blue;
 
