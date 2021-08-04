@@ -1,0 +1,61 @@
+@import "./mixins";
+
+@mixin form_container {
+    width: 36%;
+    box-shadow: 2px 2px 5px $black;
+    border-radius: 0.4vw;
+    margin: 8vw auto 8vw auto;
+    padding: 2vw;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5vw;
+
+        .form_sec{
+            display: flex;
+            flex-direction: column;
+            gap: 0.2vw;
+
+            input:not([type="checkbox"]){
+                border-radius: 0.3vw;
+            }
+            input[type="checkbox"]{
+                border-radius: 2px;
+            }
+            .checkbox_label{
+                display: flex;
+                gap: 0.8vw;
+                align-items: center;
+            }
+            [type="text"], [type="email"], [type="password"], [type="tel"]{
+
+            }
+
+        }
+        .especial{
+            border-top: 1px solid $blue;
+            border-bottom: 1px solid $blue;
+            padding: 1vw 0 1vw 0;
+        }
+        .options{
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+
+            color: $blue;
+
+            button{
+                width: fit-content;
+                padding: 0.5vw 2.5vw;
+                border-radius: 10vw;
+
+                @include hover1($blue, transparent, $blue, $white, $blue, $blue, 200ms);
+            }
+            a{
+                text-decoration: underline;
+                @include hover1($blue, transparent, transparent, $blue1, transparent, transparent, 200ms)
+            }
+        }
+    }
+}

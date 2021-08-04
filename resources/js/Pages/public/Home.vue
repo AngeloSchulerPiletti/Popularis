@@ -84,12 +84,12 @@ export default {
     },
     mounted() {
         let data = this.notices_data;
-        // this.notices =
-        //     typeof data !== "undefined"
-        //         ? data.length > 0
-        //             ? data
-        //             : false
-        //         : false;
+        this.notices =
+            typeof data !== "undefined"
+                ? data.length > 0
+                    ? data
+                    : false
+                : false;
 
         //--------------- ABOUT THE SCROLL ---------------- 
         var sections = document.querySelectorAll("section");

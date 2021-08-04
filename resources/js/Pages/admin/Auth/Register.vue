@@ -1,100 +1,171 @@
 <template>
-    <Head title="Register" />
+    <app-public>
+        <div class="form_container">
+            <form @submit.prevent="submit">
+                <div class="form_sec">
+                    <label for="name">Nome</label>
+                    <input
+                        id="name"
+                        type="text"
+                        v-model="form.name"
+                        required
+                        autofocus
+                        autocomplete="name"
+                    />
+                </div>
 
-    <jet-authentication-card>
-        <template #logo>
-            <jet-authentication-card-logo />
-        </template>
+                <div class="form_sec">
+                    <label for="email">Email</label>
+                    <input
+                        id="email"
+                        type="email"
+                        v-model="form.email"
+                        required
+                    />
+                </div>
 
-        <jet-validation-errors class="mb-4" />
+                <div class="form_sec">
+                    <label for="password">Senha</label>
+                    <input
+                        id="password"
+                        type="password"
+                        v-model="form.password"
+                        required
+                        autocomplete="new-password"
+                    />
+                </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <jet-label for="name" value="Name" />
-                <jet-input id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
-            </div>
+                <div class="form_sec">
+                    <label for="password_confirmation">Confirme a senha</label>
+                    <input
+                        id="password_confirmation"
+                        type="password"
+                        v-model="form.password_confirmation"
+                        required
+                        autocomplete="new-password"
+                    />
+                </div>
 
-            <div class="mt-4">
-                <jet-label for="email" value="Email" />
-                <jet-input id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
-            </div>
+                <div class="form_sec especial">
+                    <label for="cpf">CPF</label>
+                    <input
+                        type="text"
+                        name="cpf"
+                        id="cpf"
+                        v-model="form.cpf"
+                        @input="cpf_mask"
+                    />
+                </div>
 
-            <div class="mt-4">
-                <jet-label for="password" value="Password" />
-                <jet-input id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <jet-label for="password_confirmation" value="Confirm Password" />
-                <jet-input id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4" v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature">
-                <jet-label for="terms">
-                    <div class="flex items-center">
-                        <jet-checkbox name="terms" id="terms" v-model:checked="form.terms" />
-
-                        <div class="ml-2">
-                            I agree to the <a target="_blank" :href="route('terms.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Terms of Service</a> and <a target="_blank" :href="route('policy.show')" class="underline text-sm text-gray-600 hover:text-gray-900">Privacy Policy</a>
+                <div
+                    v-if="$page.props.jetstream.hasTermsAndPrivacyPolicyFeature"
+                >
+                    <label for="terms">
+                        <div>
+                            <input
+                                type="checkbox"
+                                name="terms"
+                                id="terms"
+                                v-model="form.terms"
+                            />
+                            <div>
+                                I agree to the
+                                <a target="_blank" :href="route('terms.show')"
+                                    >Terms of Service</a
+                                >
+                                and
+                                <a target="_blank" :href="route('policy.show')"
+                                    >Privacy Policy</a
+                                >
+                            </div>
                         </div>
-                    </div>
-                </jet-label>
-            </div>
+                    </label>
+                </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
-                </Link>
+                <div class="options">
+                    <Link :href="route('entrar')"> Já possui conta? </Link>
 
-                <jet-button class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </jet-button>
-            </div>
-        </form>
-    </jet-authentication-card>
+                    <button
+                        :class="{ 'opacity-25': form.processing }"
+                        :disabled="form.processing"
+                    >
+                        Cadastrar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </app-public>
 </template>
 
 <script>
-    import JetAuthenticationCard from '@/Jetstream/AuthenticationCard.vue'
-    import JetAuthenticationCardLogo from '@/Jetstream/AuthenticationCardLogo.vue'
-    import JetButton from '@/Jetstream/Button.vue'
-    import JetInput from '@/Jetstream/Input.vue'
-    import JetCheckbox from '@/Jetstream/Checkbox.vue'
-    import JetLabel from '@/Jetstream/Label.vue'
-    import JetValidationErrors from '@/Jetstream/ValidationErrors.vue'
-    import { Head, Link } from '@inertiajs/inertia-vue3';
+import AppPublic from "@/Layouts/AppPublic";
+import JetButton from "@/Jetstream/Button.vue";
+import JetInput from "@/Jetstream/Input.vue";
+import JetCheckbox from "@/Jetstream/Checkbox.vue";
+import JetLabel from "@/Jetstream/Label.vue";
+import { Head, Link } from "@inertiajs/inertia-vue3";
 
-    export default {
-        components: {
-            Head,
-            JetAuthenticationCard,
-            JetAuthenticationCardLogo,
-            JetButton,
-            JetInput,
-            JetCheckbox,
-            JetLabel,
-            JetValidationErrors,
-            Link,
-        },
+export default {
+    components: {
+        Head,
+        JetButton,
+        JetInput,
+        JetCheckbox,
+        JetLabel,
+        Link,
+        AppPublic,
+    },
 
-        data() {
-            return {
-                form: this.$inertia.form({
-                    name: '',
-                    email: '',
-                    password: '',
-                    password_confirmation: '',
-                    terms: false,
-                })
+    data() {
+        return {
+            form: this.$inertia.form({
+                name: "",
+                email: "",
+                password: "",
+                password_confirmation: "",
+                cpf: "",
+                rg: "",
+                titulo_eleitoral: "",
+                terms: false,
+            }),
+            char_count: 0,
+        };
+    },
+
+    methods: {
+        cpf_mask: function () {
+            var input = document.querySelector("#cpf"),
+                value = this.form.cpf;
+            var counter = value.length;
+
+            if(value.match(/.*[a-zA-Z]+/)){
+                this.form.cpf
+                //CONTINUA DAQUI
             }
-        },
 
-        methods: {
-            submit() {
-                this.form.post(this.route('register'), {
-                    onFinish: () => this.form.reset('password', 'password_confirmation'),
-                })
+            if (counter > this.char_count) {
+                if (value.length == 3 || value.length == 7) {
+                    this.$data.form.cpf += ".";
+                }
+                if (value.length == 11) {
+                    this.$data.form.cpf += "-";
+                }
             }
-        }
-    }
+
+            this.char_count = value.length;
+        },
+        submit() {
+            this.form.post(this.route("register"), {
+                onFinish: () =>
+                    this.form.reset("password", "password_confirmation"),
+            });
+        },
+    },
+};
 </script>
+
+<style lang="scss" scoped>
+.form_container {
+    @include form_container();
+}
+</style>

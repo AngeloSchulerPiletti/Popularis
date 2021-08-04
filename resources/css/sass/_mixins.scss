@@ -1,0 +1,14 @@
+@mixin hover1($color1, $back1, $border1, $color2, $back2, $border2, $time) {
+    color: $color1;
+    background-color: $back1;
+    border: 2px solid $border1;
+
+    transition: border $time, background-color $time, color $time;
+
+    &:hover{
+        color: $color2;
+        background-color: $back2;
+        border: 2px solid 
+        $border2;
+    }
+}
