@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PautasController;
 use App\Http\Controllers\PautaController;
+use App\Http\Controllers\PoliticoController;
+use App\Http\Controllers\TecnicoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +40,12 @@ Route::group(['as' => 'pautas.', 'prefix' => 'pautas'], function () {
 
 //----------------------------- PAUTA ------------------------------\\
 Route::middleware('auth')->get('/pauta/{id}',       [PautaController::class, 'show'])->name('pauta.show');
+
+
+
+//----------------------------- TÉCNICO ------------------------------\\
+Route::middleware('tecnico')->get('/area-do-tecnico', [TecnicoController::class, 'index'])->name("tecnico");
+
+//----------------------------- POLÍTICO ------------------------------\\
+Route::middleware('politico')->get('/area-do-politico', [PoliticoController::class, 'index'])->name("politico");
+
