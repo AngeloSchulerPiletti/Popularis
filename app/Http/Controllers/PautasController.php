@@ -9,7 +9,7 @@ class PautasController extends Controller
 {
     public function index()
     {
-        return Inertia::render('public/Pautas/Entenda');
+        return Inertia::render('public/Entenda');
     }
 
     const PAUTAS_TYPE = ['atuais', 'passadas', 'futuras'];

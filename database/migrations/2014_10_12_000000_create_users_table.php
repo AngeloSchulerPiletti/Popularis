@@ -41,7 +41,7 @@ class CreateUsersTable extends Migration
               |        DADOS DO TÉCNICO         |
               +---------------------------------+*/
             $table->boolean('tecnico')->default(false);
-            $table->integer('level')->default(0); // 1 -> apenas lê | 2-> lê e edita
+            $table->integer('level')->default(0); // 1 -> apenas lê | 2-> lê e edita | 3->max
         
         });
     }
