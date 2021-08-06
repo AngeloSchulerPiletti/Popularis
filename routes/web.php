@@ -8,6 +8,7 @@ use App\Http\Controllers\PautasController;
 use App\Http\Controllers\PautaController;
 use App\Http\Controllers\PoliticoController;
 use App\Http\Controllers\TecnicoController;
+use App\Http\Controllers\AdminPautasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,5 +52,9 @@ Route::group(['middleware' => 'tecnico', 'as' => 'tecnico.', 'prefix' => 'area-d
 //----------------------------- POLÍTICO ------------------------------\\
 Route::group(['middleware' => 'politico', 'as' => 'politico.', 'prefix' => 'area-do-politico'], function () {
     Route::get('/', [PoliticoController::class, 'index'])->name('show');
+    
+
+    //POST routes\\
+    Route::post('/criando-pauta', [AdminPautasController::class, 'create_pauta'])->name('create_pauta');
 });
 

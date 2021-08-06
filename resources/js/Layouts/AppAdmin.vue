@@ -1,33 +1,34 @@
 <template>
     <div id="website">
         <div id="header_container">
-            <header-component />
+            <header-component :title="title[area]"/>
         </div>
         <main>
             <slot></slot>
         </main>
-        <div id="footer_container">
-            <footer-component />
-        </div>
     </div>
 </template>
 
 <script>
-import Header from "@/Components/public/Header";
-import Footer from "@/Components/public/Footer";
+import Header from "@/Components/admin/Header";
 
 export default {
-    data(){
-        return{
-            //
-        }
+    data() {
+        return {
+            title: {
+                tecnico: "Técnico",
+                politico: "Político",
+            },
+        };
     },
-    methods:{
+    methods: {
         //
+    },
+    props: {
+        area: String,
     },
     components: {
         "header-component": Header,
-        "footer-component": Footer,
     },
 };
 </script>
@@ -41,9 +42,6 @@ export default {
     #header_container {
         position: relative;
         z-index: 1000;
-    }
-    #footer_container {
-        margin-top: auto;
     }
 }
 </style>

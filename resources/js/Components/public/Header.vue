@@ -200,8 +200,6 @@ header {
             width: fit-content;
             height: fit-content;
 
-            #logo_link {
-            }
             #bandeira {
                 width: 70px;
             }

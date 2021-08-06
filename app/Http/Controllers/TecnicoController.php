@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class TecnicoController extends Controller
 {
     public function index(){
-        dd('tecnico');
+        return Inertia::render('admin/Tecnico');
     }
 }

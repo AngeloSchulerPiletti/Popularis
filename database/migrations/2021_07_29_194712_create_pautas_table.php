@@ -17,6 +17,7 @@ class CreatePautasTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('titulo');
+            $table->tinyInteger('responsavel');
             $table->tinyText('autores'); 
             $table->string('escopo'); //est || fed
             $table->string('local');  //Se Federal (BR), senão RS, RN, BH...
