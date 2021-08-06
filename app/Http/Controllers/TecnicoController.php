@@ -8,6 +8,6 @@ use Inertia\Inertia;
 class TecnicoController extends Controller
 {
     public function index(){
-        return Inertia::render('admin/Tecnico');
+        return Inertia::render('admin/tecnico/Tecnico');
     }
 }

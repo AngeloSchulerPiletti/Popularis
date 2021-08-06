@@ -18,17 +18,7 @@
                     </span>
                 </h1>
             </div>
-            <div id="options" v-if="!$page.props.user">
-                <ul>
-                    <li>
-                        <Link :href="route('entrar')">Entrar</Link>
-                    </li>
-                    <li>
-                        <Link :href="route('cadastro')">Cadastro</Link>
-                    </li>
-                </ul>
-            </div>
-            <div id="dropmenu_container" v-else-if="$page.props.user">
+            <div id="dropmenu_container">
                 <div id="welcome">
                     <h6>Bem vindo, {{ user_name }}</h6>
                     <arrow-button
@@ -46,66 +36,40 @@
                 <!-- LINKS PRINCIPAIS  -->
                 <div id="links">
                     <Link
-                        class="more"
-                        :href="route('pautas.federal.all')"
-                        @mouseenter="open('fed')"
-                        >Pautas Federais</Link
+                        :href="route('politico.pauta_create_default.show')"
+                        >Criar Pauta</Link
                     >
                     <Link
                         class="more"
-                        :href="route('pautas.estadual.all')"
-                        @mouseenter="open('est')"
-                        >Pautas Estaduais</Link
+                        :href="route('politico.historico_pautas.show')"
+                        @mouseenter="open('his')"
+                        >Minhas Pautas</Link
                     >
-                    <Link :href="route('pautas.all')">Entenda</Link>
-                    <Link v-if="$page.props.user" :href="route('profile.votes')">Meus votos</Link>
+                    <Link :href="route('politico.gerenciar_equipe.show')">Gerenciar Equipe</Link>
                 </div>
 
                 <!-- LINKS SECUNDÁRIOS -->
                 <div id="sublinks_container">
-                    <div class="sublinks" id="fed_container">
+                    <div class="sublinks" id="his_container">
                         <Link
-                            :href="route('pautas.federal', { type: 'atuais' })"
-                            >P.F. Atuais</Link
+                            :href="route('politico.estatisticas.show')"
+                            >Estatísticas</Link
                         >
                         <Link
                             :href="
-                                route('pautas.federal', { type: 'passadas' })
+                                route('politico.historico_pautas.show')
                             "
-                            >P.F. Passadas</Link
-                        >
-                        <Link
-                            :href="route('pautas.federal', { type: 'futuras' })"
-                            >P.F. Futuras</Link
-                        >
-                    </div>
-
-                    <div class="sublinks" id="est_container">
-                        <Link
-                            :href="route('pautas.estadual', { type: 'atuais' })"
-                            >P.E. Atuais</Link
-                        >
-                        <Link
-                            :href="
-                                route('pautas.estadual', { type: 'passadas' })
-                            "
-                            >P.E. Passadas</Link
-                        >
-                        <Link
-                            :href="
-                                route('pautas.estadual', { type: 'futuras' })
-                            "
-                            >P.E. Futuras</Link
+                            >Histórico</Link
                         >
                     </div>
                 </div>
             </nav>
         </div>
-        <div v-if="$page.props.user" id="dropmenu" data-anim="none">
+        <div id="dropmenu" data-anim="none">
             <ul>
                 <li v-if="$page.props.user.tecnico" class="link"><Link :href="route('tecnico.show')">Área do Técnico</Link></li>
                 <li v-if="$page.props.user.tecnico"><hr /></li>
-                <li v-if="$page.props.user.politico" class="link"><Link :href="route('politico.show')">Área do Político</Link></li>
+                <li v-if="$page.props.user.politico" class="link"><Link :href="route('politico.pauta_create.show')">Área do Político</Link></li>
                 <li v-if="$page.props.user.politico"><hr /></li>
                 <li class="link"><Link :href="route('profile.show')">Conta</Link></li>
                 <li><hr /></li>

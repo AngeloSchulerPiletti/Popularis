@@ -51,7 +51,12 @@ Route::group(['middleware' => 'tecnico', 'as' => 'tecnico.', 'prefix' => 'area-d
 
 //----------------------------- POLÍTICO ------------------------------\\
 Route::group(['middleware' => 'politico', 'as' => 'politico.', 'prefix' => 'area-do-politico'], function () {
-    Route::get('/', [PoliticoController::class, 'index'])->name('show');
+    Route::get('/',                     [PoliticoController::class, 'pauta_create_show'])->name('pauta_create.show');
+    Route::get('/criar-pauta',          [PoliticoController::class, 'pauta_create_show'])->name('pauta_create_default.show');
+
+    Route::get('/estatisticas',         [PoliticoController::class, 'estatisticas_show'])->name('estatisticas.show');
+    Route::get('/historico-de-pautas',  [PoliticoController::class, 'historico_pautas_show'])->name('historico_pautas.show');
+    Route::get('/gerenciar-equipe',     [PoliticoController::class, 'gerenciar_equipe_show'])->name('gerenciar_equipe.show');
     
 
     //POST routes\\

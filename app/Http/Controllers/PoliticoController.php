@@ -7,8 +7,23 @@ use Inertia\Inertia;
 
 class PoliticoController extends Controller
 {
-    public function index()
+    protected const PATH = 'admin/politico/';
+
+    /*+------------------------------------+
+      |               SHOW                 |
+      +------------------------------------+*/
+    public function pauta_create_show()
     {
-        return Inertia::render('admin/Politico');
+        return Inertia::render('admin/politico/CriadorPautas');
     }
+    public function estatistica_show(){
+        return Inertia::render(self::PATH.'Estatisticas');
+    }
+    public function historico_pautas_show(){
+        return Inertia::render(self::PATH.'HistoricoPautas');
+    }
+    public function gerenciar_equipe_show(){
+        return Inertia::render(self::PATH.'GerenciadorEquipe');
+    }
+    //---------------- END --------------\\
 }
