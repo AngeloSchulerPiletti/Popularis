@@ -1,5 +1,5 @@
 <template>
-  <header>
+    <header>
         <div class="top">
             <div id="logo">
                 <Link id="logo_link" :href="route('inicio')"><bandeira /></Link>
@@ -7,7 +7,7 @@
             <div id="title">
                 <h1>
                     <span id="area">Área do </span>
-                    {{title}}
+                    {{ title }}
                     <span id="govbr">
                         <span>g</span>
                         <span>o</span>
@@ -36,30 +36,28 @@
                 <!-- LINKS PRINCIPAIS  -->
                 <div id="links">
                     <Link
-                        :href="route('politico.pauta_create_default.show')"
-                        >Criar Pauta</Link
+                        v-for="(array_values, index) in links_header.primary"
+                        :key="index"
+                        :id="array_values[1]"
+                        :class="array_values[3]"
+                        :href="array_values[2]"
+                        @mouseenter="open(array_values)"
+                        >{{ array_values[0] }}</Link
                     >
-                    <Link
-                        class="more"
-                        :href="route('politico.historico_pautas.show')"
-                        @mouseenter="open('his')"
-                        >Minhas Pautas</Link
-                    >
-                    <Link :href="route('politico.gerenciar_equipe.show')">Gerenciar Equipe</Link>
                 </div>
-
                 <!-- LINKS SECUNDÁRIOS -->
                 <div id="sublinks_container">
-                    <div class="sublinks" id="his_container">
+                    <div
+                        class="sublinks"
+                        v-for="(array, index) in links_header.secondary"
+                        :key="index"
+                        :id="array[index][1] + '_container'"
+                    >
                         <Link
-                            :href="route('politico.estatisticas.show')"
-                            >Estatísticas</Link
-                        >
-                        <Link
-                            :href="
-                                route('politico.historico_pautas.show')
-                            "
-                            >Histórico</Link
+                            v-for="(elements, index) in array"
+                            :key="index"
+                            :href="elements[2]"
+                            >{{ elements[0] }}</Link
                         >
                     </div>
                 </div>
@@ -67,13 +65,25 @@
         </div>
         <div id="dropmenu" data-anim="none">
             <ul>
-                <li v-if="$page.props.user.tecnico" class="link"><Link :href="route('tecnico.show')">Área do Técnico</Link></li>
+                <li v-if="$page.props.user.tecnico" class="link">
+                    <Link :href="route('tecnico.show')">Área do Técnico</Link>
+                </li>
                 <li v-if="$page.props.user.tecnico"><hr /></li>
-                <li v-if="$page.props.user.politico" class="link"><Link :href="route('politico.pauta_create.show')">Área do Político</Link></li>
+                <li v-if="$page.props.user.politico" class="link">
+                    <Link :href="route('politico.pauta_create.show')"
+                        >Área do Político</Link
+                    >
+                </li>
                 <li v-if="$page.props.user.politico"><hr /></li>
-                <li class="link"><Link :href="route('profile.show')">Conta</Link></li>
+                <li class="link">
+                    <Link :href="route('profile.show')">Conta</Link>
+                </li>
                 <li><hr /></li>
-                <li class="link"><button @click="$inertia.post(route('logout'));">Sair</button></li>
+                <li class="link">
+                    <button @click="$inertia.post(route('logout'))">
+                        Sair
+                    </button>
+                </li>
             </ul>
         </div>
     </header>
@@ -89,11 +99,67 @@ export default {
         return {
             opened: "",
             user_name: "",
+            links_header: {
+                primary: {},
+                secondary: [],
+            },
         };
     },
     created() {
         if (this.$page.props.user) {
             this.user_name = this.$page.props.user.name.split(" ")[0];
+        }
+        if (this.links) {
+            var link_obj = this.links;
+            var primary_title = Object.keys(link_obj),
+                primary_array = Object.values(link_obj);
+
+            var primary_links = [
+                    /*['title', 'id', 'route, has secondary?'],*/
+                ],
+                secondary_links = [
+                    /*['title', 'owner(id)', 'route],*/
+                ];
+
+            var secondary_values = [];
+            for (
+                var parent_i = 0;
+                parent_i < primary_title.length;
+                parent_i++
+            ) {
+                primary_links.push([
+                    primary_title[parent_i],
+                    primary_array[parent_i][0],
+                    primary_array[parent_i][1],
+                    "",
+                ]);
+
+                if (primary_array[parent_i][2]) {
+                    primary_links[parent_i][3] = "more";
+
+                    var secondary_titles = Object.keys(
+                            primary_array[parent_i][2]
+                        ),
+                        secondary_routes = Object.values(
+                            primary_array[parent_i][2]
+                        );
+
+                    var secondary_values_sub = [];
+                    for (let i = 0; i < secondary_titles.length; i++) {
+                        secondary_values_sub[i] = [
+                            secondary_titles[i],
+                            primary_array[parent_i][0],
+                            secondary_routes[i],
+                        ];
+                    }
+                    secondary_values.push(secondary_values_sub);
+
+                    this.links_header.secondary = secondary_values;
+                }
+            }
+
+            this.links_header.primary = primary_links;
+            console.log(this.links_header.secondary);
         }
     },
     methods: {
@@ -123,20 +189,25 @@ export default {
                 cont.style.display = "none";
             });
         },
-        open(wich) {
-            if (this.opened != "") {
+        open(arr) {
+            if (arr[3] == "more") {
+                if (this.opened != "") {
+                    let container = document.querySelector(
+                        "#" + this.opened + "_container"
+                    );
+                    container.style.display = "none";
+                }
+                this.opened = arr[1];
                 let container = document.querySelector(
-                    "#" + this.opened + "_container"
+                    "#" + arr[1] + "_container"
                 );
-                container.style.display = "none";
+                container.style.display = "flex";
             }
-            this.opened = wich;
-            let container = document.querySelector("#" + wich + "_container");
-            container.style.display = "flex";
         },
     },
-    props:{
+    props: {
         title: String,
+        links: Object,
     },
     components: {
         Link,
@@ -177,7 +248,7 @@ header {
                 @include Title3;
                 font-size: 50px;
                 color: $blue;
-                #area{
+                #area {
                     font-size: 0.5em;
                     text-transform: lowercase;
                 }
@@ -218,7 +289,6 @@ header {
             }
         }
         #dropmenu_container {
-
             #welcome {
                 display: flex;
                 gap: 5px;
@@ -332,29 +402,28 @@ header {
                 padding: 8px 10px 8px 10px;
                 display: flex;
 
-        @include hover1(
-                        $white,
-                        $blue,
-                        transparent,
-                        $blue,
-                        $white,
-                        transparent,
-                        200ms
-                    );
+                @include hover1(
+                    $white,
+                    $blue,
+                    transparent,
+                    $blue,
+                    $white,
+                    transparent,
+                    200ms
+                );
 
                 a {
                     flex-grow: 1;
                     font-size: 15px;
-                    
                 }
             }
-            li:first-child{
+            li:first-child {
                 padding: 16px 10px 8px 10px;
             }
-            li:last-child{
+            li:last-child {
                 padding: 8px 10px 8px 16px;
-                
-        border-radius: 0px 0px 8px 8px;
+
+                border-radius: 0px 0px 8px 8px;
             }
 
             hr {

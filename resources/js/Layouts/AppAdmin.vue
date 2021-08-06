@@ -1,7 +1,7 @@
 <template>
     <div id="website">
         <div id="header_container">
-            <header-component :title="title[area]"/>
+            <header-component :title="title[area]" :links="links"/>
         </div>
         <main>
             <slot></slot>
@@ -26,6 +26,7 @@ export default {
     },
     props: {
         area: String,
+        links: Object,
     },
     components: {
         "header-component": Header,

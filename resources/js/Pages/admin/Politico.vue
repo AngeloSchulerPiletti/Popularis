@@ -1,25 +1,39 @@
 <template>
-  <app-admin area="politico" :links="links">
-      <slot></slot>
-  </app-admin>
+    <app-admin area="politico" :links="links">
+        <slot></slot>
+    </app-admin>
 </template>
 
 <script>
 import AppAdmin from "@/Layouts/AppAdmin";
 
 export default {
-    data(){
-        return{
-            links: {},
-        }
+    data() {
+        return {
+            links: {
+                "Criar Pauta": [
+                    "criarpauta",
+                    route("politico.pauta_create_default.show"),
+                ],
+                "Minhas Pautas": [
+                    "minhaspautas",
+                    route("politico.historico_pautas.show"),
+                    {
+                        Estatísticas: route("politico.estatisticas.show"),
+                        Histórico: route("politico.historico_pautas.show"),
+                    },
+                ],
+                "Gerenciar Equipes": [
+                    "gerenciarequipes",
+                    route("politico.gerenciar_equipe.show"),
+                ],
+            },
+        };
     },
-    components:{
+    components: {
         AppAdmin,
-    }
-
-}
+    },
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
