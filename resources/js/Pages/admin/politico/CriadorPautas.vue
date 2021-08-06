@@ -1,5 +1,5 @@
 <template>
-    <app-admin area="politico">
+    <politico-container area="politico">
         <div>
             <form @submit.prevent="submit">
                 <div class="input_container">
@@ -33,11 +33,12 @@
                 <div class="actions"><button type="submit">Enviar</button></div>
             </form>
         </div>
-    </app-admin>
+    </politico-container>
 </template>
 
 <script>
-import AppAdmin from "@/Layouts/AppAdmin";
+import Politico from "@/Pages/admin/Politico";
+
 export default {
     data() {
         return {
@@ -60,7 +61,7 @@ export default {
         },
     },
     components: {
-        AppAdmin,
+        'politico-container': Politico,
     },
 };
 </script>

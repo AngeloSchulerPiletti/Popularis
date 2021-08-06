@@ -16,7 +16,7 @@ class PoliticoController extends Controller
     {
         return Inertia::render('admin/politico/CriadorPautas');
     }
-    public function estatistica_show(){
+    public function estatisticas_show(){
         return Inertia::render(self::PATH.'Estatisticas');
     }
     public function historico_pautas_show(){
