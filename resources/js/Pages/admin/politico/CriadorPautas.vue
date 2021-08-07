@@ -53,7 +53,7 @@
                     </textarea>
                 </div>
                 <div class="form_sec">
-                    <label for="pauta">Pauta</label>
+                    <label for="pauta">Pauta<info-icon class="pauta_info icon_info"/></label>
                     <textarea name="pauta" id="pauta" v-model="form.pauta">
                     </textarea>
                 </div>
@@ -65,6 +65,7 @@
 
 <script>
 import Politico from "@/Pages/admin/Politico";
+import Info from "@/Components/SVGs/Info";
 
 export default {
     data() {
@@ -88,6 +89,7 @@ export default {
     },
     components: {
         "politico-container": Politico,
+        'info-icon': Info,
     },
 };
 </script>
@@ -102,6 +104,10 @@ export default {
     padding: 20px;
 
     @include form_style();
+
+    .pauta_info{
+
+    }
 
     .form_header {
         h3 {
