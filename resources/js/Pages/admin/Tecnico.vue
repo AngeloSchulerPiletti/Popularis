@@ -1,6 +1,8 @@
 <template>
   <app-admin area="tecnico" :links="links">
-      <slot></slot>
+      <div id="tecnico_container">
+        <slot></slot>
+      </div>
   </app-admin>
 </template>
 
@@ -20,6 +22,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss" scoped>
+#tecnico_container{
+    @include page_bottom;
+}
 </style>

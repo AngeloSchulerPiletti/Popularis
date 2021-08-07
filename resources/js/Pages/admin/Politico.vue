@@ -1,6 +1,8 @@
 <template>
     <app-admin area="politico" :links="links">
-        <slot></slot>
+        <div id="politico_container">
+            <slot></slot>
+        </div>
     </app-admin>
 </template>
 
@@ -36,4 +38,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+#politico_container{
+    @include page_bottom;
+}
+</style>

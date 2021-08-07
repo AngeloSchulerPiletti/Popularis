@@ -229,6 +229,7 @@ header {
     color: $blue1;
 
     $lateral_padding_top: 2.5vw;
+
     .top {
         display: grid;
         grid-template-columns: 2fr 7fr 4fr;

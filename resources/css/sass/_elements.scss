@@ -1,12 +1,6 @@
 @import "./mixins";
 
-@mixin form_container {
-    width: 36%;
-    box-shadow: 2px 2px 5px $black;
-    border-radius: 0.4vw;
-    margin: 8vw auto 8vw auto;
-    padding: 2vw;
-
+@mixin form_style {
     form {
         display: flex;
         flex-direction: column;
@@ -17,7 +11,7 @@
             flex-direction: column;
             gap: 0.2vw;
 
-            input:not([type="checkbox"]), select{
+            input:not([type="checkbox"]), textarea, select{
                 border-radius: 0.3vw;
             }
             input[type="checkbox"]{
@@ -28,9 +22,17 @@
                 gap: 0.8vw;
                 align-items: center;
             }
-            [type="text"], [type="email"], [type="password"], [type="tel"]{
+            textarea{
+                resize: none;
 
+                &#pauta{
+                    height: 50vh !important;
+                }
+                &#resumo{
+                    height: 30vh !important;
+                }
             }
+            
 
         }
         .especial{
@@ -44,12 +46,7 @@
             gap: 1vw;
         }
         .options{
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            margin-top: 3vw;
-
-            color: $blue;
+            @include buttons_container1;
 
             button{
                 width: fit-content;
@@ -63,5 +60,49 @@
                 @include hover1($blue, transparent, transparent, $blue1, transparent, transparent, 200ms)
             }
         }
+
+        .actions{
+            @include buttons_container1;
+
+            button{
+                width: fit-content;
+                padding: 0.5vw 3vw;
+                border-radius: 4px;
+
+                @include hover1($white, $blue, $blue, $white, $blue1, $blue1, 200ms);
+            }
+            a{
+                text-decoration: underline;
+                @include hover1($blue, transparent, transparent, $blue1, transparent, transparent, 200ms)
+            }
+        }
     }
+}
+
+@mixin buttons_container1{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 3vw;
+
+    color: $blue;
+}
+
+
+@mixin form_container {
+    width: 36%;
+    box-shadow: 2px 2px 5px $black;
+    border-radius: 0.4vw;
+    margin: 8vw auto 8vw auto;
+    padding: 2vw;
+
+    @include form_style();
+}
+
+
+
+@mixin page_bottom {
+    //$header_margin: calc(1.2vw + 30px);
+    margin-top: calc((1.2vw + 30px) + 4vw);
+    padding-bottom: 8vw;
 }
