@@ -1,5 +1,6 @@
 <template>
     <div id="website">
+        <messages-report class="messages"/>
         <info-window id="info_window" :window_content="content_to_pass"/>
         <div id="header_container">
             <header-component :title="title[area]" :links="links"/>
@@ -13,6 +14,7 @@
 <script>
 import Header from "@/Components/admin/Header";
 import InfoWindow from "@/Components/geral/InfoWindow";
+import Messages from "@/Components/geral/Messages";
 
 export default {
     data() {
@@ -46,6 +48,7 @@ export default {
     components: {
         "header-component": Header,
         InfoWindow,
+        "messages-report": Messages,
     },
 };
 </script>
@@ -56,6 +59,9 @@ export default {
     flex-direction: column;
     min-height: 100vh;
 
+    .messages{
+        z-index: 100000;
+    }
     #info_window{
         z-index: 10000;
     }
