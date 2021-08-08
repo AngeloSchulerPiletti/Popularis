@@ -1,5 +1,5 @@
 <template>
-    <app-admin area="politico" :links="links">
+    <app-admin area="politico" :links="links" :window_content="window_content">
         <div id="politico_container">
             <slot></slot>
         </div>
@@ -31,6 +31,9 @@ export default {
                 ],
             },
         };
+    },
+    props:{
+        window_content: Object,
     },
     components: {
         AppAdmin,

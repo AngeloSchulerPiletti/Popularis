@@ -159,7 +159,6 @@ export default {
             }
 
             this.links_header.primary = primary_links;
-            console.log(this.links_header.secondary);
         }
     },
     methods: {

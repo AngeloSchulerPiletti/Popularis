@@ -1,5 +1,6 @@
 <template>
     <div id="website">
+        <info-window :window_content="content_to_pass"/>
         <div id="header_container">
             <header-component :title="title[area]" :links="links"/>
         </div>
@@ -11,6 +12,7 @@
 
 <script>
 import Header from "@/Components/admin/Header";
+import InfoWindow from "@/Components/geral/InfoWindow";
 
 export default {
     data() {
@@ -19,17 +21,31 @@ export default {
                 tecnico: "Técnico",
                 politico: "Político",
             },
+            content_to_pass: {},
         };
     },
-    methods: {
-        //
+    methods:{
+        refresh(){
+            if(this.window_content){
+                let prop = this.window_content;
+                this.$data.content_to_pass = prop;
+            }
+        },
+    },
+    updated(){
+        this.refresh();
+    },
+    mounted(){
+        this.refresh();
     },
     props: {
         area: String,
         links: Object,
+        window_content: Object,
     },
     components: {
         "header-component": Header,
+        InfoWindow,
     },
 };
 </script>

@@ -166,12 +166,6 @@ export default {
         Link,
         AppPublic,
     },
-    created(){
-        console.log(this.$page.props);
-    },
-    updated(){
-        console.log(this.$page.props);
-    },
     data() {
         return {
             form: this.$inertia.form({

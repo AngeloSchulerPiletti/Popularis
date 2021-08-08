@@ -1,5 +1,5 @@
 <template>
-    <politico-container area="politico">
+    <politico-container area="politico" :window_content="info_content">
         <div class="form_container">
             <div class="form_header">
                 <h3>Criador de Pautas</h3>
@@ -48,12 +48,19 @@
                     />
                 </div>
                 <div class="form_sec">
-                    <label for="resumo">Resumo</label>
+                    <label for="resumo">Resumo<info-icon
+                            @click="info_change('resumo')"
+                            class="pauta_info icon_info"
+                    /></label>
                     <textarea name="resumo" id="resumo" v-model="form.resumo">
                     </textarea>
                 </div>
                 <div class="form_sec">
-                    <label for="pauta">Pauta<info-icon class="pauta_info icon_info"/></label>
+                    <label for="pauta"
+                        >Pauta<info-icon
+                            @click="info_change('pauta')"
+                            class="pauta_info icon_info"
+                    /></label>
                     <textarea name="pauta" id="pauta" v-model="form.pauta">
                     </textarea>
                 </div>
@@ -78,9 +85,39 @@ export default {
                 resumo: "",
                 pauta: "",
             }),
+            info_content: {},
         };
     },
     methods: {
+        info_change(which) {
+            if (which == "pauta") {
+                this.$data.info_content = [
+                    "Markdown Pauta",
+                    [
+                        "Atenção às orientações sobre como formatar a pauta corretamente",
+                        [
+                            "AAAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAA",
+                        ],
+                    ],
+                ]; //{'titulo': ['subtitle', ['p1', 'p2', 'p3' ...n 'pn']]}
+            } else if (which == "resumo") {
+                this.$data.info_content = [
+                    "Regras do Resumo",
+                    [
+                        "Atenção às orientações sobre como formatar a pauta corretamente",
+                        [
+                            "AAAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAAAAA",
+                            "AAAAAAAAAAAA",
+                        ],
+                    ],
+                ]; //{'titulo': ['subtitle', ['p1', 'p2', 'p3' ...n 'pn']]}
+            }
+        },
         submit() {
             this.form.post(route("politico.create_pauta"), {
                 //
@@ -89,7 +126,7 @@ export default {
     },
     components: {
         "politico-container": Politico,
-        'info-icon': Info,
+        "info-icon": Info,
     },
 };
 </script>
@@ -105,8 +142,7 @@ export default {
 
     @include form_style();
 
-    .pauta_info{
-
+    .pauta_info {
     }
 
     .form_header {
