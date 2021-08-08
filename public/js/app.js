@@ -18246,7 +18246,6 @@ __webpack_require__.r(__webpack_exports__);
         this.$data.par = other_props[1];
 
         if (container.style.display != "block") {
-          console.log('resolved');
           container.style.display = "block";
           setTimeout(function () {
             container.dataset.anim = "on";
@@ -18293,8 +18292,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       messagesToShow: {}
     };
   },
-  props: {// errors: Object,
-    // status: Object,
+  props: {
+    errors: Object,
+    status: Object
   },
   methods: {
     closeMessage: function closeMessage(key) {
@@ -18302,24 +18302,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       delete this.$data.messagesToShow[key];
     },
     check: function check() {
-      if (this.$page.props.errors || this.$page.props.status) {
-        var errorsLen = Object.keys(this.$page.props.errors).length,
+      if (Object.keys(this.errors).length > 0 || Object.keys(this.status).length > 0) {
+        var errorsLen = Object.keys(this.errors).length,
             statusLen = [];
-        statusLen = this.$page.props.status ? Object.keys(this.$page.props.status).length : [];
-        console.log(statusLen, errorsLen);
+        statusLen = this.status ? Object.keys(this.status).length : [];
 
-        if (errorsLen > 0 && statusLen > 0) {
-          this.messagesToShow = _objectSpread(_objectSpread({}, this.$page.props.errors), this.$page.props.status);
+        if (errorsLen > 0 && statusLen > 0 && this.messagesToShow != _objectSpread(_objectSpread({}, this.errors), this.status)) {
+          this.messagesToShow = _objectSpread(_objectSpread({}, this.errors), this.status);
           this.cleanMessages();
-        } else if (statusLen > 0) {
-          this.messagesToShow = this.$page.props.status;
+        } else if (statusLen > 0 && this.messagesToShow != this.status) {
+          this.messagesToShow = this.status;
           this.cleanMessages();
-        } else if (errorsLen > 0) {
-          this.messagesToShow = this.$page.props.errors;
+        } else if (errorsLen > 0 && this.messagesToShow != this.errors) {
+          console.log('modify errors');
+          this.messagesToShow = this.errors;
           this.cleanMessages();
         }
 
-        console.log(this.messagesToShow);
         this.toClose = "no";
       }
     },
@@ -18999,14 +18998,18 @@ __webpack_require__.r(__webpack_exports__);
         tecnico: "Técnico",
         politico: "Político"
       },
-      content_to_pass: {}
+      content_to_pass: {},
+      status: {}
     };
   },
   methods: {
     refresh: function refresh() {
-      if (this.window_content) {
-        var prop = this.window_content;
-        this.$data.content_to_pass = prop;
+      if (this.$data.content_to_pass != this.window_content && this.window_content) {
+        this.$data.content_to_pass = this.window_content ? this.window_content : {};
+      }
+
+      if (this.$data.status != this.$page.props.status && this.$page.props.status) {
+        this.$data.status = this.$page.props.status ? this.$page.props.status : {};
       }
     }
   },
@@ -20278,11 +20281,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     info_change: function info_change(which) {
-      if (which == "pauta") {
-        this.$data.info_content = ["Markdown Pauta", ["Atenção às orientações sobre como formatar a pauta corretamente", ["Atenção, o markdown é sensível à quebra de linha, isso quer dizer que linhas em branco serão adicionadas ao texto como quebra de linha.", 'Para indicar um títlo use "#", sendo "#" o maior título e "######" o menor.', 'Para indicar início de um parágrafo use "@@"', 'Para criar uma lista utilize a seguinte marcação: adicione "---" para indicar o início da lista, então pule de linha liste cada elemento adicionando "--" antes e pulando uma linha. Ao fim da lista adicione "---" para finalizar.', 'Para deixar um texto em negrito, ponha-o entre "*".', 'Para deixar um texto em itálico, ponha-o entre "**"']]]; //{'titulo': ['subtitle', ['p1', 'p2', 'p3' ...n 'pn']]}
-      } else if (which == "resumo") {
-        this.$data.info_content = ["Regras do Resumo", ["Siga às instruções para escrever corretamente o resumo", ["Defina os objetivos da pauta com clareza e objetividade.", "Esclareça os pontos mais relevantes.", "Introduza as consequências de ambas decisões."]]]; //{'titulo': ['subtitle', ['p1', 'p2', 'p3' ...n 'pn']]}
-      }
+      var _this = this;
+
+      var labels = [["pauta", ["Markdown Pauta", ["Atenção às orientações sobre como formatar a pauta corretamente", ["Atenção, o markdown é sensível à quebra de linha, isso quer dizer que linhas em branco serão adicionadas ao texto como quebra de linha.", 'Para indicar um títlo use "#", sendo "#" o maior título e "######" o menor.', 'Para indicar início de um parágrafo use "@@"', 'Para criar uma lista utilize a seguinte marcação: adicione "---" para indicar o início da lista, então pule de linha liste cada elemento adicionando "--" antes e pulando uma linha. Ao fim da lista adicione "---" para finalizar.', 'Para deixar um texto em negrito, ponha-o entre "*".', 'Para deixar um texto em itálico, ponha-o entre "**"']]]], ["resumo", ["Regras do Resumo", ["Siga às instruções para escrever corretamente o resumo", ["Defina os objetivos da pauta com clareza e objetividade.", "Esclareça os pontos mais relevantes.", "Introduza as consequências de ambas decisões."]]]], ["palavras_chave", ["Utilizando Palavras-chave", ["Siga às instruções abaixo para separa corretamente as palavras-chave", ["Separe cada palavra-chave com vírgula. Não importa se você adicionar espaço antes ou depois da vírgula.", 'Acentos e letras maiúsculas não são diferenciadas, isso quer dizer que "maçã" é igual a "maca".']]]], ["autores", ["Como indiciar os autores e participantes", ["Siga às instruções abaixo para indicar corretamente os autores e participantes", ["Separe cada autor com vírgula. Não importa se você adicionar espaço antes ou depois da vírgula."]]]]];
+      labels.forEach(function (label) {
+        if (label[0] == which) {
+          _this.$data.info_content = label[1];
+        }
+      });
     },
     submit: function submit() {
       this.form.post(route("politico.create_pauta"), {//
@@ -21719,7 +21725,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       "class": "message_container",
       key: key
-    }, [message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
+    }, [message != null ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", {
       key: 0,
       id: $data.toClose,
       "class": "message",
@@ -23037,8 +23043,12 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   var _component_header_component = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("header-component");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_messages_report, {
+    errors: _ctx.$page.props.errors,
+    status: $data.status,
     "class": "messages"
-  }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_window, {
+  }, null, 8
+  /* PROPS */
+  , ["errors", "status"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_window, {
     id: "info_window",
     window_content: $data.content_to_pass
   }, null, 8
@@ -25931,45 +25941,133 @@ var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 /* HOISTED */
 );
 
-var _hoisted_8 = {
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "economia"
+}, "Economia", -1
+/* HOISTED */
+);
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "saude"
+}, "Saúde", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "seguranca"
+}, "Segurança", -1
+/* HOISTED */
+);
+
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "internacional"
+}, "Internacional", -1
+/* HOISTED */
+);
+
+var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "agricultura"
+}, "Agricultura", -1
+/* HOISTED */
+);
+
+var _hoisted_13 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "aposentadoria"
+}, "Aposentadoria", -1
+/* HOISTED */
+);
+
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "obras"
+}, "Obras", -1
+/* HOISTED */
+);
+
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "tecnologia"
+}, "Tecnologia", -1
+/* HOISTED */
+);
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "pesquisa"
+}, " Pesquisa e Inovação ", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "aeroespacial"
+}, "Aeroespacial", -1
+/* HOISTED */
+);
+
+var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "comercio"
+}, "Comércio", -1
+/* HOISTED */
+);
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "educacao"
+}, "Educação", -1
+/* HOISTED */
+);
+
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "financas"
+}, "Finanças", -1
+/* HOISTED */
+);
+
+var _hoisted_21 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "civil"
+}, "Civil", -1
+/* HOISTED */
+);
+
+var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("option", {
+  value: "outros"
+}, "Outros", -1
+/* HOISTED */
+);
+
+var _hoisted_23 = {
   "class": "form_sec"
 };
-
-var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_24 = {
   "for": "autores"
-}, "Autores", -1
-/* HOISTED */
-);
-
-var _hoisted_10 = {
-  "class": "form_sec"
 };
 
-var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", {
+var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Autores");
+
+var _hoisted_26 = {
+  "class": "form_sec"
+};
+var _hoisted_27 = {
   "for": "palavras_chave"
-}, "Palavras-Chave", -1
-/* HOISTED */
-);
+};
 
-var _hoisted_12 = {
+var _hoisted_28 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Palavras-Chave");
+
+var _hoisted_29 = {
   "class": "form_sec"
 };
-var _hoisted_13 = {
+var _hoisted_30 = {
   "for": "resumo"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Resumo");
+var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Resumo");
 
-var _hoisted_15 = {
+var _hoisted_32 = {
   "class": "form_sec"
 };
-var _hoisted_16 = {
+var _hoisted_33 = {
   "for": "pauta"
 };
 
-var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pauta");
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Pauta");
 
-var _hoisted_18 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   "class": "actions"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
   type: "submit"
@@ -25990,7 +26088,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
   }, {
     "default": _withId(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", {
-        onSubmit: _cache[9] || (_cache[9] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+        onSubmit: _cache[11] || (_cache[11] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
           return $options.submit && $options.submit.apply($options, arguments);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
@@ -26002,60 +26100,69 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.titulo]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
-        type: "text",
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.titulo]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("select", {
         name: "assunto",
         id: "assunto",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
           return $data.form.assunto = $event;
         })
-      }, null, 512
+      }, [_hoisted_8, _hoisted_9, _hoisted_10, _hoisted_11, _hoisted_12, _hoisted_13, _hoisted_14, _hoisted_15, _hoisted_16, _hoisted_17, _hoisted_18, _hoisted_19, _hoisted_20, _hoisted_21, _hoisted_22], 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.assunto]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.assunto]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input\r\n                            type=\"text\"\r\n                            name=\"assunto\"\r\n                            id=\"assunto\"\r\n                            v-model=\"form.assunto\"\r\n                        /> ")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_24, [_hoisted_25, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_icon, {
+        onClick: _cache[3] || (_cache[3] = function ($event) {
+          return $options.info_change('autores');
+        }),
+        "class": "pauta_info icon_info"
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         type: "text",
         name: "autores",
         id: "autores",
-        "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
           return $data.form.autores = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.autores]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.autores]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_26, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_27, [_hoisted_28, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_icon, {
+        onClick: _cache[5] || (_cache[5] = function ($event) {
+          return $options.info_change('palavras_chave');
+        }),
+        "class": "pauta_info icon_info"
+      })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
         type: "text",
         name: "palavras_chave",
         id: "palavras_chave",
-        "onUpdate:modelValue": _cache[4] || (_cache[4] = function ($event) {
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
           return $data.form.palavras_chave = $event;
         })
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.palavras_chave]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_icon, {
-        onClick: _cache[5] || (_cache[5] = function ($event) {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.palavras_chave]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_icon, {
+        onClick: _cache[7] || (_cache[7] = function ($event) {
           return $options.info_change('resumo');
         }),
         "class": "pauta_info icon_info"
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
         name: "resumo",
         id: "resumo",
-        "onUpdate:modelValue": _cache[6] || (_cache[6] = function ($event) {
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
           return $data.form.resumo = $event;
         })
       }, "\r\n                    ", 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.resumo]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_16, [_hoisted_17, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_icon, {
-        onClick: _cache[7] || (_cache[7] = function ($event) {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.resumo]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_32, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_info_icon, {
+        onClick: _cache[9] || (_cache[9] = function ($event) {
           return $options.info_change('pauta');
         }),
         "class": "pauta_info icon_info"
       })]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
         name: "pauta",
         id: "pauta",
-        "onUpdate:modelValue": _cache[8] || (_cache[8] = function ($event) {
+        "onUpdate:modelValue": _cache[10] || (_cache[10] = function ($event) {
           return $data.form.pauta = $event;
         })
       }, "\r\n                    ", 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.pauta]])]), _hoisted_18], 32
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.pauta]])]), _hoisted_35], 32
       /* HYDRATE_EVENTS */
       )])];
     }),
@@ -26971,7 +27078,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* Color Theme Swatches in Hex */\nhtml[data-v-6d066032], body[data-v-6d066032], div[data-v-6d066032], span[data-v-6d066032], applet[data-v-6d066032], object[data-v-6d066032], iframe[data-v-6d066032],\nh1[data-v-6d066032], h2[data-v-6d066032], h3[data-v-6d066032], h4[data-v-6d066032], h5[data-v-6d066032], h6[data-v-6d066032], p[data-v-6d066032], blockquote[data-v-6d066032], pre[data-v-6d066032],\na[data-v-6d066032], abbr[data-v-6d066032], acronym[data-v-6d066032], address[data-v-6d066032], big[data-v-6d066032], cite[data-v-6d066032], code[data-v-6d066032],\ndel[data-v-6d066032], dfn[data-v-6d066032], em[data-v-6d066032], img[data-v-6d066032], ins[data-v-6d066032], kbd[data-v-6d066032], q[data-v-6d066032], s[data-v-6d066032], samp[data-v-6d066032],\nsmall[data-v-6d066032], strike[data-v-6d066032], strong[data-v-6d066032], sub[data-v-6d066032], sup[data-v-6d066032], tt[data-v-6d066032], var[data-v-6d066032],\nb[data-v-6d066032], u[data-v-6d066032], i[data-v-6d066032], center[data-v-6d066032],\ndl[data-v-6d066032], dt[data-v-6d066032], dd[data-v-6d066032], ol[data-v-6d066032], ul[data-v-6d066032], li[data-v-6d066032],\nfieldset[data-v-6d066032], form[data-v-6d066032], label[data-v-6d066032], legend[data-v-6d066032],\ntable[data-v-6d066032], caption[data-v-6d066032], tbody[data-v-6d066032], tfoot[data-v-6d066032], thead[data-v-6d066032], tr[data-v-6d066032], th[data-v-6d066032], td[data-v-6d066032],\narticle[data-v-6d066032], aside[data-v-6d066032], canvas[data-v-6d066032], details[data-v-6d066032], embed[data-v-6d066032],\nfigure[data-v-6d066032], figcaption[data-v-6d066032], footer[data-v-6d066032], header[data-v-6d066032], hgroup[data-v-6d066032],\nmenu[data-v-6d066032], nav[data-v-6d066032], output[data-v-6d066032], ruby[data-v-6d066032], section[data-v-6d066032], summary[data-v-6d066032],\ntime[data-v-6d066032], mark[data-v-6d066032], audio[data-v-6d066032], video[data-v-6d066032] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n  outline: none;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle[data-v-6d066032], aside[data-v-6d066032], details[data-v-6d066032], figcaption[data-v-6d066032], figure[data-v-6d066032],\nfooter[data-v-6d066032], header[data-v-6d066032], hgroup[data-v-6d066032], menu[data-v-6d066032], nav[data-v-6d066032], section[data-v-6d066032] {\n  display: block;\n}\nbody[data-v-6d066032] {\n  line-height: 1;\n}\nol[data-v-6d066032], ul[data-v-6d066032] {\n  list-style: none;\n}\nblockquote[data-v-6d066032], q[data-v-6d066032] {\n  quotes: none;\n}\nblockquote[data-v-6d066032]:before, blockquote[data-v-6d066032]:after,\nq[data-v-6d066032]:before, q[data-v-6d066032]:after {\n  content: '';\n  content: none;\n}\ntable[data-v-6d066032] {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n*[data-v-6d066032] {\n  font-family: 'Raleway', sans-serif;\n}\n#messages_container[data-v-6d066032] {\n  position: fixed;\n  z-index: 10000000;\n  top: 1vw;\n  left: 1.5vw;\n  display: flex;\n  flex-direction: column;\n  gap: 0.6vw;\n}\n#messages_container .message_container[data-v-6d066032] {\n  transition-duration: 300ms;\n  transition-property: opacity;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n  width: 20vw;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n  cursor: pointer;\n  padding: 0.6vw;\n  border-radius: 0.4vw;\n  background-image: linear-gradient(225deg, #cdcdcd, #ffffff);\n  border-left: 4px solid #002776;\n  opacity: 0.95;\n  box-shadow: -2px 3px 4px #202020;\n  transition-property: transform, opacity;\n  transition-duration: 200ms;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  color: #202020;\n  margin-bottom: 0.3vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n  font-weight: 600;\n  text-transform: uppercase;\n  font-style: italic;\n  font-size: 1.2vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n  font-size: 1.2vw;\n  font-weight: 900;\n  text-transform: uppercase;\n  margin-right: 0.3vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032]:focus {\n  border: none;\n  outline: none;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n  font-weight: 300;\n  font-style: italic;\n  font-size: 1.2vw;\n  color: #202020;\n}\n#messages_container .message_container #yes[data-v-6d066032] {\n  opacity: 0;\n  transform: translateY(-1vw);\n}\n#messages_container .message_container.closing[data-v-6d066032] {\n  opacity: 0;\n}\n\n/*+----------------------------------------+\r\n  |           RESPONSIVIDADE               |\r\n  +----------------------------------------+ */\n@media (max-width: 1100px) {\n#messages_container[data-v-6d066032] {\n    top: 1.5vw;\n    left: 1.5vw;\n    gap: 0.8vw;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n    width: 28vw;\n    padding: 1vw;\n    border-radius: 0.6vw;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n    margin-bottom: 0.5vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n    font-size: 1.9vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n    font-size: 1.5vw;\n    margin-right: 0.7vw;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n    font-size: 1.6vw;\n}\n}\n@media (max-width: 700px) {\n#messages_container[data-v-6d066032] {\n    top: 2vw;\n    left: 1.8vw;\n    gap: 1.6vw;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n    width: 45vw;\n    padding: 1.4vw;\n    border-radius: 1vw;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n    margin-bottom: 0.8vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n    font-size: 3vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n    font-size: 2.5vw;\n    margin-right: 0.9vw;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n    font-size: 2.8vw;\n}\n}\n@media (max-width: 500px) {\n#messages_container[data-v-6d066032] {\n    top: 3.6vw;\n    left: 2.1vw;\n    gap: 2.2vw;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n    width: 55vw;\n    padding: 2vw;\n    border-radius: 1vw;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n    margin-bottom: 0.8vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n    font-size: 4vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n    font-size: 3.5vw;\n    margin-right: 1.2vw;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n    font-size: 3.6vw;\n}\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* Color Theme Swatches in Hex */\nhtml[data-v-6d066032], body[data-v-6d066032], div[data-v-6d066032], span[data-v-6d066032], applet[data-v-6d066032], object[data-v-6d066032], iframe[data-v-6d066032],\nh1[data-v-6d066032], h2[data-v-6d066032], h3[data-v-6d066032], h4[data-v-6d066032], h5[data-v-6d066032], h6[data-v-6d066032], p[data-v-6d066032], blockquote[data-v-6d066032], pre[data-v-6d066032],\na[data-v-6d066032], abbr[data-v-6d066032], acronym[data-v-6d066032], address[data-v-6d066032], big[data-v-6d066032], cite[data-v-6d066032], code[data-v-6d066032],\ndel[data-v-6d066032], dfn[data-v-6d066032], em[data-v-6d066032], img[data-v-6d066032], ins[data-v-6d066032], kbd[data-v-6d066032], q[data-v-6d066032], s[data-v-6d066032], samp[data-v-6d066032],\nsmall[data-v-6d066032], strike[data-v-6d066032], strong[data-v-6d066032], sub[data-v-6d066032], sup[data-v-6d066032], tt[data-v-6d066032], var[data-v-6d066032],\nb[data-v-6d066032], u[data-v-6d066032], i[data-v-6d066032], center[data-v-6d066032],\ndl[data-v-6d066032], dt[data-v-6d066032], dd[data-v-6d066032], ol[data-v-6d066032], ul[data-v-6d066032], li[data-v-6d066032],\nfieldset[data-v-6d066032], form[data-v-6d066032], label[data-v-6d066032], legend[data-v-6d066032],\ntable[data-v-6d066032], caption[data-v-6d066032], tbody[data-v-6d066032], tfoot[data-v-6d066032], thead[data-v-6d066032], tr[data-v-6d066032], th[data-v-6d066032], td[data-v-6d066032],\narticle[data-v-6d066032], aside[data-v-6d066032], canvas[data-v-6d066032], details[data-v-6d066032], embed[data-v-6d066032],\nfigure[data-v-6d066032], figcaption[data-v-6d066032], footer[data-v-6d066032], header[data-v-6d066032], hgroup[data-v-6d066032],\nmenu[data-v-6d066032], nav[data-v-6d066032], output[data-v-6d066032], ruby[data-v-6d066032], section[data-v-6d066032], summary[data-v-6d066032],\ntime[data-v-6d066032], mark[data-v-6d066032], audio[data-v-6d066032], video[data-v-6d066032] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n  outline: none;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle[data-v-6d066032], aside[data-v-6d066032], details[data-v-6d066032], figcaption[data-v-6d066032], figure[data-v-6d066032],\nfooter[data-v-6d066032], header[data-v-6d066032], hgroup[data-v-6d066032], menu[data-v-6d066032], nav[data-v-6d066032], section[data-v-6d066032] {\n  display: block;\n}\nbody[data-v-6d066032] {\n  line-height: 1;\n}\nol[data-v-6d066032], ul[data-v-6d066032] {\n  list-style: none;\n}\nblockquote[data-v-6d066032], q[data-v-6d066032] {\n  quotes: none;\n}\nblockquote[data-v-6d066032]:before, blockquote[data-v-6d066032]:after,\nq[data-v-6d066032]:before, q[data-v-6d066032]:after {\n  content: '';\n  content: none;\n}\ntable[data-v-6d066032] {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n*[data-v-6d066032] {\n  font-family: 'Raleway', sans-serif;\n}\n#messages_container[data-v-6d066032] {\n  position: fixed;\n  z-index: 10000000;\n  top: 1vw;\n  left: 1.5vw;\n  display: flex;\n  flex-direction: column;\n  gap: 0.6vw;\n}\n#messages_container .message_container[data-v-6d066032] {\n  transition-duration: 300ms;\n  transition-property: opacity;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n  display: flex;\n  flex-direction: column;\n  overflow: hidden;\n  width: 20vw;\n  height: -webkit-fit-content;\n  height: -moz-fit-content;\n  height: fit-content;\n  cursor: pointer;\n  padding: 0.6vw;\n  border-radius: 0.4vw;\n  background-image: linear-gradient(225deg, #cdcdcd, #ffffff);\n  border-left: 4px solid #002776;\n  opacity: 0.95;\n  box-shadow: -2px 3px 4px #202020;\n  transition-property: transform, opacity;\n  transition-duration: 200ms;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n  display: flex;\n  justify-content: space-between;\n  width: 100%;\n  color: #202020;\n  margin-bottom: 0.3vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n  font-weight: 600;\n  text-transform: uppercase;\n  font-style: italic;\n  font-size: 1.2vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n  font-size: 1.2vw;\n  font-weight: 900;\n  text-transform: uppercase;\n  margin-right: 0.3vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032]:focus {\n  border: none;\n  outline: none;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n  font-weight: 400;\n  font-style: italic;\n  font-size: 1.2vw;\n  color: #202020;\n}\n#messages_container .message_container #yes[data-v-6d066032] {\n  opacity: 0;\n  transform: translateY(-1vw);\n}\n#messages_container .message_container.closing[data-v-6d066032] {\n  opacity: 0;\n}\n\n/*+----------------------------------------+\r\n  |           RESPONSIVIDADE               |\r\n  +----------------------------------------+ */\n@media (max-width: 1100px) {\n#messages_container[data-v-6d066032] {\n    top: 1.5vw;\n    left: 1.5vw;\n    gap: 0.8vw;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n    width: 28vw;\n    padding: 1vw;\n    border-radius: 0.6vw;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n    margin-bottom: 0.5vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n    font-size: 1.9vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n    font-size: 1.5vw;\n    margin-right: 0.7vw;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n    font-size: 1.6vw;\n}\n}\n@media (max-width: 700px) {\n#messages_container[data-v-6d066032] {\n    top: 2vw;\n    left: 1.8vw;\n    gap: 1.6vw;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n    width: 45vw;\n    padding: 1.4vw;\n    border-radius: 1vw;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n    margin-bottom: 0.8vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n    font-size: 3vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n    font-size: 2.5vw;\n    margin-right: 0.9vw;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n    font-size: 2.8vw;\n}\n}\n@media (max-width: 500px) {\n#messages_container[data-v-6d066032] {\n    top: 3.6vw;\n    left: 2.1vw;\n    gap: 2.2vw;\n}\n#messages_container .message_container .message[data-v-6d066032] {\n    width: 55vw;\n    padding: 2vw;\n    border-radius: 1vw;\n}\n#messages_container .message_container .message #aviso[data-v-6d066032] {\n    margin-bottom: 0.8vw;\n}\n#messages_container .message_container .message #aviso h6[data-v-6d066032] {\n    font-size: 4vw;\n}\n#messages_container .message_container .message #aviso #close[data-v-6d066032] {\n    font-size: 3.5vw;\n    margin-right: 1.2vw;\n}\n#messages_container .message_container .message span[data-v-6d066032] {\n    font-size: 3.6vw;\n}\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

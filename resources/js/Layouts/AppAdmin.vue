@@ -1,6 +1,6 @@
 <template>
     <div id="website">
-        <messages-report class="messages"/>
+        <messages-report :errors="$page.props.errors" :status="status" class="messages"/>
         <info-window id="info_window" :window_content="content_to_pass"/>
         <div id="header_container">
             <header-component :title="title[area]" :links="links"/>
@@ -24,14 +24,18 @@ export default {
                 politico: "Político",
             },
             content_to_pass: {},
+            status: {},
         };
     },
-    methods:{
+    methods:{ 
         refresh(){
-            if(this.window_content){
-                let prop = this.window_content;
-                this.$data.content_to_pass = prop;
+            if(this.$data.content_to_pass != this.window_content && this.window_content){
+                this.$data.content_to_pass = this.window_content ? this.window_content     : {};
             }
+            if(this.$data.status != this.$page.props.status && this.$page.props.status){
+                this.$data.status = this.$page.props.status      ? this.$page.props.status : {};
+            }
+            
         },
     },
     updated(){

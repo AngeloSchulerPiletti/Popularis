@@ -8,7 +8,7 @@
             <div
                 :id="toClose"
                 class="message"
-                v-if="message"
+                v-if="message != null"
                 @click="closeMessage(key)"
             >
                 <div id="aviso">
@@ -30,8 +30,8 @@ export default {
         };
     },
     props: {
-        // errors: Object,
-        // status: Object,
+        errors: Object,
+        status: Object,
     },
     methods: {
         closeMessage: function (key) {
@@ -39,25 +39,24 @@ export default {
             delete this.$data.messagesToShow[key];
         },
         check: function () {
-            if(this.$page.props.errors || this.$page.props.status){
-                var errorsLen = Object.keys(this.$page.props.errors).length,
+            if((Object.keys(this.errors).length > 0 || Object.keys(this.status).length > 0)){
+                var errorsLen = Object.keys(this.errors).length,
                     statusLen = [];
 
-                statusLen = this.$page.props.status ? Object.keys(this.$page.props.status).length : [];
+                statusLen = this.status ? Object.keys(this.status).length : [];
                 
-                console.log(statusLen, errorsLen);
-
-                if (errorsLen > 0 && statusLen > 0) {
-                    this.messagesToShow = { ...this.$page.props.errors, ...this.$page.props.status };
+                if (errorsLen > 0 && statusLen > 0 && this.messagesToShow != { ...this.errors, ...this.status }) {
+                    this.messagesToShow = { ...this.errors, ...this.status };
                     this.cleanMessages();
-                } else if (statusLen > 0) {
-                    this.messagesToShow = this.$page.props.status;
+                } else if (statusLen > 0 && this.messagesToShow != this.status) {
+                    this.messagesToShow = this.status;
                     this.cleanMessages();
-                } else if (errorsLen > 0) {
-                    this.messagesToShow = this.$page.props.errors;
+                } else if (errorsLen > 0 && this.messagesToShow != this.errors) {
+                    console.log('modify errors');
+                    this.messagesToShow = this.errors;
                     this.cleanMessages();
                 }
-                console.log(this.messagesToShow);
+
                 this.toClose = "no";
             }
         },
@@ -148,7 +147,7 @@ export default {
             transition-duration: 200ms;
 
             span {
-                @include Font2_I();
+                @include Font1_I();
                 font-size: 1.2vw;
                 color: $black;
             }

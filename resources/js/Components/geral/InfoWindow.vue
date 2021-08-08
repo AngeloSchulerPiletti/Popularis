@@ -44,8 +44,6 @@ export default {
                 this.$data.par = other_props[1];
 
                 if (container.style.display != "block") {
-                    console.log('resolved');
-
                     container.style.display = "block";
                     setTimeout(() => {
                         container.dataset.anim = "on";
