@@ -52,7 +52,6 @@ export default {
                     this.messagesToShow = this.status;
                     this.cleanMessages();
                 } else if (errorsLen > 0 && this.messagesToShow != this.errors) {
-                    console.log('modify errors');
                     this.messagesToShow = this.errors;
                     this.cleanMessages();
                 }

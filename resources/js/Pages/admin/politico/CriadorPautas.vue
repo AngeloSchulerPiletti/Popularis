@@ -110,11 +110,11 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                titulo: "",
-                assunto: "",
-                autores: "",
-                palavras_chave: "",
-                resumo: "",
+                titulo: "Título de exmplo",
+                assunto: "economia",
+                autores: "angelo schuler, joão goulart",
+                palavras_chave: "abacate, cerimonia,feijao , leitao,",
+                resumo: "AAAAAAAAAA",
                 pauta: "",
             }),
             info_content: {},
@@ -136,6 +136,7 @@ export default {
                                 'Para criar uma lista utilize a seguinte marcação: adicione "---" para indicar o início da lista, então pule de linha liste cada elemento adicionando "--" antes e pulando uma linha. Ao fim da lista adicione "---" para finalizar.',
                                 'Para deixar um texto em negrito, ponha-o entre "*".',
                                 'Para deixar um texto em itálico, ponha-o entre "**"',
+                                'Para adicionar uma linha horizontal elegante digite "+-+"',
                             ],
                         ],
                     ],

@@ -1,2 +1,2 @@
 ## Next step ##
-Include animations on the home's sections; 
+Need to do the CRUD model; 

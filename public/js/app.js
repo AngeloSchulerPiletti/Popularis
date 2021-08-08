@@ -18314,7 +18314,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           this.messagesToShow = this.status;
           this.cleanMessages();
         } else if (errorsLen > 0 && this.messagesToShow != this.errors) {
-          console.log('modify errors');
           this.messagesToShow = this.errors;
           this.cleanMessages();
         }
@@ -20269,11 +20268,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       form: this.$inertia.form({
-        titulo: "",
-        assunto: "",
-        autores: "",
-        palavras_chave: "",
-        resumo: "",
+        titulo: "Título de exmplo",
+        assunto: "economia",
+        autores: "angelo schuler, joão goulart",
+        palavras_chave: "abacate, cerimonia,feijao , leitao,",
+        resumo: "AAAAAAAAAA",
         pauta: ""
       }),
       info_content: {}
@@ -20283,7 +20282,7 @@ __webpack_require__.r(__webpack_exports__);
     info_change: function info_change(which) {
       var _this = this;
 
-      var labels = [["pauta", ["Markdown Pauta", ["Atenção às orientações sobre como formatar a pauta corretamente", ["Atenção, o markdown é sensível à quebra de linha, isso quer dizer que linhas em branco serão adicionadas ao texto como quebra de linha.", 'Para indicar um títlo use "#", sendo "#" o maior título e "######" o menor.', 'Para indicar início de um parágrafo use "@@"', 'Para criar uma lista utilize a seguinte marcação: adicione "---" para indicar o início da lista, então pule de linha liste cada elemento adicionando "--" antes e pulando uma linha. Ao fim da lista adicione "---" para finalizar.', 'Para deixar um texto em negrito, ponha-o entre "*".', 'Para deixar um texto em itálico, ponha-o entre "**"']]]], ["resumo", ["Regras do Resumo", ["Siga às instruções para escrever corretamente o resumo", ["Defina os objetivos da pauta com clareza e objetividade.", "Esclareça os pontos mais relevantes.", "Introduza as consequências de ambas decisões."]]]], ["palavras_chave", ["Utilizando Palavras-chave", ["Siga às instruções abaixo para separa corretamente as palavras-chave", ["Separe cada palavra-chave com vírgula. Não importa se você adicionar espaço antes ou depois da vírgula.", 'Acentos e letras maiúsculas não são diferenciadas, isso quer dizer que "maçã" é igual a "maca".']]]], ["autores", ["Como indiciar os autores e participantes", ["Siga às instruções abaixo para indicar corretamente os autores e participantes", ["Separe cada autor com vírgula. Não importa se você adicionar espaço antes ou depois da vírgula."]]]]];
+      var labels = [["pauta", ["Markdown Pauta", ["Atenção às orientações sobre como formatar a pauta corretamente", ["Atenção, o markdown é sensível à quebra de linha, isso quer dizer que linhas em branco serão adicionadas ao texto como quebra de linha.", 'Para indicar um títlo use "#", sendo "#" o maior título e "######" o menor.', 'Para indicar início de um parágrafo use "@@"', 'Para criar uma lista utilize a seguinte marcação: adicione "---" para indicar o início da lista, então pule de linha liste cada elemento adicionando "--" antes e pulando uma linha. Ao fim da lista adicione "---" para finalizar.', 'Para deixar um texto em negrito, ponha-o entre "*".', 'Para deixar um texto em itálico, ponha-o entre "**"', 'Para adicionar uma linha horizontal elegante digite "+-+"']]]], ["resumo", ["Regras do Resumo", ["Siga às instruções para escrever corretamente o resumo", ["Defina os objetivos da pauta com clareza e objetividade.", "Esclareça os pontos mais relevantes.", "Introduza as consequências de ambas decisões."]]]], ["palavras_chave", ["Utilizando Palavras-chave", ["Siga às instruções abaixo para separa corretamente as palavras-chave", ["Separe cada palavra-chave com vírgula. Não importa se você adicionar espaço antes ou depois da vírgula.", 'Acentos e letras maiúsculas não são diferenciadas, isso quer dizer que "maçã" é igual a "maca".']]]], ["autores", ["Como indiciar os autores e participantes", ["Siga às instruções abaixo para indicar corretamente os autores e participantes", ["Separe cada autor com vírgula. Não importa se você adicionar espaço antes ou depois da vírgula."]]]]];
       labels.forEach(function (label) {
         if (label[0] == which) {
           _this.$data.info_content = label[1];
