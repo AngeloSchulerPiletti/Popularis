@@ -48,7 +48,8 @@
                     />
                 </div>
                 <div class="form_sec">
-                    <label for="resumo">Resumo<info-icon
+                    <label for="resumo"
+                        >Resumo<info-icon
                             @click="info_change('resumo')"
                             class="pauta_info icon_info"
                     /></label>
@@ -95,11 +96,13 @@ export default {
                     "Markdown Pauta",
                     [
                         "Atenção às orientações sobre como formatar a pauta corretamente",
-                        [
-                            "AAAAAAAAAAAAAAA",
-                            "AAAAAAAAAAAAAA",
-                            "AAAAAAAAAAAAAAA",
-                            "AAAAAAAAAAAA",
+                        [                            
+                            "Atenção, o markdown é sensível à quebra de linha, isso quer dizer que linhas em branco serão adicionadas ao texto como quebra de linha.",
+                            'Para indicar um títlo use "#", sendo "#" o maior título e "######" o menor.',
+                            'Para indicar início de um parágrafo use "@@"',
+                            'Para criar uma lista utilize a seguinte marcação: adicione "---" para indicar o início da lista, então pule de linha liste cada elemento adicionando "--" antes e pulando uma linha. Ao fim da lista adicione "---" para finalizar.',
+                            'Para deixar um texto em negrito, ponha-o entre "*".',
+                            'Para deixar um texto em itálico, ponha-o entre "**"',
                         ],
                     ],
                 ]; //{'titulo': ['subtitle', ['p1', 'p2', 'p3' ...n 'pn']]}
@@ -107,12 +110,11 @@ export default {
                 this.$data.info_content = [
                     "Regras do Resumo",
                     [
-                        "Atenção às orientações sobre como formatar a pauta corretamente",
+                        "Siga às instruções para escrever corretamente o resumo",
                         [
-                            "AAAAAAAAAAAAAAA",
-                            "AAAAAAAAAAAAAA",
-                            "AAAAAAAAAAAAAAA",
-                            "AAAAAAAAAAAA",
+                            "Defina os objetivos da pauta com clareza e objetividade.",
+                            "Esclareça os pontos mais relevantes.",
+                            "Introduza as consequências de ambas decisões.",
                         ],
                     ],
                 ]; //{'titulo': ['subtitle', ['p1', 'p2', 'p3' ...n 'pn']]}
@@ -142,20 +144,8 @@ export default {
 
     @include form_style();
 
-    .pauta_info {
-    }
-
     .form_header {
-        h3 {
-            @include Title4;
-            font-size: 24px;
-            color: $blue;
-        }
-        p {
-            @include Font1_I;
-            font-size: 13px;
-            color: $blue1;
-        }
+        @include form_header;
     }
 }
 </style>

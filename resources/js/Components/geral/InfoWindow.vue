@@ -74,7 +74,6 @@ export default {
     width: 100%;
     height: 100%;
     background-color: #000000b0;
-    z-index: 10000;
 
     .info_container {
         width: 60vw;

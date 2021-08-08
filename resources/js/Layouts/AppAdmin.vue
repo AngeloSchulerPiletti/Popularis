@@ -1,6 +1,6 @@
 <template>
     <div id="website">
-        <info-window :window_content="content_to_pass"/>
+        <info-window id="info_window" :window_content="content_to_pass"/>
         <div id="header_container">
             <header-component :title="title[area]" :links="links"/>
         </div>
@@ -56,6 +56,9 @@ export default {
     flex-direction: column;
     min-height: 100vh;
 
+    #info_window{
+        z-index: 10000;
+    }
     #header_container {
         position: relative;
         z-index: 1000;

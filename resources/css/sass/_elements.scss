@@ -1,5 +1,18 @@
 @import "./mixins";
 
+@mixin form_header {
+    h3 {
+        @include Title4;
+        font-size: 24px;
+        color: $blue;
+    }
+    p {
+        @include Font1_I;
+        font-size: 13px;
+        color: $blue1;
+    }
+}
+
 @mixin form_style {
     form {
         display: flex;
