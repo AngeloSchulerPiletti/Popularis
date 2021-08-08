@@ -64,6 +64,41 @@
                             v-model="form.autores"
                         />
                     </div>
+                    <div class="form_sec">
+                        <label for="uf">Estado (UF)</label>
+                        <select name="uf" id="uf" v-model="form.local">
+                            <option value="" disabled selected>
+                                Selecione um estado
+                            </option>
+                            <option value="RO">Rondônia</option>
+                            <option value="AC">Acre</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="RR">Roraima</option>
+                            <option value="AP">Amapá</option>
+                            <option value="TO">Tocantins</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PR">Paraná</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="BH">Bahia</option>
+                            <option value="PI">Piauí</option>
+                            <option value="CE">Ceará</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="PA">Pará</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="PB">Paraíba</option>
+                        </select>
+                    </div>
                 </div>
                 <div class="form_sec">
                     <label for="palavras_chave"
@@ -113,6 +148,7 @@ export default {
                 titulo: "Título de exmplo",
                 assunto: "economia",
                 autores: "angelo schuler, joão goulart",
+                local: "RS",
                 palavras_chave: "abacate, cerimonia,feijao , leitao,",
                 resumo: "AAAAAAAAAA",
                 pauta: "",

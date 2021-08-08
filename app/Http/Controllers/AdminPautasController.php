@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pauta;
+use Illuminate\Support\Facades\Auth;
 
 class AdminPautasController extends Controller
 {
@@ -39,7 +40,31 @@ class AdminPautasController extends Controller
         return $url;
     }
 
-    public function ArticleRegEx($text){
+    public function AutorRegEx($autores){
+        $autores_after = preg_split('/[\s]*[,][\s]*/', $autores);
+
+        for ($i=0; $i < count($autores_after); $i++) { 
+            preg_match('/^[\s]*$/', $autores_after[$i], $matches);
+            if(count($matches) > 0){
+                unset($autores_after[$i]);
+            }
+        }
+        return $autores_after;
+    }
+
+    public function PVRegEx($words){
+        $words_after = preg_split('/[\s,]+/', $words);
+
+        for ($i=0; $i < count($words_after); $i++) { 
+            preg_match('/^[\s]*$/', $words_after[$i], $matches);
+            if(count($matches) > 0){
+                unset($words_after[$i]);
+            }
+        }
+        return $words_after;
+    }
+
+    public function PautaRegEx($text){
         $unicode_n = "\u{000A}";
         $last_char = substr($text, -1);
         $text = substr_replace($text, ($last_char.$unicode_n), -1, 1);
@@ -127,20 +152,31 @@ class AdminPautasController extends Controller
             'titulo'         => 'required|string|max:150',
             'assunto'        => 'required|string|max:20',
             'autores'        => 'required|string|',
+            'local'          => 'required|string|max:2',
             'palavras_chave' => 'required|string|max:800',
             'resumo'         => 'required|string|max:1000',
             'pauta'          => 'required|string',
         ]);
         
-        $palavras_chave = $this->stringToURL($request->palavras_chave);
-        $text = $this->ArticleRegEx($request->pauta);
+        $palavras_chave = $this->PVRegEx($request->palavras_chave);
+        dd($palavras_chave);
 
+        $text = $this->PautaRegEx($request->pauta);
+        $responsavel = Auth::user()->id;
+        $autores = $this->AutorRegEx($request->autores);
+        
 
         $pauta = new Pauta();
+        $pauta->palavras_chave = $palavras_chave;
+        $pauta->pauta = $text;
+        $pauta->responsavel = $responsavel;
+        $pauta->autores = $autores;
+        
+        $pauta->titulo = $request->titulo;
+        $pauta->assunto = $request->assunto;
 
 
 
 
-        dd($text);
     }
 }
