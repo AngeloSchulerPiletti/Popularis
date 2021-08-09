@@ -1,7 +1,7 @@
 <template>
     <div id="website">
-        <messages class="messages"/>
-        <!-- <info-window id="info_window" :window_content="content_to_pass"/> -->
+        <messages-report :errors="$page.props.errors" :status="status" class="messages"/>
+        <info-window id="info_window" :window_content="content_to_pass"/>
         <div id="header_container">
             <header-component />
         </div>
@@ -23,15 +23,34 @@ import Footer from "@/Components/public/Footer";
 export default {
     data(){
         return{
-            //
+            content_to_pass: {},
+            status: {},
         }
     },
-    methods:{
-        //
+    methods:{ 
+        refresh(){
+            if(this.$data.content_to_pass != this.window_content && this.window_content){
+                this.$data.content_to_pass = this.window_content ? this.window_content     : {};
+            }
+            if(this.$data.status != this.$page.props.status && this.$page.props.status){
+                this.$data.status = this.$page.props.status      ? this.$page.props.status : {};
+            }
+            
+        },
+    },
+    updated(){
+        this.refresh();
+    },
+    mounted(){
+        this.refresh();
+    },
+    props:{   
+        window_content: Object,  
     },
     components: {
         "header-component": Header,
         "footer-component": Footer,
+        "messages-report": Messages,
         InfoWindow,
         Messages,
     },

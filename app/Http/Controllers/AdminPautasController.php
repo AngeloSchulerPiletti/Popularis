@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pauta;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Illuminate\Support\Facades\DB;
 
 class AdminPautasController extends Controller
 {
@@ -159,24 +161,36 @@ class AdminPautasController extends Controller
         ]);
         
         $palavras_chave = $this->PVRegEx($request->palavras_chave);
-        dd($palavras_chave);
 
         $text = $this->PautaRegEx($request->pauta);
         $responsavel = Auth::user()->id;
+        $escopo = Auth::user()->politico_tipo == 1 ? "est" : "fed";
         $autores = $this->AutorRegEx($request->autores);
+        $url = $this->stringToURL($request->titulo);
+
+        $url .= DB::table('pautas')->where('url', $url)->first() ? date('-d-m-Y') : "";
         
 
+        $final_date = mktime(0, 0, 0, date('m')+3, date('d'), date('Y'));
+        $final_date = date('d-m-Y', $final_date);
+
+
         $pauta = new Pauta();
-        $pauta->palavras_chave = $palavras_chave;
+        $pauta->palavras_chave = implode('-', $palavras_chave);
         $pauta->pauta = $text;
         $pauta->responsavel = $responsavel;
-        $pauta->autores = $autores;
+        $pauta->escopo = $escopo;
+        $pauta->autores = implode('-', $autores);
+        $pauta->url = $url;
         
         $pauta->titulo = $request->titulo;
         $pauta->assunto = $request->assunto;
+        $pauta->local = $request->local;
+        $pauta->resumo = $request->resumo;
+        $pauta->final_date = $final_date;
 
+        $pauta->save();
 
-
-
+        return Inertia::render('admin/politico/CriadorPautas', ['status' => [0 => 'Pauta criada com sucesso, aguardando análise!']]);
     }
 }
