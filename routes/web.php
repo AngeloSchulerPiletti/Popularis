@@ -46,7 +46,10 @@ Route::middleware('auth')->get('/pauta/{id}',       [PautaController::class, 'sh
 
 //----------------------------- TÉCNICO ------------------------------\\
 Route::group(['middleware' => 'tecnico', 'as' => 'tecnico.', 'prefix' => 'area-do-tecnico'], function () {
-    Route::get('/', [TecnicoController::class, 'index'])->name('show');
+    Route::get('/',             [TecnicoController::class, 'index'])->name('requisicoes.show');
+    Route::get('/requisicoes',  [TecnicoController::class, 'index'])->name('requisicoes_default.show');
+
+    Route::get('/bugs',         [TecnicoController::class, 'bugs_show'])->name('bugs.show');
 });
 
 //----------------------------- POLÍTICO ------------------------------\\

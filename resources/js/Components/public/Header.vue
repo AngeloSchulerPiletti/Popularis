@@ -102,7 +102,7 @@
         </div>
         <div v-if="$page.props.user" id="dropmenu" data-anim="none">
             <ul>
-                <li v-if="$page.props.user.tecnico" class="link"><Link :href="route('tecnico.show')">Área do Técnico</Link></li>
+                <li v-if="$page.props.user.tecnico" class="link"><Link :href="route('tecnico.requisicoes.show')">Área do Técnico</Link></li>
                 <li v-if="$page.props.user.tecnico"><hr /></li>
                 <li v-if="$page.props.user.politico" class="link"><Link :href="route('politico.pauta_create.show')">Área do Político</Link></li>
                 <li v-if="$page.props.user.politico"><hr /></li>

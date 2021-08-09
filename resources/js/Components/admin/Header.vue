@@ -31,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div class="bottom">
+        <div class="bottom" v-if="Object.keys(links_header.primary).length > 0">
             <nav @mouseleave="close()">
                 <!-- LINKS PRINCIPAIS  -->
                 <div id="links">
@@ -66,7 +66,7 @@
         <div id="dropmenu" data-anim="none">
             <ul>
                 <li v-if="$page.props.user.tecnico" class="link">
-                    <Link :href="route('tecnico.show')">Área do Técnico</Link>
+                    <Link :href="route('tecnico.requisicoes.show')">Área do Técnico</Link>
                 </li>
                 <li v-if="$page.props.user.tecnico"><hr /></li>
                 <li v-if="$page.props.user.politico" class="link">
@@ -109,8 +109,10 @@ export default {
         if (this.$page.props.user) {
             this.user_name = this.$page.props.user.name.split(" ")[0];
         }
+        
         if (this.links) {
             var link_obj = this.links;
+
             var primary_title = Object.keys(link_obj),
                 primary_array = Object.values(link_obj);
 
