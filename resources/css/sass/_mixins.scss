@@ -12,3 +12,20 @@
         $border2;
     }
 }
+
+@mixin svg_hover1($color1, $color2, $time) {
+    transition: transform $time;
+    
+    path, circle{
+        fill: $color1;
+        transition: fill $time;
+    }
+
+    &:hover{
+        transform: scale(1.05);
+        path{
+            fill: $color2;
+        }
+    }
+
+}
