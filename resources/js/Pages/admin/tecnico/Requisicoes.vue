@@ -1,12 +1,16 @@
 <template>
     <tecnico-container>
+        <!-- MODAL  -->
+        <pauta-preview v-if="Object.keys(pauta_to_preview).length > 0" :pauta="pauta_to_preview"/>
+        
+        <!-- PAGE -->
         <page-header
             :title="page_header.title"
             :paragraph="page_header.paragraph"
         />
         <section v-if="Object.keys(db_pautas).length > 0" id="cards_container">
             <div v-for="(obj, index) in pautas_showing" :key="index">
-                <card-requisicao :pauta="obj" />
+                <card-requisicao :pauta="obj" @preview="showModal"/>
             </div>
             <div
                 class="pagination"
@@ -85,6 +89,7 @@ import Tecnico from "@/Pages/admin/Tecnico";
 import Cabecalho1 from "@/Components/admin/Cabecalho1";
 import CardRequisicao from "@/Components/admin/CardRequisicao";
 import Arrow from "@/Components/SVGs/Icons/Arrow";
+import PautaPreview from "@/Components/geral/PautaPreview";
 
 export default {
     data() {
@@ -98,12 +103,17 @@ export default {
             pautas_perpage: 5,
             total_pautas: 0,
             pautas_showing: [],
+            pauta_to_preview: {},
         };
     },
     created() {
         this.listingArticles();
+        this.print();
     },
     methods: {
+        showModal(pauta){
+            this.pauta_to_preview = Object.keys(pauta).length > 0 ? pauta : {};
+        },
         print(){
           console.log(this.pautas_showing);
           console.log(this.list_selector);
@@ -139,6 +149,7 @@ export default {
         "page-header": Cabecalho1,
         CardRequisicao,
         Arrow,
+        PautaPreview,
     },
 };
 </script>

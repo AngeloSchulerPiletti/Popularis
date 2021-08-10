@@ -13,7 +13,7 @@
         </div>
         <div class="right">
             <button><icon-agree class="icon agree" /></button>
-            <button><icon-eye class="icon eye" /></button>
+            <button><icon-eye class="icon eye" @click="preview()"/></button>
             <button><icon-block class="icon block" /></button>
         </div>
     </div>
@@ -40,6 +40,9 @@ export default {
         };
     },
     methods: {
+        preview(){
+            this.$emit('preview', this.current_pauta);
+        },
         refresh() {
             if (this.pauta && this.pauta != this.current_pauta) {
                 this.current_pauta = this.pauta;
