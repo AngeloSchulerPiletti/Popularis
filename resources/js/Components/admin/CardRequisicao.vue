@@ -36,29 +36,37 @@ export default {
                 assunto: "",
                 data: "",
             },
+            current_pauta: {},
         };
     },
+    methods: {
+        refresh() {
+            if (this.pauta && this.pauta != this.current_pauta) {
+                this.current_pauta = this.pauta;
+                var vm = this.pauta;
+                var title = vm.titulo,
+                    resume = vm.resumo;
+
+                this.pauta_info.title = title;
+                this.pauta_info.resume = resume;
+
+                var infos = {
+                    responsavel: vm.responsavel,
+                    assunto: vm.assunto,
+                    data: vm.created_at.split(" ")[0],
+                };
+                infos.data = infos.data.split("-");
+                infos.data = `${infos.data[2]}/${infos.data[1]}/${infos.data[0]}`;
+
+                this.badges = infos;
+            }
+        },
+    },
     created() {
-        if (this.pauta) {
-            var vm = this.pauta;
-            var title = vm.titulo,
-                resume = vm.resumo;
-
-            this.pauta_info.title = title;
-            this.pauta_info.resume = resume;
-
-            console.log(this.pauta_info);
-
-            var infos = {
-                responsavel: vm.responsavel,
-                assunto: vm.assunto,
-                data: vm.created_at.split(" ")[0],
-            };
-            infos.data = infos.data.split("-");
-            infos.data = `${infos.data[2]}/${infos.data[1]}/${infos.data[0]}`;
-
-            this.badges = infos;
-        }
+        this.refresh();
+    },
+    updated() {
+        this.refresh();
     },
     props: {
         pauta: Object,
