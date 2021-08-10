@@ -20422,6 +20422,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Pages_admin_Tecnico__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Pages/admin/Tecnico */ "./resources/js/Pages/admin/Tecnico.vue");
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  created: function created() {
+    console.log(this.db_pautas);
+  },
+  props: {
+    db_pautas: Object
+  },
   components: {
     'tecnico-container': _Pages_admin_Tecnico__WEBPACK_IMPORTED_MODULE_0__.default
   }

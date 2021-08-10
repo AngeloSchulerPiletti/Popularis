@@ -26,6 +26,12 @@ class CreateUsersTable extends Migration
             $table->string('cpf')->unique();
             $table->string('titulo_eleitoral')->unique();
             /*+---------------------------------+
+              |           NOTIFICAÇÕES          |
+              +---------------------------------+*/
+            $table->tinyText('notification_text')->nullable();
+            $table->string('notification_title')->nullable();
+            $table->string('notification_action')->nullable();
+            /*+---------------------------------+
               |        DADOS POLÍTICOS          |
               +---------------------------------+*/
             $table->boolean('politico')->default(false);
