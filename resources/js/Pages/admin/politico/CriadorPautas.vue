@@ -64,7 +64,7 @@
                             v-model="form.autores"
                         />
                     </div>
-                    <div class="form_sec">
+                    <!-- <div class="form_sec">
                         <label for="uf">Estado (UF)</label>
                         <select name="uf" id="uf" v-model="form.local">
                             <option value="" disabled selected>
@@ -98,7 +98,7 @@
                             <option value="SC">Santa Catarina</option>
                             <option value="PB">Paraíba</option>
                         </select>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="form_sec">
                     <label for="palavras_chave"

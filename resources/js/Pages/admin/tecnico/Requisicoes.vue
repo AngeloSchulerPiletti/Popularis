@@ -1,7 +1,7 @@
 <template>
     <tecnico-container>
         <!-- MODAL  -->
-        <pauta-preview v-if="Object.keys(pauta_to_preview).length > 0" :pauta="pauta_to_preview"/>
+        <pauta-preview @close_pauta="pauta_to_preview={};" v-show="Object.keys(pauta_to_preview).length > 0" :pauta="pauta_to_preview"/>
         
         <!-- PAGE -->
         <page-header
@@ -108,18 +108,13 @@ export default {
     },
     created() {
         this.listingArticles();
-        this.print();
     },
     methods: {
         showModal(pauta){
-            this.pauta_to_preview = Object.keys(pauta).length > 0 ? pauta : {};
-        },
-        print(){
-          console.log(this.pautas_showing);
-          console.log(this.list_selector);
-          console.log(this.total_pautas);
+            this.pauta_to_preview = pauta;
         },
         setList(wich) {
+            this.pauta_to_preview = {};
             this.list_selector = wich;
             this.listingArticles();
             window.scrollTo(0, 0);

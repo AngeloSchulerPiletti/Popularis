@@ -154,7 +154,7 @@ class AdminPautasController extends Controller
             'titulo'         => 'required|string|max:150',
             'assunto'        => 'required|string|max:20',
             'autores'        => 'required|string|',
-            'local'          => 'required|string|max:2',
+            // 'local'          => 'required|string|max:2',
             'palavras_chave' => 'required|string|max:800',
             'resumo'         => 'required|string|max:1000',
             'pauta'          => 'required|string',
@@ -185,7 +185,7 @@ class AdminPautasController extends Controller
         
         $pauta->titulo = $request->titulo;
         $pauta->assunto = $request->assunto;
-        $pauta->local = $request->local;
+        $pauta->local = Auth::user()->uf;
         $pauta->resumo = $request->resumo;
         $pauta->final_date = $final_date;
 

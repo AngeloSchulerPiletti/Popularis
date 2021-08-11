@@ -131,3 +131,79 @@
     margin-top: calc((1.2vw + 30px) + 4vw);
     padding-bottom: 8vw;
 }
+
+
+@mixin badge($color, $back){
+    padding: 1px 10px 1px 10px;
+    border-radius: 4px;
+    color: $color;
+    background-color: $back;
+}
+
+
+@mixin pauta_style {
+    &:deep(h1){
+        @include Title2;
+        font-size: 40px;
+        text-align: center;
+        color: $blue;
+    }
+    &:deep(h2){
+        @include Title3;
+        font-size: 30px;
+        text-align: center;
+        color: $blue;
+    }
+    &:deep(h3){
+        @include Title3;
+        font-size: 26px;
+        text-align: center;
+        color: $blue;
+    }
+    &:deep(h4){
+        @include Title4;
+        font-size: 24px;
+        text-align: center;
+        color: $blue1;
+    }
+    &:deep(h5){
+        @include Title4;
+        font-size: 20px;
+        text-align: center;
+        color: $blue1;
+    }
+    &:deep(h6){
+        @include Title4_I;
+        font-size: 18px;
+        text-align: center;
+        color: $blue1;
+    }
+
+    &:deep(ul){
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+
+        li{
+            @include Font0_I;
+            font-size: 16px;
+            padding-left: 5px;
+            border-left: 2px solid $blue;
+            text-indent: 1em;
+        }
+    }
+
+    &:deep(p){
+        @include Font1;
+        font-size: 15px;
+        text-indent: 1.1em;
+        text-align: justify;
+    }
+
+    &:deep(hr){
+        border: 0;
+        outline: 0 0 0 0;
+        height: 1px;
+        background-color: $blue;
+    }
+}
