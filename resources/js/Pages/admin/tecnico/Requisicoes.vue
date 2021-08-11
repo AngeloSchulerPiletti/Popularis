@@ -10,7 +10,7 @@
         />
         <section v-if="Object.keys(db_pautas).length > 0" id="cards_container">
             <div v-for="(obj, index) in pautas_showing" :key="index">
-                <card-requisicao :pauta="obj" @preview="showModal"/>
+                <card-requisicao :pauta="obj" @preview="showModal" @refresh="listingArticles()"/>
             </div>
             <div
                 class="pagination"

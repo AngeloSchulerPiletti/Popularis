@@ -46,10 +46,16 @@ Route::middleware('auth')->get('/pauta/{id}',       [PautaController::class, 'sh
 
 //----------------------------- TÉCNICO ------------------------------\\
 Route::group(['middleware' => 'tecnico', 'as' => 'tecnico.', 'prefix' => 'area-do-tecnico'], function () {
-    Route::get('/',             [TecnicoController::class, 'index'])->name('requisicoes.show');
-    Route::get('/requisicoes',  [TecnicoController::class, 'index'])->name('requisicoes_default.show');
+    Route::get('/',                    [TecnicoController::class, 'index'])->name('requisicoes.show');
+    Route::get('/requisicoes',         [TecnicoController::class, 'index'])->name('requisicoes_default.show');
 
-    Route::get('/bugs',         [TecnicoController::class, 'bugs_show'])->name('bugs.show');
+    Route::get('/bugs',                [TecnicoController::class, 'bugs_show'])->name('bugs.show');
+
+
+    //POST routes\\
+    Route::post('/pauta-aceita',       [TecnicoController::class, 'pauta_accepted'])->name('pauta.accepted');
+    Route::post('/pauta-negada',       [TecnicoController::class, 'pauta_denied'])->name('pauta.denied');
+
 });
 
 //----------------------------- POLÍTICO ------------------------------\\

@@ -12,8 +12,8 @@
             </ul>
         </div>
         <div class="right">
-            <button><icon-agree class="icon agree" /></button>
-            <button><icon-eye class="icon eye" @click="preview()"/></button>
+            <button><icon-agree class="icon agree" @click="accepted"/></button>
+            <button><icon-eye class="icon eye" @click="preview"/></button>
             <button><icon-block class="icon block" /></button>
         </div>
     </div>
@@ -40,6 +40,13 @@ export default {
         };
     },
     methods: {
+        accepted(){
+            this.$inertia.form({
+                id: this.pauta.id
+            }).post(this.route('tecnico.pauta.accepted'), {
+                onFinish: () => this.$emit('refresh'),
+            });
+        },
         preview(){
             this.$emit('preview', this.current_pauta);
         },

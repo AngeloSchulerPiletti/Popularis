@@ -39,19 +39,38 @@ export default {
             delete this.$data.messagesToShow[key];
         },
         check: function () {
-            if((Object.keys(this.errors).length > 0 || Object.keys(this.status).length > 0)){
+            var to_close = document.querySelectorAll(".closing"),
+                TCLength = to_close.length;
+            for (let i = TCLength - 1; i >= 0; i--) {
+                to_close[i].classList.remove("closing");
+            }
+
+            if (
+                Object.keys(this.errors).length > 0 ||
+                Object.keys(this.status).length > 0
+            ) {
                 var errorsLen = Object.keys(this.errors).length,
                     statusLen = [];
 
                 statusLen = this.status ? Object.keys(this.status).length : [];
-                
-                if (errorsLen > 0 && statusLen > 0 && this.messagesToShow != { ...this.errors, ...this.status }) {
+
+                if (
+                    errorsLen > 0 &&
+                    statusLen > 0 &&
+                    this.messagesToShow != { ...this.errors, ...this.status }
+                ) {
                     this.messagesToShow = { ...this.errors, ...this.status };
                     this.cleanMessages();
-                } else if (statusLen > 0 && this.messagesToShow != this.status) {
+                } else if (
+                    statusLen > 0 &&
+                    this.messagesToShow != this.status
+                ) {
                     this.messagesToShow = this.status;
                     this.cleanMessages();
-                } else if (errorsLen > 0 && this.messagesToShow != this.errors) {
+                } else if (
+                    errorsLen > 0 &&
+                    this.messagesToShow != this.errors
+                ) {
                     this.messagesToShow = this.errors;
                     this.cleanMessages();
                 }
@@ -65,18 +84,17 @@ export default {
                     MLength = messages.length,
                     wait = 1300;
 
-                for (let i = MLength-1; i >= 0; i--) {
+                for (let i = MLength - 1; i >= 0; i--) {
                     setTimeout(() => {
                         messages[i].classList.add("closing");
                     }, wait * (-i + MLength - 1));
                 }
 
                 setTimeout(() => {
-                    Object.keys(this.$data.messagesToShow).forEach(key => {
+                    Object.keys(this.$data.messagesToShow).forEach((key) => {
                         delete this.$data.messagesToShow[key];
                     });
-                }, (MLength*wait) + 100);
-
+                }, MLength * wait + 100);
             }, 6000);
         },
     },
