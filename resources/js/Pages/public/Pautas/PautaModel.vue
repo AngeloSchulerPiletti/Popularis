@@ -1,23 +1,19 @@
 <template>
   <app-public>
       <div class="view_header">
-          <div v-if="!votou" class="vote_container">
+          <div class="vote_container">
               <div class="votos favor">
                   <h3>A Favor</h3>
                   <h5>{{pauta.pos_votes}}</h5>
-                  <button @click="vote('pos')">VOTAR</button>
+                  <button @click="vote('pos')" v-if="!votou">VOTAR</button>
               </div> 
               <div class="votos contra">
                   <h3>Contra</h3>
                   <h5>{{pauta.neg_votes}}</h5>
-                  <button @click="vote('neg')">VOTAR</button>
+                  <button @click="vote('neg')" v-if="!votou">VOTAR</button>
               </div>
               <div id="progresso"></div>
               <span id="percentual">{{percentual}}%</span>
-             
-          </div>
-          <div class="votou" v-else>
-              <h3>Você já votou nessa pauta!</h3>
           </div>
       </div>
       <div class="view_container">
@@ -40,7 +36,8 @@ export default {
         this.calc_percentual();
     },
     updated(){
-        this.calc_percentual();  
+        this.calc_percentual(); 
+        console.log(this.$props); 
     },
     methods:{
         vote(type){
@@ -143,15 +140,6 @@ export default {
                 padding: 0 20px;
                 box-shadow: 2px 2px 5px $black;
 
-            }
-        }
-        .votou{
-            h3{
-                @include Title4;
-                font-size: 26px;
-                color: $blue1;
-                text-align: center;
-                margin-top: 10vw;
             }
         }
     }
