@@ -29,7 +29,8 @@ class TecnicoController extends Controller
         return redirect(route('tecnico.requisicoes_default.show'))->with('status', 'Pauta aprovado com sucesso!');
     }
     public function pauta_denied(Request $request){
-        dd($request);
+        DB::table('pautas')->where('id', $request->id)->update(['status' => 5]);
 
+        return redirect(route('tecnico.requisicoes_default.show'))->with('status', 'Pauta apagada com sucesso!');
     }
 }

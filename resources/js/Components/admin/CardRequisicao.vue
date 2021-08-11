@@ -12,9 +12,9 @@
             </ul>
         </div>
         <div class="right">
-            <button><icon-agree class="icon agree" @click="accepted"/></button>
+            <button><icon-agree class="icon agree" @click="send('accepted')"/></button>
             <button><icon-eye class="icon eye" @click="preview"/></button>
-            <button><icon-block class="icon block" /></button>
+            <button><icon-block class="icon block" @click="send('denied')"/></button>
         </div>
     </div>
 </template>
@@ -40,10 +40,10 @@ export default {
         };
     },
     methods: {
-        accepted(){
+        send(action){
             this.$inertia.form({
                 id: this.pauta.id
-            }).post(this.route('tecnico.pauta.accepted'), {
+            }).post(this.route('tecnico.pauta.' + action), {
                 onFinish: () => this.$emit('refresh'),
             });
         },

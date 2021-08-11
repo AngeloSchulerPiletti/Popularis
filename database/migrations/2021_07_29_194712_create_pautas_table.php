@@ -32,7 +32,7 @@ class CreatePautasTable extends Migration
             $table->tinyInteger('neg_votes')->default(0);
             $table->tinyInteger('pos_votes')->default(0);
             //STATUS DA VOTAÇÃO
-            $table->integer('status')->default(4); // 1-perdeu 2-venceu 3-em votação 4-futura
+            $table->integer('status')->default(4); // 1-perdeu 2-venceu 3-em votação 4-precisa de aprovacao 5-deletado
             $table->string('final_date'); //ano-mes-dia  Ex: 13-12-2003
         });
     }

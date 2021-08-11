@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         // MEUS MIDDLEWARES 
         'politico' => \App\Http\Middleware\PoliticoCheck::class,
         'tecnico' => \App\Http\Middleware\TecnicoCheck::class,
+        'has_votted' => \App\Http\Middleware\VoteCheck::class,
     ];
 }

@@ -29,18 +29,21 @@ Route::group(['as' => 'pautas.', 'prefix' => 'pautas'], function () {
     Route::get('/', [PautasController::class, 'index'])->name('all');
 
     Route::group(['prefix' => 'federal'], function () {
-        Route::get('/',         [PautasController::class, 'federal_all'])->name('federal.all');
-        Route::get('/{type}',   [PautasController::class, 'federal'])->name('federal');
+        Route::get('/',                [PautasController::class, 'federal_all'])->name('federal.all');
+        Route::get('/{type}',          [PautasController::class, 'federal'])->name('federal');
+
     });
     Route::group(['prefix' => 'estadual'], function () {
-        Route::get('/',         [PautasController::class, 'estadual_all'])->name('estadual.all');
-        Route::get('/{type}',   [PautasController::class, 'estadual'])->name('estadual');
+        Route::get('/',                [PautasController::class, 'estadual_all'])->name('estadual.all');
+        Route::get('/{type}',          [PautasController::class, 'estadual'])->name('estadual');
+
     });
 });
 
 
 //----------------------------- PAUTA ------------------------------\\
-Route::middleware('auth')->get('/pauta/{id}',       [PautaController::class, 'show'])->name('pauta.show');
+Route::middleware('auth')->get('/pauta/{url}',                          [PautaController::class, 'show'])->name('pauta.show');
+Route::middleware(['auth', 'has_votted'])->post('/pauta/{url}',         [PautaController::class, 'store'])->name('pauta.store');
 
 
 
