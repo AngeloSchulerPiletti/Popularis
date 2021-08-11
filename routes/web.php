@@ -69,6 +69,6 @@ Route::group(['middleware' => 'politico', 'as' => 'politico.', 'prefix' => 'area
     
 
     //POST routes\\
-    Route::post('/criando-pauta', [AdminPautasController::class, 'create_pauta'])->name('create_pauta');
+    Route::post('/criar-pauta', [AdminPautasController::class, 'create_pauta'])->name('create_pauta');
 });
 

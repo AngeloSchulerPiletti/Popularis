@@ -78,7 +78,7 @@
                 </nav>
             </div>
         </section>
-        <div v-else>
+        <div class="without_db" v-else>
             <h5>Não existem pautas para serem aprovadas!</h5>
         </div>
     </tecnico-container>
@@ -191,6 +191,14 @@ export default {
                 cursor: auto;
             }
         }
+    }
+}
+.without_db{
+    h5{
+        text-align: center;
+        @include Title4;
+        font-size: 20px;
+        color: $blue;
     }
 }
 </style>

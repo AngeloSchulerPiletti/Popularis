@@ -168,7 +168,7 @@ class AdminPautasController extends Controller
         $autores = $this->AutorRegEx($request->autores);
         $url = $this->stringToURL($request->titulo);
 
-        $url .= DB::table('pautas')->where('url', $url)->first() ? date('-d-m-Y') : "";
+        $url .= DB::table('pautas')->where('url', $url)->first() ? date('-d-m-Y-his') : "";
         
 
         $final_date = mktime(0, 0, 0, date('m')+3, date('d'), date('Y'));
