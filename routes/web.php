@@ -42,7 +42,7 @@ Route::group(['as' => 'pautas.', 'prefix' => 'pautas'], function () {
 
 
 //----------------------------- PAUTA ------------------------------\\
-Route::middleware(['auth', 'has_votted'])->get('/pauta/{url}',          [PautaController::class, 'show'])->name('pauta.show');
+Route::middleware('auth')->get('/pauta/{url}',                          [PautaController::class, 'show'])->name('pauta.show');
 Route::middleware(['auth', 'has_votted'])->post('/pauta/{url}',         [PautaController::class, 'store'])->name('pauta.store');
 
 
