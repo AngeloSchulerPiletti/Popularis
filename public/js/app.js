@@ -20890,15 +20890,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      percentual: 0
+      percentual: 0,
+      per_pos: 0
     };
+  },
+  mounted: function mounted() {
+    var elemento = document.querySelector("#bar");
+    elemento.style.width = this.per_pos + "%";
   },
   created: function created() {
     this.calc_percentual();
   },
   updated: function updated() {
     this.calc_percentual();
-    console.log(this.$props);
   },
   methods: {
     vote: function vote(type) {
@@ -20913,9 +20917,16 @@ __webpack_require__.r(__webpack_exports__);
       var pos = vm.pos_votes == 0 ? 1 : vm.pos_votes,
           neg = vm.neg_votes == 0 ? 1 : vm.neg_votes;
       var total = pos + neg;
-      var percentual = (pos / total * 100).toFixed(2);
-      this.percentual = percentual;
-      console.log(percentual);
+      var per_pos = (pos / total * 100).toFixed(2),
+          per_neg = (neg / total * 100).toFixed(2);
+
+      if (per_pos > per_neg) {
+        this.percentual = per_pos;
+      } else {
+        this.percentual = per_neg;
+      }
+
+      this.per_pos = Number(per_pos).toFixed(0);
     }
   },
   props: {
@@ -27692,7 +27703,9 @@ var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
   id: "progresso"
-}, null, -1
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  id: "bar"
+})], -1
 /* HOISTED */
 );
 
@@ -28725,7 +28738,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* Color Theme Swatches in Hex */\nhtml[data-v-43826a28], body[data-v-43826a28], div[data-v-43826a28], span[data-v-43826a28], applet[data-v-43826a28], object[data-v-43826a28], iframe[data-v-43826a28],\nh1[data-v-43826a28], h2[data-v-43826a28], h3[data-v-43826a28], h4[data-v-43826a28], h5[data-v-43826a28], h6[data-v-43826a28], p[data-v-43826a28], blockquote[data-v-43826a28], pre[data-v-43826a28],\na[data-v-43826a28], abbr[data-v-43826a28], acronym[data-v-43826a28], address[data-v-43826a28], big[data-v-43826a28], cite[data-v-43826a28], code[data-v-43826a28],\ndel[data-v-43826a28], dfn[data-v-43826a28], em[data-v-43826a28], img[data-v-43826a28], ins[data-v-43826a28], kbd[data-v-43826a28], q[data-v-43826a28], s[data-v-43826a28], samp[data-v-43826a28],\nsmall[data-v-43826a28], strike[data-v-43826a28], strong[data-v-43826a28], sub[data-v-43826a28], sup[data-v-43826a28], tt[data-v-43826a28], var[data-v-43826a28],\nb[data-v-43826a28], u[data-v-43826a28], i[data-v-43826a28], center[data-v-43826a28],\ndl[data-v-43826a28], dt[data-v-43826a28], dd[data-v-43826a28], ol[data-v-43826a28], ul[data-v-43826a28], li[data-v-43826a28],\nfieldset[data-v-43826a28], form[data-v-43826a28], label[data-v-43826a28], legend[data-v-43826a28],\ntable[data-v-43826a28], caption[data-v-43826a28], tbody[data-v-43826a28], tfoot[data-v-43826a28], thead[data-v-43826a28], tr[data-v-43826a28], th[data-v-43826a28], td[data-v-43826a28],\narticle[data-v-43826a28], aside[data-v-43826a28], canvas[data-v-43826a28], details[data-v-43826a28], embed[data-v-43826a28],\nfigure[data-v-43826a28], figcaption[data-v-43826a28], footer[data-v-43826a28], header[data-v-43826a28], hgroup[data-v-43826a28],\nmenu[data-v-43826a28], nav[data-v-43826a28], output[data-v-43826a28], ruby[data-v-43826a28], section[data-v-43826a28], summary[data-v-43826a28],\ntime[data-v-43826a28], mark[data-v-43826a28], audio[data-v-43826a28], video[data-v-43826a28] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n  outline: none;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle[data-v-43826a28], aside[data-v-43826a28], details[data-v-43826a28], figcaption[data-v-43826a28], figure[data-v-43826a28],\nfooter[data-v-43826a28], header[data-v-43826a28], hgroup[data-v-43826a28], menu[data-v-43826a28], nav[data-v-43826a28], section[data-v-43826a28] {\n  display: block;\n}\nbody[data-v-43826a28] {\n  line-height: 1;\n}\nol[data-v-43826a28], ul[data-v-43826a28] {\n  list-style: none;\n}\nblockquote[data-v-43826a28], q[data-v-43826a28] {\n  quotes: none;\n}\nblockquote[data-v-43826a28]:before, blockquote[data-v-43826a28]:after,\nq[data-v-43826a28]:before, q[data-v-43826a28]:after {\n  content: '';\n  content: none;\n}\ntable[data-v-43826a28] {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n*[data-v-43826a28] {\n  font-family: 'Raleway', sans-serif;\n}\n.view_header .vote_container[data-v-43826a28] {\n  display: flex;\n  justify-content: center;\n  gap: 40%;\n  margin: 10vw 0 2vw 0;\n  position: relative;\n}\n.view_header .vote_container .votos[data-v-43826a28] {\n  background-color: #002776;\n  padding: 30px;\n  border-radius: 10px;\n  box-shadow: 2px 2px 5px #202020;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.view_header .vote_container .votos h3[data-v-43826a28] {\n  font-weight: 700;\n  text-transform: uppercase;\n  font-size: 34px;\n  color: #FBFEFC;\n  text-align: center;\n}\n.view_header .vote_container .votos h5[data-v-43826a28] {\n  font-size: 25px;\n  color: #FBFEFC;\n  font-family: Arial, Helvetica, sans-serif;\n}\n.view_header .vote_container .votos button[data-v-43826a28] {\n  margin-top: 10px;\n  box-shadow: 2px 2px 5px #202020;\n  color: #002776;\n  background-color: #FBFEFC;\n  border: 2px solid #FBFEFC;\n  transition: border 300ms, background-color 300ms, color 300ms;\n  padding: 1px 10px;\n  border-radius: 4px;\n  font-weight: 500;\n  font-size: 18px;\n}\n.view_header .vote_container .votos button[data-v-43826a28]:hover {\n  color: #FBFEFC;\n  background-color: #1351b4;\n  border: 2px solid #1351b4;\n}\n.view_header .vote_container #progresso[data-v-43826a28] {\n  position: absolute;\n  height: 20%;\n  width: 100%;\n  background: linear-gradient(90deg, #009C3B 0 50%, #FFDF00 50% 100%);\n  z-index: -1;\n  top: 50%;\n  transform: translateY(-50%);\n  box-shadow: 0px 0px 5px #202020;\n}\n.view_header .vote_container #percentual[data-v-43826a28] {\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  bottom: -15%;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 38px;\n  font-weight: 500;\n  background-color: #1351b4;\n  color: #FBFEFC;\n  border-radius: 100vw;\n  padding: 0 20px;\n  box-shadow: 2px 2px 5px #202020;\n}\n.view_container[data-v-43826a28] {\n  padding: 10vw 5vw 5vw 5vw;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* Color Theme Swatches in Hex */\nhtml[data-v-43826a28], body[data-v-43826a28], div[data-v-43826a28], span[data-v-43826a28], applet[data-v-43826a28], object[data-v-43826a28], iframe[data-v-43826a28],\nh1[data-v-43826a28], h2[data-v-43826a28], h3[data-v-43826a28], h4[data-v-43826a28], h5[data-v-43826a28], h6[data-v-43826a28], p[data-v-43826a28], blockquote[data-v-43826a28], pre[data-v-43826a28],\na[data-v-43826a28], abbr[data-v-43826a28], acronym[data-v-43826a28], address[data-v-43826a28], big[data-v-43826a28], cite[data-v-43826a28], code[data-v-43826a28],\ndel[data-v-43826a28], dfn[data-v-43826a28], em[data-v-43826a28], img[data-v-43826a28], ins[data-v-43826a28], kbd[data-v-43826a28], q[data-v-43826a28], s[data-v-43826a28], samp[data-v-43826a28],\nsmall[data-v-43826a28], strike[data-v-43826a28], strong[data-v-43826a28], sub[data-v-43826a28], sup[data-v-43826a28], tt[data-v-43826a28], var[data-v-43826a28],\nb[data-v-43826a28], u[data-v-43826a28], i[data-v-43826a28], center[data-v-43826a28],\ndl[data-v-43826a28], dt[data-v-43826a28], dd[data-v-43826a28], ol[data-v-43826a28], ul[data-v-43826a28], li[data-v-43826a28],\nfieldset[data-v-43826a28], form[data-v-43826a28], label[data-v-43826a28], legend[data-v-43826a28],\ntable[data-v-43826a28], caption[data-v-43826a28], tbody[data-v-43826a28], tfoot[data-v-43826a28], thead[data-v-43826a28], tr[data-v-43826a28], th[data-v-43826a28], td[data-v-43826a28],\narticle[data-v-43826a28], aside[data-v-43826a28], canvas[data-v-43826a28], details[data-v-43826a28], embed[data-v-43826a28],\nfigure[data-v-43826a28], figcaption[data-v-43826a28], footer[data-v-43826a28], header[data-v-43826a28], hgroup[data-v-43826a28],\nmenu[data-v-43826a28], nav[data-v-43826a28], output[data-v-43826a28], ruby[data-v-43826a28], section[data-v-43826a28], summary[data-v-43826a28],\ntime[data-v-43826a28], mark[data-v-43826a28], audio[data-v-43826a28], video[data-v-43826a28] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n  outline: none;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle[data-v-43826a28], aside[data-v-43826a28], details[data-v-43826a28], figcaption[data-v-43826a28], figure[data-v-43826a28],\nfooter[data-v-43826a28], header[data-v-43826a28], hgroup[data-v-43826a28], menu[data-v-43826a28], nav[data-v-43826a28], section[data-v-43826a28] {\n  display: block;\n}\nbody[data-v-43826a28] {\n  line-height: 1;\n}\nol[data-v-43826a28], ul[data-v-43826a28] {\n  list-style: none;\n}\nblockquote[data-v-43826a28], q[data-v-43826a28] {\n  quotes: none;\n}\nblockquote[data-v-43826a28]:before, blockquote[data-v-43826a28]:after,\nq[data-v-43826a28]:before, q[data-v-43826a28]:after {\n  content: '';\n  content: none;\n}\ntable[data-v-43826a28] {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n*[data-v-43826a28] {\n  font-family: 'Raleway', sans-serif;\n}\n.view_header .vote_container[data-v-43826a28] {\n  display: flex;\n  justify-content: center;\n  gap: 40%;\n  margin: 10vw 0 2vw 0;\n  position: relative;\n}\n.view_header .vote_container .votos[data-v-43826a28] {\n  background-color: #002776;\n  padding: 30px;\n  border-radius: 10px;\n  box-shadow: 2px 2px 5px #202020;\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n}\n.view_header .vote_container .votos h3[data-v-43826a28] {\n  font-weight: 700;\n  text-transform: uppercase;\n  font-size: 34px;\n  color: #FBFEFC;\n  text-align: center;\n}\n.view_header .vote_container .votos h5[data-v-43826a28] {\n  font-size: 25px;\n  color: #FBFEFC;\n  font-family: Arial, Helvetica, sans-serif;\n}\n.view_header .vote_container .votos button[data-v-43826a28] {\n  margin-top: 10px;\n  box-shadow: 2px 2px 5px #202020;\n  color: #002776;\n  background-color: #FBFEFC;\n  border: 2px solid #FBFEFC;\n  transition: border 300ms, background-color 300ms, color 300ms;\n  padding: 1px 10px;\n  border-radius: 4px;\n  font-weight: 500;\n  font-size: 18px;\n}\n.view_header .vote_container .votos button[data-v-43826a28]:hover {\n  color: #FBFEFC;\n  background-color: #1351b4;\n  border: 2px solid #1351b4;\n}\n.view_header .vote_container #progresso[data-v-43826a28] {\n  position: absolute;\n  height: 20%;\n  width: 100%;\n  background-color: #009C3B;\n  z-index: -1;\n  top: 50%;\n  transform: translateY(-50%);\n  box-shadow: 0px 0px 5px #202020;\n}\n.view_header .vote_container #progresso #bar[data-v-43826a28] {\n  background-color: #FFDF00;\n  height: 100%;\n  margin-left: auto;\n}\n.view_header .vote_container #percentual[data-v-43826a28] {\n  position: absolute;\n  left: 50%;\n  transform: translateX(-50%);\n  bottom: -15%;\n  font-family: Arial, Helvetica, sans-serif;\n  font-size: 38px;\n  font-weight: 500;\n  background-color: #1351b4;\n  color: #FBFEFC;\n  border-radius: 100vw;\n  padding: 0 20px;\n  box-shadow: 2px 2px 5px #202020;\n}\n.view_container[data-v-43826a28] {\n  padding: 10vw 5vw 5vw 5vw;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

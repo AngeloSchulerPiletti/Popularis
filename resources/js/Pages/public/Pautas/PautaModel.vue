@@ -12,7 +12,7 @@
                   <h5>{{pauta.neg_votes}}</h5>
                   <button @click="vote('neg')" v-if="!votou">VOTAR</button>
               </div>
-              <div id="progresso"></div>
+              <div id="progresso"><div id="bar"></div></div>
               <span id="percentual">{{percentual}}%</span>
           </div>
       </div>
@@ -30,14 +30,18 @@ export default {
     data(){
         return{
             percentual: 0,
+            per_pos: 0,
         }
+    },
+    mounted(){
+        var elemento = document.querySelector("#bar");
+        elemento.style.width = (this.per_pos+"%");
     },
     created(){
         this.calc_percentual();
     },
     updated(){
         this.calc_percentual(); 
-        console.log(this.$props); 
     },
     methods:{
         vote(type){
@@ -49,11 +53,17 @@ export default {
                 neg = vm.neg_votes == 0 ? 1 : vm.neg_votes;
             
             var total = pos+neg;
-            
-            var percentual = (pos/total * 100).toFixed(2); 
+            var per_pos = (pos/total * 100).toFixed(2),
+                per_neg = (neg/total * 100).toFixed(2);
 
-            this.percentual = percentual;
-            console.log(percentual);
+            if(per_pos > per_neg){
+                this.percentual = per_pos;
+            } 
+            else{
+                this.percentual = per_neg;
+            }
+            
+            this.per_pos = Number(per_pos).toFixed(0);
         },
     },
     props:{
@@ -119,11 +129,18 @@ export default {
                 position: absolute;
                 height: 20%;
                 width: 100%;
-                background: linear-gradient(90deg, $green 0 50%, $yellow 50% 100%);
+                background-color: $green;
                 z-index: -1;
                 top: 50%;
                 transform: translateY(-50%);
                 box-shadow: 0px 0px 5px $black;
+
+                #bar{
+                    background-color: $yellow;
+                    height: 100%;
+                    margin-left: auto;
+
+                }
             }
             #percentual{
                 position: absolute;
