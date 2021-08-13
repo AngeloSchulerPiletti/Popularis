@@ -4,12 +4,13 @@
             <ul>
                 <li><Link href="#">Fale Conosco</Link></li>
                 <li><Link href="#">Contribua</Link></li>
+                <li><Link href="#">Governo Federal</Link></li>
                 <li><Link href="#">Governo Estadual</Link></li>
             </ul>
             <ul>
                 <li><Link href="#">Termos de Uso</Link></li>
                 <li><Link href="#">Política de Privacidade</Link></li>
-                <li><Link href="#">Governo Federal</Link></li>
+                <li><Link href="#">Reportar Bug ou Falha</Link></li>
             </ul>
         </nav>
         <p>&copy; Popularis, all rights reserved</p>

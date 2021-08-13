@@ -48,17 +48,18 @@ export default {
         transform: translateY(0);
         z-index: -1;
 
-        box-shadow: 0px 0px 5px $black;
         border-radius: 0px 0px 8px 8px;
 
         &[data-anim] {
-            transition: transform 600ms;
+            transition: transform 600ms, box-shadow 600ms;
         }
         &[data-anim="on"] {
             transform: translateY(100%);
+            box-shadow: 0px 0px 5px $black;
         }
         &[data-anim="off"] {
             transform: translateY(0);
+            box-shadow: 0px;
         }
 
         ul {
