@@ -12,7 +12,7 @@ class PautaController extends Controller
     public function show($url, Request $request){
         $props = null !== $request->session()->get('status') ? $request->session()->get('status') : [];
 
-        $pauta = DB::table('pautas')->where('url', $url)->first();
+        $pauta = DB::table('pautas')->where('url', $url)->first() !== null ? DB::table('pautas')->where('url', $url)->first() : abort(404);
 
         $his_neg = Auth::user()->neg_votes;
         $his_pos = Auth::user()->pos_votes;
