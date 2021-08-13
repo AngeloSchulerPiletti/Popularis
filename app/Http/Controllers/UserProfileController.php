@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Jenssegers\Agent\Agent;
 use Laravel\Jetstream\Jetstream;
+use Inertia\Inertia;
 
 class UserProfileController extends Controller
 {
@@ -73,6 +74,6 @@ class UserProfileController extends Controller
 
     public function votes()
     {
-        dd('it will show your last votes');
+        return Inertia::render('admin/profile/MeusVotos');
     }
 }

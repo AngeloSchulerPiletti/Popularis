@@ -22,6 +22,7 @@ export default {
             title: {
                 tecnico: "Técnico",
                 politico: "Político",
+                eleitor: "Eleitor",
             },
             content_to_pass: {},
             status: {},
