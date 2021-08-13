@@ -172,29 +172,30 @@ $padding_container: 20px;
     .percentual {
         position: absolute;
         z-index: -1;
-        height: 40%;
+        height: fit-content;
         background-color: $darken-blue;
         bottom: 0;
         color: $white;
         border-radius: 6px;
+        padding-top: 10px;
 
         display: flex;
         align-items: flex-end;
 
         h4 {
-            padding: 10px 20px;
+            padding: 10px 20px 10px 20px;
             font-family: Arial, Helvetica, sans-serif;
             color: $white;
             font-size: 30px;
         }
         &.pos {
             left: 25%;
-            transform: translateY(90%) translateX(calc(-50% + 10px));
+            transform: translateY(95%) translateX(calc(-50% + 10px));
 
         }
         &.neg {
             left: 75%;
-            transform: translateY(90%) translateX(calc(-50% - 10px));
+            transform: translateY(95%) translateX(calc(-50% - 10px));
 
         }
     }
