@@ -1,5 +1,5 @@
 <template>
-  <div id="dropmenu" data-anim="none">
+  <div id="dropmenu" data-anim="none" v-if="$page.props.user">
             <ul>
                 <li v-if="$page.props.user.tecnico" class="link">
                     <Link :href="route('tecnico.requisicoes.show')"
