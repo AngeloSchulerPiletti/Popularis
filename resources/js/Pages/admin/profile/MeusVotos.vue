@@ -6,6 +6,7 @@
 
 <script>
 import Profile from "@/Pages/admin/Profile";
+
 export default {
     components: {
         'profile-container': Profile,

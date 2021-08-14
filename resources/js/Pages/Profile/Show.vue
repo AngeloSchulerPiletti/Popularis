@@ -1,5 +1,5 @@
 <template>
-    <app-layout title="Profile">
+    <profile-container>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 Profile
@@ -35,11 +35,11 @@
                 </template>
             </div>
         </div>
-    </app-layout>
+    </profile-container>
 </template>
 
 <script>
-    import AppLayout from '@/Layouts/AppPublic.vue'
+import Profile from "@/Pages/admin/Profile";
     import DeleteUserForm from '@/Pages/Profile/Partials/DeleteUserForm.vue'
     import JetSectionBorder from '@/Jetstream/SectionBorder.vue'
     import LogoutOtherBrowserSessionsForm from '@/Pages/Profile/Partials/LogoutOtherBrowserSessionsForm.vue'
@@ -51,7 +51,7 @@
         props: ['sessions'],
 
         components: {
-            AppLayout,
+            'profile-container': Profile,
             DeleteUserForm,
             JetSectionBorder,
             LogoutOtherBrowserSessionsForm,

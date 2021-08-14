@@ -1,5 +1,5 @@
 ## Next step ##
-- **Must increase date when pauta request is approved**
+- DONE **Must increase date when pauta request is approved**
 - Must increase more performance about the header
 - Need to style account page
 - Need to complete the project documentation
