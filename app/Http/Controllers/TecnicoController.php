@@ -25,6 +25,9 @@ class TecnicoController extends Controller
 
     public function pauta_accepted(Request $request){
         DB::table('pautas')->where('id', $request->id)->update(['status' => 3]);
+        $final_date = mktime(0, 0, 0, date('m')+3, date('d'), date('Y'));
+        $final_date = date('d-m-Y', $final_date);
+        DB::table('pautas')->where('id', $request->id)->update(['final_date' => $final_date]);
 
         return redirect(route('tecnico.requisicoes_default.show'))->with('status', 'Pauta aprovado com sucesso!');
     }
