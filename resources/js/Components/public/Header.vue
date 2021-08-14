@@ -46,13 +46,13 @@
                 <div id="links">
                     <Link
                         class="more"
-                        :href="route('pautas.federal.all')"
+                        :href="route('pautas.section.show', {'section': 'federal'})"
                         @mouseenter="open('fed')"
                         >Pautas Federais</Link
                     >
                     <Link
                         class="more"
-                        :href="route('pautas.estadual.all')"
+                        :href="route('pautas.section.show', {'section': 'estadual'})"
                         @mouseenter="open('est')"
                         >Pautas Estaduais</Link
                     >
@@ -66,36 +66,34 @@
                 <div id="sublinks_container">
                     <div class="sublinks" id="fed_container">
                         <Link
-                            :href="route('pautas.federal', { type: 'atuais' })"
+                            :href="route('pautas.section.type.show', {'section': 'federal', 'type': 'atuais'})"
                             >P.F. Atuais</Link
                         >
                         <Link
                             :href="
-                                route('pautas.federal', { type: 'passadas' })
+                                route('pautas.section.type.show', {'section': 'federal', 'type': 'passadas'})
                             "
                             >P.F. Passadas</Link
                         >
                         <Link
-                            :href="route('pautas.federal', { type: 'futuras' })"
+                            :href="route('pautas.section.type.show', {'section': 'federal', 'type': 'futuras'})"
                             >P.F. Futuras</Link
                         >
                     </div>
 
                     <div class="sublinks" id="est_container">
                         <Link
-                            :href="route('pautas.estadual', { type: 'atuais' })"
+                            :href="route('pautas.section.type.show', {'section': 'estadual', 'type': 'atuais'})"
                             >P.E. Atuais</Link
                         >
                         <Link
                             :href="
-                                route('pautas.estadual', { type: 'passadas' })
+                                route('pautas.section.type.show', {'section': 'estadual', 'type': 'passadas'})
                             "
                             >P.E. Passadas</Link
                         >
                         <Link
-                            :href="
-                                route('pautas.estadual', { type: 'futuras' })
-                            "
+                            :href="route('pautas.section.type.show', {'section': 'estadual', 'type': 'futuras'})"
                             >P.E. Futuras</Link
                         >
                     </div>

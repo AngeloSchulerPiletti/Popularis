@@ -15,34 +15,46 @@ export default {
             links: {
                 "Pautas Fedeirais": [
                     "pautasfederais",
-                    route('pautas.federal.all'),
+                    route("pautas.section.show", { section: "federal" }),
                     {
-                        'P. F. Atuais': route('pautas.federal', { type: 'atuais' }),
-                        'P. F. Passadas': route('pautas.federal', { type: 'passadas' }),
-                        'P. F. Futuras': route('pautas.federal', { type: 'futuras' }),
-                    }
+                        "P. F. Atuais": route("pautas.section.type.show", {
+                            section: "federal",
+                            type: "atuais",
+                        }),
+                        "P. F. Passadas": route("pautas.section.type.show", {
+                            section: "federal",
+                            type: "passadas",
+                        }),
+                        "P. F. Futuras": route("pautas.section.type.show", {
+                            section: "federal",
+                            type: "futuras",
+                        }),
+                    },
                 ],
                 "Pautas Estaduais": [
                     "pautasfederais",
-                    route('pautas.estadual.all'),
+                    route("pautas.section.show", { section: "estadual" }),
                     {
-                        'P. E. Atuais': route('pautas.estadual', { type: 'atuais' }),
-                        'P. E. Passadas': route('pautas.estadual', { type: 'passadas' }),
-                        'P. E. Futuras': route('pautas.estadual', { type: 'futuras' }),
-                    }
+                        "P. E. Atuais": route("pautas.section.type.show", {
+                            section: "estadual",
+                            type: "atuais",
+                        }),
+                        "P. E. Passadas": route("pautas.section.type.show", {
+                            section: "estadual",
+                            type: "passadas",
+                        }),
+                        "P. E. Futuras": route("pautas.section.type.show", {
+                            section: "estadual",
+                            type: "futuras",
+                        }),
+                    },
                 ],
-                "Entenda": [
-                    "entenda",
-                    route('pautas.all'),
-                ],
-                "Meus Votos": [
-                    "meusvotos",
-                    route('profile.votes'),
-                ],
+                Entenda: ["entenda", route("pautas.all")],
+                "Meus Votos": ["meusvotos", route("profile.votes")],
             },
         };
     },
-    props:{
+    props: {
         window_content: Object,
     },
     components: {
@@ -52,7 +64,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#profile_container{
+#profile_container {
     @include page_bottom;
 }
 </style>

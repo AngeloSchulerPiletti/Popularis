@@ -8,6 +8,7 @@
 - List elector's voted pautas on "Meus Votos"
 - Criar página com estatísticas das pautas do político para ele mesmo
 - Criar listagem do histórico de pautas do político
+- Create search system
  
 
 ### Ideias para o aperfeiçoamento futuro ### 

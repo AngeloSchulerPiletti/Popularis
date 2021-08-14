@@ -9,6 +9,7 @@ use App\Http\Controllers\PautaController;
 use App\Http\Controllers\PoliticoController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\AdminPautasController;
+use App\Http\Controllers\PaginationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,22 +29,16 @@ Route::get('/', [HomeController::class, 'index'])->name('inicio');
 Route::group(['as' => 'pautas.', 'prefix' => 'pautas'], function () {
     Route::get('/', [PautasController::class, 'index'])->name('all');
 
-    Route::group(['prefix' => 'federal'], function () {
-        Route::get('/',                [PautasController::class, 'federal_all'])->name('federal.all');
-        Route::get('/{type}',          [PautasController::class, 'federal'])->name('federal');
-
-    });
-    Route::group(['prefix' => 'estadual'], function () {
-        Route::get('/',                [PautasController::class, 'estadual_all'])->name('estadual.all');
-        Route::get('/{type}',          [PautasController::class, 'estadual'])->name('estadual');
-
-    });
+    Route::get('/{section}',           [PautasController::class, 'show_section'])->name('section.show');
+    Route::get('/{section}/{type}',    [PautasController::class, 'show_section_type'])->name('section.type.show');
 });
 
 
 //----------------------------- PAUTA ------------------------------\\
 Route::middleware('auth')->get('/pauta/{url}',                          [PautaController::class, 'show'])->name('pauta.show');
 Route::middleware(['auth', 'has_votted'])->post('/pauta/{url}',         [PautaController::class, 'store'])->name('pauta.store');
+
+Route::post('/paginacao',    [PaginationController::class, 'index'])->name('pagination.load');
 
 
 
@@ -74,4 +69,6 @@ Route::group(['middleware' => 'politico', 'as' => 'politico.', 'prefix' => 'area
     //POST routes\\
     Route::post('/criar-pauta', [AdminPautasController::class, 'create_pauta'])->name('create_pauta');
 });
+
+
 
