@@ -1,6 +1,6 @@
 <template>
   <section id="pagination_container">
-        <div id="pagination_options">
+        <div v-if="!static_list" id="pagination_options">
             <select name="perpage" id="perpage_field" v-model="listing.perpage">
                 <option value="5" selected>5</option>
                 <option value="10">10</option>
@@ -9,7 +9,6 @@
                 <option value="100">100</option>
                 <option value="150">150</option>
             </select>
-
         </div>
             <div v-for="(obj, index) in pautas_in_data" :key="index">
                 <pauta-card :pauta="obj"/>
@@ -17,6 +16,7 @@
             <div
                 class="pagination"
                 id="actions"
+                v-if="!static_list"
             >
                 <nav class="actions_container">
                     <div
@@ -104,7 +104,24 @@ export default {
         },
         refresh(){
             if(this.pautas_data){
-                this.pautas_in_data = this.pautas_data;
+                var vm = this.pautas_data;
+                var new_vm = [];
+                for (let i = 0; i < vm.length; i++) {
+                    new_vm[i] = [
+                        vm[i].titulo,
+                        vm[i].resumo,
+                        vm[i].id,
+                        vm[i].url,
+                        {
+                            'Assunto: ': vm[i].assunto,
+                            'Escopo: ': vm[i].escopo,
+                            'De: ': vm[i].local,
+                            'Disponível até: ': vm[i].final_date,
+                        }
+                    ];
+                }
+                this.pautas_in_data = new_vm;
+                console.log(this.pautas_in_data);
             }
             if(this.which_page){
                 this.listing.actual_page = this.which_page;
@@ -121,13 +138,14 @@ export default {
         this.refresh();
     },
     props:{
-        pautas_data: Array, //[[Pauta format], [title, resume, url, id, {'titulo de prop1': prop1, ...}]]
+        pautas_data: Array,
         which_page: Number,
         per_page: Number,
+        static_list: Boolean,
     },
     components: {
         'pauta-card': PautaVoteCard,
-
+        Arrow,
     }
 }
 </script>

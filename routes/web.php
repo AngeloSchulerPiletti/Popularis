@@ -29,8 +29,8 @@ Route::get('/', [HomeController::class, 'index'])->name('inicio');
 Route::group(['as' => 'pautas.', 'prefix' => 'pautas'], function () {
     Route::get('/', [PautasController::class, 'index'])->name('all');
 
-    Route::get('/{section}',           [PautasController::class, 'show_section'])->name('section.show');
-    Route::get('/{section}/{type}',    [PautasController::class, 'show_section_type'])->name('section.type.show');
+    Route::middleware('auth')->get('/{section}',           [PautasController::class, 'show_section'])->name('section.show');
+    Route::middleware('auth')->get('/{section}/{type}',    [PautasController::class, 'show_section_type'])->name('section.type.show');
 });
 
 
