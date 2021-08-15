@@ -1,5 +1,5 @@
 <template>
-    <section id="pagination_container">
+    <section id="pagination_container" v-if="pautas_data.length > 0">
         <div v-if="!static_list" id="pagination_options">
             <select name="perpage" id="perpage_field" v-model="listing.perpage" @change="setList(listing.actual_page)">
                 <option value="5" selected>5</option>
@@ -83,6 +83,9 @@
             <Link :href="ver_mais">Ver mais</Link>
         </div>
     </section>
+    <section id="pagination_container" v-else>
+        <h3 class="warn">Por quanto não existem pautas para serem apresentadas</h3>
+    </section>
 </template>
 
 <script>
@@ -159,6 +162,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.warn{
+    width: 80%;
+    margin: auto;
+    @include Title4;
+    color: $blue;
+    font-size: 20px;
+}
 #pagination_options{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: 600;
