@@ -27818,17 +27818,22 @@ var _withId = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.withScopeId)("dat
 var _hoisted_1 = {
   "class": "meusvotos_container"
 };
-
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+var _hoisted_2 = {
   "class": "header"
-}, null, -1
+};
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Histórico de Votos", -1
 /* HOISTED */
 );
 
-var _hoisted_3 = {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Caro eleitor(a) ");
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(", aqui você tem acesso a todos os seus votos anteriores. Qualquer irregularidade, por favor nos avise. ");
+
+var _hoisted_6 = {
   key: 0
 };
-var _hoisted_4 = {
+var _hoisted_7 = {
   key: 1,
   "class": "warn"
 };
@@ -27842,14 +27847,16 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_profile_container, null, {
     "default": _withId(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [_hoisted_2, $props.db_data.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_listing_cards, {
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p", null, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.$page.props.user.name), 1
+      /* TEXT */
+      ), _hoisted_5])]), $props.db_data.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_listing_cards, {
         static_list: false,
         pautas_data: $data.pauta_data[0],
         list_name: 0,
         total_pautas: $props.total_pautas
       }, null, 8
       /* PROPS */
-      , ["pautas_data", "total_pautas"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h3", _hoisted_4, " Votos não encontrados. Participe de votações para vê-los aqui! "))])];
+      , ["pautas_data", "total_pautas"])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("h3", _hoisted_7, " Votos não encontrados. Participe de votações para vê-los aqui! "))])];
     }),
     _: 1
     /* STABLE */
@@ -29518,7 +29525,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "/* Color Theme Swatches in Hex */\nhtml[data-v-731200aa], body[data-v-731200aa], div[data-v-731200aa], span[data-v-731200aa], applet[data-v-731200aa], object[data-v-731200aa], iframe[data-v-731200aa],\nh1[data-v-731200aa], h2[data-v-731200aa], h3[data-v-731200aa], h4[data-v-731200aa], h5[data-v-731200aa], h6[data-v-731200aa], p[data-v-731200aa], blockquote[data-v-731200aa], pre[data-v-731200aa],\na[data-v-731200aa], abbr[data-v-731200aa], acronym[data-v-731200aa], address[data-v-731200aa], big[data-v-731200aa], cite[data-v-731200aa], code[data-v-731200aa],\ndel[data-v-731200aa], dfn[data-v-731200aa], em[data-v-731200aa], img[data-v-731200aa], ins[data-v-731200aa], kbd[data-v-731200aa], q[data-v-731200aa], s[data-v-731200aa], samp[data-v-731200aa],\nsmall[data-v-731200aa], strike[data-v-731200aa], strong[data-v-731200aa], sub[data-v-731200aa], sup[data-v-731200aa], tt[data-v-731200aa], var[data-v-731200aa],\nb[data-v-731200aa], u[data-v-731200aa], i[data-v-731200aa], center[data-v-731200aa],\ndl[data-v-731200aa], dt[data-v-731200aa], dd[data-v-731200aa], ol[data-v-731200aa], ul[data-v-731200aa], li[data-v-731200aa],\nfieldset[data-v-731200aa], form[data-v-731200aa], label[data-v-731200aa], legend[data-v-731200aa],\ntable[data-v-731200aa], caption[data-v-731200aa], tbody[data-v-731200aa], tfoot[data-v-731200aa], thead[data-v-731200aa], tr[data-v-731200aa], th[data-v-731200aa], td[data-v-731200aa],\narticle[data-v-731200aa], aside[data-v-731200aa], canvas[data-v-731200aa], details[data-v-731200aa], embed[data-v-731200aa],\nfigure[data-v-731200aa], figcaption[data-v-731200aa], footer[data-v-731200aa], header[data-v-731200aa], hgroup[data-v-731200aa],\nmenu[data-v-731200aa], nav[data-v-731200aa], output[data-v-731200aa], ruby[data-v-731200aa], section[data-v-731200aa], summary[data-v-731200aa],\ntime[data-v-731200aa], mark[data-v-731200aa], audio[data-v-731200aa], video[data-v-731200aa] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n  outline: none;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle[data-v-731200aa], aside[data-v-731200aa], details[data-v-731200aa], figcaption[data-v-731200aa], figure[data-v-731200aa],\nfooter[data-v-731200aa], header[data-v-731200aa], hgroup[data-v-731200aa], menu[data-v-731200aa], nav[data-v-731200aa], section[data-v-731200aa] {\n  display: block;\n}\nbody[data-v-731200aa] {\n  line-height: 1;\n}\nol[data-v-731200aa], ul[data-v-731200aa] {\n  list-style: none;\n}\nblockquote[data-v-731200aa], q[data-v-731200aa] {\n  quotes: none;\n}\nblockquote[data-v-731200aa]:before, blockquote[data-v-731200aa]:after,\nq[data-v-731200aa]:before, q[data-v-731200aa]:after {\n  content: '';\n  content: none;\n}\ntable[data-v-731200aa] {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n*[data-v-731200aa] {\n  font-family: 'Raleway', sans-serif;\n}\n.warn[data-v-731200aa] {\n  width: 80%;\n  margin: auto;\n  font-weight: 600;\n  text-transform: uppercase;\n  font-size: 20px;\n  color: #002c85;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "/* Color Theme Swatches in Hex */\nhtml[data-v-731200aa], body[data-v-731200aa], div[data-v-731200aa], span[data-v-731200aa], applet[data-v-731200aa], object[data-v-731200aa], iframe[data-v-731200aa],\nh1[data-v-731200aa], h2[data-v-731200aa], h3[data-v-731200aa], h4[data-v-731200aa], h5[data-v-731200aa], h6[data-v-731200aa], p[data-v-731200aa], blockquote[data-v-731200aa], pre[data-v-731200aa],\na[data-v-731200aa], abbr[data-v-731200aa], acronym[data-v-731200aa], address[data-v-731200aa], big[data-v-731200aa], cite[data-v-731200aa], code[data-v-731200aa],\ndel[data-v-731200aa], dfn[data-v-731200aa], em[data-v-731200aa], img[data-v-731200aa], ins[data-v-731200aa], kbd[data-v-731200aa], q[data-v-731200aa], s[data-v-731200aa], samp[data-v-731200aa],\nsmall[data-v-731200aa], strike[data-v-731200aa], strong[data-v-731200aa], sub[data-v-731200aa], sup[data-v-731200aa], tt[data-v-731200aa], var[data-v-731200aa],\nb[data-v-731200aa], u[data-v-731200aa], i[data-v-731200aa], center[data-v-731200aa],\ndl[data-v-731200aa], dt[data-v-731200aa], dd[data-v-731200aa], ol[data-v-731200aa], ul[data-v-731200aa], li[data-v-731200aa],\nfieldset[data-v-731200aa], form[data-v-731200aa], label[data-v-731200aa], legend[data-v-731200aa],\ntable[data-v-731200aa], caption[data-v-731200aa], tbody[data-v-731200aa], tfoot[data-v-731200aa], thead[data-v-731200aa], tr[data-v-731200aa], th[data-v-731200aa], td[data-v-731200aa],\narticle[data-v-731200aa], aside[data-v-731200aa], canvas[data-v-731200aa], details[data-v-731200aa], embed[data-v-731200aa],\nfigure[data-v-731200aa], figcaption[data-v-731200aa], footer[data-v-731200aa], header[data-v-731200aa], hgroup[data-v-731200aa],\nmenu[data-v-731200aa], nav[data-v-731200aa], output[data-v-731200aa], ruby[data-v-731200aa], section[data-v-731200aa], summary[data-v-731200aa],\ntime[data-v-731200aa], mark[data-v-731200aa], audio[data-v-731200aa], video[data-v-731200aa] {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n  outline: none;\n}\n\n/* HTML5 display-role reset for older browsers */\narticle[data-v-731200aa], aside[data-v-731200aa], details[data-v-731200aa], figcaption[data-v-731200aa], figure[data-v-731200aa],\nfooter[data-v-731200aa], header[data-v-731200aa], hgroup[data-v-731200aa], menu[data-v-731200aa], nav[data-v-731200aa], section[data-v-731200aa] {\n  display: block;\n}\nbody[data-v-731200aa] {\n  line-height: 1;\n}\nol[data-v-731200aa], ul[data-v-731200aa] {\n  list-style: none;\n}\nblockquote[data-v-731200aa], q[data-v-731200aa] {\n  quotes: none;\n}\nblockquote[data-v-731200aa]:before, blockquote[data-v-731200aa]:after,\nq[data-v-731200aa]:before, q[data-v-731200aa]:after {\n  content: '';\n  content: none;\n}\ntable[data-v-731200aa] {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n*[data-v-731200aa] {\n  font-family: 'Raleway', sans-serif;\n}\n.meusvotos_container[data-v-731200aa] {\n  display: flex;\n  flex-direction: column;\n  gap: 40px;\n}\n.meusvotos_container .header[data-v-731200aa] {\n  width: 80%;\n  margin: auto;\n}\n.meusvotos_container .header h2[data-v-731200aa] {\n  font-weight: 600;\n  text-transform: uppercase;\n  font-size: 30px;\n  color: #002c85;\n}\n.meusvotos_container .header p[data-v-731200aa] {\n  font-weight: 400;\n  font-size: 15px;\n  color: #1351b4;\n}\n.meusvotos_container .header p span[data-v-731200aa] {\n  text-transform: capitalize;\n  font-weight: 500;\n}\n.meusvotos_container .warn[data-v-731200aa] {\n  width: 80%;\n  margin: auto;\n  font-weight: 600;\n  text-transform: uppercase;\n  font-size: 20px;\n  color: #002c85;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
