@@ -30,4 +30,10 @@
 export default {};
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+svg{
+    path{
+        fill: $green;
+    }
+}
+</style>

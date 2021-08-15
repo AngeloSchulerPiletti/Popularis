@@ -15,6 +15,7 @@
                 :pauta="obj"
                 v-for="(obj, index) in pautas_in_data"
                 :key="index"
+                :card_name="'name_'+list_name+index"
             />
         </div>
         <div class="pagination" id="actions" v-if="!static_list">
@@ -145,6 +146,7 @@ export default {
         per_page: Number,
         static_list: Boolean,
         ver_mais: String,
+        list_name: Number,
     },
     components: {
         "pauta-card": PautaVoteCard,

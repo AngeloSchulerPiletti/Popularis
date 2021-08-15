@@ -16,6 +16,7 @@
                     :ver_mais="vermais_routes[index]"
                     :static_list="true"
                     :pautas_data="pauta_data[index]"
+                    :list_name="index"
                 />
             </div>
         </section>
