@@ -145,12 +145,11 @@ export default {
     data() {
         return {
             form: this.$inertia.form({
-                titulo: "Título de exmplo",
-                assunto: "economia",
-                autores: "angelo schuler, joão goulart",
-                local: "RS",
-                palavras_chave: "abacate, cerimonia,feijao , leitao,",
-                resumo: "AAAAAAAAAA",
+                titulo: "Pauta Estadual ",
+                assunto: "saude",
+                autores: "jone mario, joão goulart",
+                palavras_chave: "bahia, praia, coronavírus",
+                resumo: "Esse aqui é um resumo de teste que pode ser usado em qualquer tipo de pauta",
                 pauta: "",
             }),
             info_content: {},

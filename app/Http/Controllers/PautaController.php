@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\URL;
 
 class PautaController extends Controller
 {
@@ -27,8 +28,11 @@ class PautaController extends Controller
             }    
         }
         
-        if($pauta && $pauta->status == 3){
+        if($pauta && (in_array($pauta->status, [1, 2, 3]))){
             return Inertia::render('public/Pautas/PautaModel', ['status' => $props, 'pauta' => $pauta, 'votou' => $votou]);
+        }
+        else if($pauta->status == 4){
+            return Inertia::render('public/Unavailable', ['suggestions' => ['Página Inicial' => route('inicio'), 'Voltar para página anterior' => URL::previous() ], 'page_config' => ['Essa pauta ainda não está disponível', 'Essa pauta não está disponível porque aguarda aprovação do técnico. Para entender mais acesso nosso FAQ.']]);
         }
         abort(404);
     }
