@@ -1,7 +1,7 @@
 <template>
     <section id="pagination_container">
         <div v-if="!static_list" id="pagination_options">
-            <select name="perpage" id="perpage_field" v-model="listing.perpage">
+            <select name="perpage" id="perpage_field" v-model="listing.perpage" @change="setList(listing.actual_page)">
                 <option value="5" selected>5</option>
                 <option value="10">10</option>
                 <option value="25">25</option>
@@ -103,7 +103,6 @@ export default {
     methods: {
         setList(which) {
             this.listing.actual_page = which;
-
             this.$inertia.form(this.listing).post(route("pagination.load"));
         },
         refresh() {

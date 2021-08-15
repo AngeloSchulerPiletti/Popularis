@@ -24,7 +24,7 @@ class PautasController extends Controller
         }
         $escope_title = $section == "federal" ? "Federais" : "Estaduais";
 
-       
+
         $db_data = [];
         for ($i = 1; $i <= 3; $i++) {
             $db_data[] = $section == "federal" ? DB::table('pautas')
@@ -42,7 +42,7 @@ class PautasController extends Controller
 
 
         foreach ($db_data as $dataArr) {
-            if(count($dataArr) > 0){
+            if (count($dataArr) > 0) {
                 foreach ($dataArr as $dataObj) {
                     $dataObj->autores    = explode('-', $dataObj->autores);
                     $dataObj->final_date = explode('-', $dataObj->final_date);
@@ -56,43 +56,51 @@ class PautasController extends Controller
 
         return Inertia::render('public/Pautas/Pautas', ['db_data' => $db_data, 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
     }
-    public function show_section_type($section, $type)
+    public function show_section_type($section, $type, Request $request)
     {
-        if ((!in_array($section, self::PAUTAS_SECTION) || (!in_array($type, self::PAUTAS_TYPE)))) {
-            abort(404);
-        }
+        $escope = [$section, $type];
         $escope_title = $section == "federal" ? "Federais" : "Estaduais";
-        $status_arr = ['passadas' => 1, 'atuais' => 2, 'futuras' => 3];
+        $page_config = ["Essas são as pautas " . $escope_title, "Caro cidadão, procure sempre se informar antes de qualquer decisão. Aja com responsabilidade."];
 
-        $db_data_count = $section == "federal" ? DB::table('pautas')
-        ->where('escopo', $section)
-        ->where('status', $status_arr[$type])
-        ->get()
-        : DB::table('pautas')
-        ->where('escopo', $section)
-        ->where('status', $status_arr[$type])
-        ->where('local', Auth::user()->uf)
-        ->get();
 
-        $total_pautas = count($db_data_count);
-        
-        $db_data = $section == "federal" ? DB::table('pautas')
+        if (null === $request->session()->get('pagination')) {
+            if ((!in_array($section, self::PAUTAS_SECTION) || (!in_array($type, self::PAUTAS_TYPE)))) {
+                abort(404);
+            }
+            $status_arr = ['passadas' => 1, 'atuais' => 2, 'futuras' => 3];
+
+            $db_data_count = $section == "federal" ? DB::table('pautas')
                 ->where('escopo', $section)
                 ->where('status', $status_arr[$type])
-                ->take(6)
                 ->get()
                 : DB::table('pautas')
                 ->where('escopo', $section)
                 ->where('status', $status_arr[$type])
                 ->where('local', Auth::user()->uf)
-                ->take(6)
                 ->get();
 
-        //$db_data: 1 array, pauta->local == auth->user->uf, pauta->status == $type(status);
+            $total_pautas = count($db_data_count);
 
-        $escope = [$section, $type];
-        $page_config = ["Essas são as pautas " . $escope_title, "Caro cidadão, procure sempre se informar antes de qualquer decisão. Aja com responsabilidade."];
-        
-        return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
+            $db_data = $section == "federal" ? DB::table('pautas')
+                ->where('escopo', $section)
+                ->where('status', $status_arr[$type])
+                ->take(5)
+                ->get()
+                : DB::table('pautas')
+                ->where('escopo', $section)
+                ->where('status', $status_arr[$type])
+                ->where('local', Auth::user()->uf)
+                ->take(5)
+                ->get();
+
+            //$db_data: 1 array, pauta->local == auth->user->uf, pauta->status == $type(status);
+            return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
+        } else {
+            $pagination = $request->session()->get('pagination');
+            $db_data = $pagination[0];
+            $total_pautas = $pagination[1];
+
+            return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
+        }
     }
 }
