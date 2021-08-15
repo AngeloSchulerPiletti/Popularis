@@ -13,7 +13,7 @@
         <div class="cards_list">
             <pauta-card
                 :pauta="obj"
-                v-for="(obj, index) in pautas_in_data"
+                v-for="(obj, index) in pautas_formatted"
                 :key="index"
                 :card_name="'name_'+list_name+index"
             />
@@ -93,11 +93,12 @@ import { Link } from "@inertiajs/inertia-vue3";
 export default {
     data() {
         return {
-            pautas_in_data: [],
+            pautas_formatted: [],
             listing: {
                 perpage: 5,
                 actual_page: 1,
             },
+            pautas_save: [],
         };
     },
     methods: {
@@ -106,8 +107,9 @@ export default {
             this.$inertia.form(this.listing).post(route("pagination.load"));
         },
         refresh() {
-            if (this.pautas_data) {
+            if (this.pautas_data && this.pautas_data != this.pautas_save) {
                 var vm = this.pautas_data;
+                this.pautas_save = vm;
                 var new_vm = [];
                 for (let i = 0; i < vm.length; i++) {
                     new_vm[i] = [
@@ -123,12 +125,12 @@ export default {
                         },
                     ];
                 }
-                this.pautas_in_data = new_vm;
+                this.pautas_formatted = new_vm;
             }
-            if (this.which_page) {
+            if (this.which_page && this.listing.actual_page != this.which_page) {
                 this.listing.actual_page = this.which_page;
             }
-            if (this.per_page) {
+            if (this.per_page && this.listing.perpage != this.per_page) {
                 this.listing.perpage = this.per_page;
             }
         },

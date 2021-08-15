@@ -73,7 +73,7 @@ export default {
             this.has_type = this.escope.length > 1;
         },
         refresh() {
-            if (this.db_data) {
+            if (this.db_data && this.pauta_data != this.db_data) {
                 this.pauta_data = this.db_data;
             }
         },

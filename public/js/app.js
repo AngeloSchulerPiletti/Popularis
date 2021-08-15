@@ -18503,11 +18503,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      pautas_in_data: [],
+      pautas_formatted: [],
       listing: {
         perpage: 5,
         actual_page: 1
-      }
+      },
+      pautas_save: []
     };
   },
   methods: {
@@ -18516,8 +18517,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$inertia.form(this.listing).post(route("pagination.load"));
     },
     refresh: function refresh() {
-      if (this.pautas_data) {
+      if (this.pautas_data && this.pautas_data != this.pautas_save) {
         var vm = this.pautas_data;
+        this.pautas_save = vm;
         var new_vm = [];
 
         for (var i = 0; i < vm.length; i++) {
@@ -18529,14 +18531,14 @@ __webpack_require__.r(__webpack_exports__);
           }];
         }
 
-        this.pautas_in_data = new_vm;
+        this.pautas_formatted = new_vm;
       }
 
-      if (this.which_page) {
+      if (this.which_page && this.listing.actual_page != this.which_page) {
         this.listing.actual_page = this.which_page;
       }
 
-      if (this.per_page) {
+      if (this.per_page && this.listing.perpage != this.per_page) {
         this.listing.perpage = this.per_page;
       }
     }
@@ -21237,7 +21239,7 @@ __webpack_require__.r(__webpack_exports__);
       this.has_type = this.escope.length > 1;
     },
     refresh: function refresh() {
-      if (this.db_data) {
+      if (this.db_data && this.pauta_data != this.db_data) {
         this.pauta_data = this.db_data;
       }
     }
@@ -22841,7 +22843,7 @@ var render = /*#__PURE__*/_withId(function (_ctx, _cache, $props, $setup, $data,
     })
   }, [_hoisted_3], 544
   /* HYDRATE_EVENTS, NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.listing.perpage]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pautas_in_data, function (obj, index) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.listing.perpage]])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_9, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.pautas_formatted, function (obj, index) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_pauta_card, {
       pauta: obj,
       key: index,
