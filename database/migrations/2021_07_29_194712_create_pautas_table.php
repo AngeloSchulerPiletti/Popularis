@@ -20,7 +20,7 @@ class CreatePautasTable extends Migration
             $table->string('url');
             $table->tinyInteger('responsavel');
             $table->tinyText('autores'); 
-            $table->string('escopo'); //est || fed
+            $table->string('escopo'); //estadual || federal
             $table->string('local');  //Se Federal (BR), senão RS, RN, BH...
             $table->tinyText('palavras_chave');
             $table->string('assunto'); 
@@ -32,7 +32,8 @@ class CreatePautasTable extends Migration
             $table->tinyInteger('neg_votes')->default(0);
             $table->tinyInteger('pos_votes')->default(0);
             //STATUS DA VOTAÇÃO
-            $table->integer('status')->default(4); // 1-perdeu 2-venceu 3-em votação 4-precisa de aprovacao 5-deletado
+            $table->integer('status')->default(3); // 1-votação passada 2-em votação 3-precisa de aprovacao 4-deletado
+            $table->integer('result')->default(0); // 0-Sem resultado 1- Perdeu 2- Venceu
             $table->string('final_date'); //ano-mes-dia  Ex: 13-12-2003
         });
     }

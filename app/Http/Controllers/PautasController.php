@@ -26,25 +26,24 @@ class PautasController extends Controller
 
         $user_uf = Auth::user()->uf;
         $db_data = [];
-        for ($i = 0; $i < 4; $i++) {
+        for ($i = 1; $i <= 3; $i++) {
             $db_data[] = $section == "federal" ? DB::table('pautas')
-                ->where('escopo', substr($section, 0, 3))
-                ->where('status', $i + 1)
+                ->where('escopo', $section)
+                ->where('status', $i)
                 ->take(6)
                 ->get()
                 : DB::table('pautas')
-                ->where('escopo', substr($section, 0, 3))
-                ->where('status', $i + 1)
+                ->where('escopo', $section)
+                ->where('status', $i)
                 ->where('local', $user_uf)
                 ->take(6)
                 ->get();
         }
+        
 
-        $escope_arr = ['fed'=> 'Federal', 'est'=> 'Estadual'];
         foreach ($db_data as $dataArr) {
             if(count($dataArr) > 0){
                 foreach ($dataArr as $dataObj) {
-                    $dataObj->escopo     = $escope_arr[$dataObj->escopo];
                     $dataObj->autores    = explode('-', $dataObj->autores);
                     $dataObj->final_date = explode('-', $dataObj->final_date);
                     $dataObj->final_date = implode('/', $dataObj->final_date);
@@ -63,10 +62,17 @@ class PautasController extends Controller
             abort(404);
         }
         $escope_title = $section == "federal" ? "Federais" : "Estaduais";
+        $status_arr = ['passadas' => [1,2], 'atuais' => 3, 'futuras' => 4];
+        
+
+
+        //$db_data: 1 array, pauta->local == auth->user->uf, pauta->status == $type(status);
+
+        
 
         $escope = [$section, $type];
         $page_config = ["Essas são as pautas " . $escope_title, "Caro cidadão, procure sempre se informar antes de qualquer decisão. Aja com responsabilidade."];
         
-        return Inertia::render('public/Pautas/Pautas', ['db_data' => "\$db_data", 'escope' => $escope, 'page_config' => $page_config]);
+        return Inertia::render('public/Pautas/Pautas', ['db_data' => ["\$db_data"], 'escope' => $escope, 'page_config' => $page_config]);
     }
 }

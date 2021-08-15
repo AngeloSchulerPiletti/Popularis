@@ -154,7 +154,6 @@ class AdminPautasController extends Controller
             'titulo'         => 'required|string|max:150',
             'assunto'        => 'required|string|max:20',
             'autores'        => 'required|string|',
-            // 'local'          => 'required|string|max:2',
             'palavras_chave' => 'required|string|max:800',
             'resumo'         => 'required|string|max:1000',
             'pauta'          => 'required|string',
@@ -164,10 +163,10 @@ class AdminPautasController extends Controller
 
         $text = $this->PautaRegEx($request->pauta);
         $responsavel = Auth::user()->id;
-        $escopo = Auth::user()->politico_tipo == 1 ? "est" : "fed";
+        $escopo = Auth::user()->politico_tipo == 1 ? "estadual" : "federal";
         $autores = $this->AutorRegEx($request->autores);
+        
         $url = $this->stringToURL($request->titulo);
-
         $url .= DB::table('pautas')->where('url', $url)->first() ? date('-d-m-Y-his') : "";
         
 

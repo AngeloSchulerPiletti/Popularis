@@ -78,7 +78,7 @@ export default {
                 this.pauta_to_show.local = vm.local;
                 this.pauta_to_show.pauta = vm.pauta;
 
-                let escope = { est: "Estadual", fed: "Federal" };
+                let escope = { estadual: "Estadual", federal: "Federal" };
                 this.pauta_to_show.escopo = escope[vm.escopo];
 
                 let autores = vm.autores.split("-");

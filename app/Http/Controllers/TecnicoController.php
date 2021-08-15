@@ -9,7 +9,7 @@ use Inertia\Inertia;
 class TecnicoController extends Controller
 {
     public function index(Request $request){
-        $pautas_to_aprove = DB::table('pautas')->where('status', 4)->get();
+        $pautas_to_aprove = DB::table('pautas')->where('status', 3)->get();
         $message = count($pautas_to_aprove) > 0 ? "Pautas encontradas e carregadas." : "Não há nenhuma pauta para ser aprovada!"; 
         
         $props = null !== $request->session()->get('status') ? [$request->session()->get('status'), $message] : [$message];
@@ -24,7 +24,7 @@ class TecnicoController extends Controller
 
 
     public function pauta_accepted(Request $request){
-        DB::table('pautas')->where('id', $request->id)->update(['status' => 3]);
+        DB::table('pautas')->where('id', $request->id)->update(['status' => 2]);
         $final_date = mktime(0, 0, 0, date('m')+3, date('d'), date('Y'));
         $final_date = date('d-m-Y', $final_date);
         DB::table('pautas')->where('id', $request->id)->update(['final_date' => $final_date]);
@@ -32,7 +32,7 @@ class TecnicoController extends Controller
         return redirect(route('tecnico.requisicoes_default.show'))->with('status', 'Pauta aprovado com sucesso!');
     }
     public function pauta_denied(Request $request){
-        DB::table('pautas')->where('id', $request->id)->update(['status' => 5]);
+        DB::table('pautas')->where('id', $request->id)->update(['status' => 4]);
 
         return redirect(route('tecnico.requisicoes_default.show'))->with('status', 'Pauta apagada com sucesso!');
     }
