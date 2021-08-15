@@ -33,7 +33,15 @@ export default {};
 <style lang="scss" scoped>
 svg{
     path{
-        fill: $green;
+        fill: $black;
+        transition: fill 400ms;
+    }
+        transition: transform 400ms;
+    &:hover{
+        transform: rotate(360deg);
+        path{
+            fill: $blue1;
+        }
     }
 }
 </style>

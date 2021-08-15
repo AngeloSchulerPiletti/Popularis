@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Jenssegers\Agent\Agent;
 use Laravel\Jetstream\Jetstream;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -72,8 +73,25 @@ class UserProfileController extends Controller
     }
 
 
-    public function votes()
+    public function votes(Request $request)
     {
-        return Inertia::render('admin/profile/MeusVotos');
+        if (null === $request->session()->get('pagination')) {
+            $votes = Auth::user()->neg_votes . Auth::user()->pos_votes;
+            $votes_id = explode('-', $votes);
+
+            $total_pautas = count(DB::table('pautas')->whereIn('id', $votes_id)->get());
+            $db_data = DB::table('pautas')->whereIn('id', $votes_id)->take(5)->get();
+
+            $message = count($db_data) > 0 ? [0 => "Votos encontrados!"] : [0 => "Votos não encontrados. Se acha que isso é um erro, entre em contato conosco."];
+            return Inertia::render('admin/profile/MeusVotos', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'status' => $message]);
+        }
+        else{
+            $pagination = $request->session()->get('pagination');
+            $db_data = $pagination[0];
+            $total_pautas = $pagination[1];
+
+            $message = count($db_data) > 0 ? [0 => "Votos encontrados!"] : [0 => "Votos não encontrados. Se acha que isso é um erro, entre em contato conosco."];
+            return Inertia::render('admin/profile/MeusVotos', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'status' => $message]);
+        }
     }
 }
