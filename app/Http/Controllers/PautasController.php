@@ -24,7 +24,7 @@ class PautasController extends Controller
         }
         $escope_title = $section == "federal" ? "Federais" : "Estaduais";
 
-        $user_uf = Auth::user()->uf;
+       
         $db_data = [];
         for ($i = 1; $i <= 3; $i++) {
             $db_data[] = $section == "federal" ? DB::table('pautas')
@@ -35,11 +35,11 @@ class PautasController extends Controller
                 : DB::table('pautas')
                 ->where('escopo', $section)
                 ->where('status', $i)
-                ->where('local', $user_uf)
+                ->where('local', Auth::user()->uf)
                 ->take(6)
                 ->get();
         }
-        
+
 
         foreach ($db_data as $dataArr) {
             if(count($dataArr) > 0){
@@ -62,17 +62,37 @@ class PautasController extends Controller
             abort(404);
         }
         $escope_title = $section == "federal" ? "Federais" : "Estaduais";
-        $status_arr = ['passadas' => [1,2], 'atuais' => 3, 'futuras' => 4];
-        
+        $status_arr = ['passadas' => 1, 'atuais' => 2, 'futuras' => 3];
 
+        $db_data_count = $section == "federal" ? DB::table('pautas')
+        ->where('escopo', $section)
+        ->where('status', $status_arr[$type])
+        ->get()
+        : DB::table('pautas')
+        ->where('escopo', $section)
+        ->where('status', $status_arr[$type])
+        ->where('local', Auth::user()->uf)
+        ->get();
+
+        $total_pautas = count($db_data_count);
+        
+        $db_data = $section == "federal" ? DB::table('pautas')
+                ->where('escopo', $section)
+                ->where('status', $status_arr[$type])
+                ->take(6)
+                ->get()
+                : DB::table('pautas')
+                ->where('escopo', $section)
+                ->where('status', $status_arr[$type])
+                ->where('local', Auth::user()->uf)
+                ->take(6)
+                ->get();
 
         //$db_data: 1 array, pauta->local == auth->user->uf, pauta->status == $type(status);
-
-        
 
         $escope = [$section, $type];
         $page_config = ["Essas são as pautas " . $escope_title, "Caro cidadão, procure sempre se informar antes de qualquer decisão. Aja com responsabilidade."];
         
-        return Inertia::render('public/Pautas/Pautas', ['db_data' => ["\$db_data"], 'escope' => $escope, 'page_config' => $page_config]);
+        return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
     }
 }

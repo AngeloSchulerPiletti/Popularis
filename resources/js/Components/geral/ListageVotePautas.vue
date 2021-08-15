@@ -47,14 +47,14 @@
                     <span id="actual_list">{{ listing.actual_page }}</span>
                     <span
                         v-show="
-                            listing.actual_page * pautas_perpage < total_pautas
+                            listing.actual_page * listing.perpage < total_pautas
                         "
                         @click="setList(listing.actual_page + 1)"
                         >{{ listing.actual_page + 1 }}</span
                     >
                     <span
                         v-show="
-                            (listing.actual_page + 1) * pautas_perpage <
+                            (listing.actual_page + 1) * listing.perpage <
                             total_pautas
                         "
                         @click="setList(listing.actual_page + 2)"
@@ -62,7 +62,7 @@
                     >
                     <span
                         v-show="
-                            (listing.actual_page + 2) * pautas_perpage <
+                            (listing.actual_page + 2) * listing.perpage <
                             total_pautas
                         "
                         @click="setList(listing.actual_page + 3)"
@@ -72,7 +72,7 @@
                 <div
                     class="arrow"
                     id="next"
-                    v-show="listing.actual_page * pautas_perpage < total_pautas"
+                    v-show="listing.actual_page * listing.perpage < total_pautas"
                     @click="setList(listing.actual_page + 1)"
                 >
                     <arrow color="$blue" />
@@ -147,6 +147,7 @@ export default {
         static_list: Boolean,
         ver_mais: String,
         list_name: Number,
+        total_pautas: Number, 
     },
     components: {
         "pauta-card": PautaVoteCard,
@@ -157,10 +158,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#pagination_options{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 20px;
+    padding: 0 10% 0 10%;
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+
+    select{
+        padding: 1px 15px;
+        border-radius: 5px;
+    }
+}
 .cards_list {
     display: flex;
     flex-direction: column;
     gap: 30px;
+}
+#actions{
+    @include pagination_style();
 }
 .link_vermais{
     padding: 0 10% 0 10%;

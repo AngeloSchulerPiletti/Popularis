@@ -156,42 +156,7 @@ export default {
     gap: 30px;
 }
 #actions {
-    color: $blue;
-    margin-top: 4vw;
-    margin-bottom: 6vw;
-
-    .actions_container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 2vw;
-
-        .arrow {
-            width: 3vw;
-            height: 3vw;
-            cursor: pointer;
-        }
-        #back {
-            transform: scaleX(-1);
-        }
-        #pages_number {
-            display: flex;
-            gap: 1vw;
-
-            span {
-                @include Font1;
-                font-size: 1.6vw;
-                cursor: pointer;
-
-                // @include anchorT($blue, $blue1);
-            }
-            #actual_list {
-                color: $blue;
-                text-decoration: underline;
-                cursor: auto;
-            }
-        }
-    }
+    @include pagination_style();
 }
 .without_db{
     h5{

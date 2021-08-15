@@ -32,14 +32,11 @@
                 <p>{{ page_config[1] }}</p>
             </div>
             <div class="list_container">
-                <div class="listing_header">
-                    <h3>{{ info[0] }}</h3>
-                    <p>{{ info[1] }}</p>
-                </div>
                 <listing-cards
                     :static_list="false"
                     :pautas_data="pauta_data[0]"
                     :list_name="0"
+                    :total_pautas="total_pautas"
                 />
             </div>
         </section>
@@ -94,6 +91,7 @@ export default {
         db_data: Array,
         page_config: Array,
         escope_url: String,
+        total_pautas: Number,
     },
     components: {
         AppPublic,
@@ -146,6 +144,30 @@ export default {
             &.sec2 {
             }
         }
+    }
+}
+
+.section_type{
+    padding-top: 40px;
+
+    .header{
+        margin: 80px auto 40px auto;
+        width: 80%;
+
+        h2{
+            @include Title3;
+            font-size: 35px;
+            color: $darken-blue;
+        }
+        p{
+            @include Font1;
+            font-size: 18px;
+            color: $blue1;
+            text-align: justify;
+        }
+    }
+    .list_container{
+
     }
 }
 </style>
