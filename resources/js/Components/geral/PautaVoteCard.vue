@@ -5,14 +5,15 @@
         @mouseleave="anim_div('off')"
         
         :id="card_name"
-    >
-        <div class="top">
+        data-anim="none"
+    ><Link :href="'/pauta/'+pauta[3]">
+        <div class="top" data-anim="none">
             <div class="header">
                 <h2>{{ pauta[0] }}</h2>
                 <link-icon class="card_share" @click="copy_text" />
             </div>
             <p>{{ pauta[1] }}</p>
-        </div>
+        </div></Link>
         <div class="bottom" data-anim="none">
             <ul>
                 <li v-for="(value, title) in pauta[4]" :key="title">
@@ -26,6 +27,7 @@
 
 <script scoped>
 import LinkIcon from "@/Components/SVGs/icons/LinkIcon";
+import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     data() {
@@ -35,17 +37,23 @@ export default {
     },
     methods: {
         anim_div(action) {
-            var div = document.querySelector("#"+this.card_name).querySelector('.bottom');
+            var container = document.querySelector("#"+this.card_name);
+            var div_bottom = container.querySelector('.bottom'),
+                div_top = container.querySelector('.top');
 
             if (action == "on") {
-                    div.style.display = "block";
+                    div_bottom.style.display = "block";
                     setTimeout(() => {
-                        div.dataset.anim = "on";
+                        div_bottom.dataset.anim = "on";
+                        div_top.dataset.anim = "on";
+                        container.dataset.anim = "on";
                     }, 10);
             } else {
-                div.dataset.anim = "off";
+                div_top.dataset.anim = "off";
+                container.dataset.anim = "off";
+                div_bottom.dataset.anim = "off";
                 setTimeout(() => {
-                    div.style.display = "none";
+                    div_bottom.style.display = "none";
                 }, 300);
             }
         },
@@ -59,6 +67,7 @@ export default {
     },
     components: {
         LinkIcon,
+        Link,
     },
 };
 </script>
@@ -71,13 +80,12 @@ export default {
     padding-left: 30px;
 
     position: relative;
-    box-sizing: border-box;
 
     .top {
         display: flex;
         flex-direction: column;
+        position: relative;
 
-        border-bottom: 2px solid $blue;
         padding-bottom: 10px;
         margin-bottom: 10px;
 
@@ -91,8 +99,8 @@ export default {
 
             h2 {
                 @include Title4;
-                color: $blue;
                 font-size: 30px;
+                color: $blue;
             }
             .card_share {
                 width: 20px;
@@ -103,6 +111,29 @@ export default {
             @include Font1;
             color: $black;
             text-align: justify;
+        }
+
+        &::after{
+            position: absolute;
+            content: "";
+            bottom: 0;
+            left: 0;
+            right: 100%;
+            opacity: 0;
+            border: 1px solid $blue;
+            background-color: $blue;
+        }
+
+        &[data-anim]::after{
+            transition: right 300ms, opacity 10ms;
+        }
+        &[data-anim="off"]::after{
+            right: 100%;
+            opacity: 0;
+        }
+        &[data-anim="on"]::after{
+            right: 0;
+            opacity: 1;
         }
     }
     .bottom {
@@ -152,5 +183,18 @@ export default {
             opacity: 1;
         }
     }
+
+
+    // &[data-anim] {
+    //         transition: transform 300ms, opacity 200ms;
+    //     }
+    //     &[data-anim="off"] {
+    //         transform: translateY(-100%);
+    //         opacity: 0;
+    //     }
+    //     &[data-anim="on"] {
+    //         transform: translateY(0);
+    //         opacity: 1;
+    //     }
 }
 </style>

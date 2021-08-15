@@ -1,14 +1,17 @@
 <template>
     <app-public>
-        <!-- MOSTRA ATUAL PASSADA E FUTURA -->
-        <section v-if="!has_type">
-            <div class="header"></div>
-            <div
+        <!-- MOSTRA ATUAL, PASSADA E FUTURA -->
+        <section v-if="!has_type" class="section">
+            <div class="header">
+                <h2>{{page_config[0]}}</h2>
+            </div>
+            <div class="sec_container">
+                <div
                 v-for="(info, index) in page_config[1]"
                 :key="index"
                 :class="'sec sec' + index"
             >
-                <div>
+                <div class="listing_header">
                     <h3>{{ info[0] }}</h3>
                     <p>{{ info[1] }}</p>
                 </div>
@@ -19,10 +22,13 @@
                     :list_name="index"
                 />
             </div>
+
+            </div>
+            
         </section>
 
         <!-- MOSTRA ESPECIFICA  -->
-        <section v-else></section>
+        <section v-else class="section_type"></section>
     </app-public>
 </template>
 
@@ -80,4 +86,55 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.section{
+    padding-top: 40px;
+
+    .header{
+        margin: 80px 0 40px 0;
+        h2{
+            text-align: center;
+            width: 80%;
+            margin: auto;
+            @include Title3;
+            font-size: 35px;
+            color: $darken-blue;
+        }
+    }
+    .sec_container{
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+
+       .sec{
+
+        .listing_header{
+            width: 80%;
+            margin: 0 auto 14px auto;
+
+            h3{
+                @include Title4;
+                color: $blue1;
+                font-size: 20px;
+            }
+            p{
+                @include Font1;
+                color: $blue1;
+                font-size: 15px;
+            }
+        }
+
+        &.sec0{
+
+        }
+        &.sec1{
+
+        }
+        &.sec2{
+
+        }
+    } 
+    }
+    
+}
+</style>

@@ -79,7 +79,7 @@
                 </div>
             </nav>
         </div>
-        <div v-else>
+        <div class="link_vermais" v-else>
             <Link :href="ver_mais">Ver mais</Link>
         </div>
     </section>
@@ -156,10 +156,25 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .cards_list {
     display: flex;
     flex-direction: column;
     gap: 30px;
+}
+.link_vermais{
+    padding: 0 10% 0 10%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+
+    a{
+        @include Font2_I;
+        font-size: 18px;
+        color: $blue1;
+        text-decoration: underline;
+
+        @include hover1($blue1, transparent, transparent, $darken-blue, transparent, transparent, 200ms);
+    }
 }
 </style>
