@@ -1096,12 +1096,6 @@ select {
 .prose > :last-child {
 	margin-bottom: 0;
 }
-.static {
-	position: static;
-}
-.\!static {
-	position: static !important;
-}
 .fixed {
 	position: fixed;
 }

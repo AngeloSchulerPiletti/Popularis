@@ -1,42 +1,78 @@
 <template>
-    <div>
-        <div>
-            <div>
-                <h2>{{pauta[0]}}</h2>
-                <link-icon @click="copy_text"/>
+    <div class="card_container">
+        <div class="top">
+            <div class="header">
+                <h2>{{ pauta[0] }}</h2>
+                <link-icon class="card_share" @click="copy_text" />
             </div>
-            <p>{{pauta[1]}}</p>
+            <p>{{ pauta[1] }}</p>
         </div>
-        <div>
+        <div class="bottom">
             <ul>
                 <li v-for="(value, title) in pauta[4]" :key="title">
-                    {{title}}<span>{{value}}</span>
+                    {{ title }}<span>{{ value }}</span>
                 </li>
             </ul>
-            <span>{{pauta[2]}}</span>
+            <span class="id_card">{{ pauta[2] }}</span>
         </div>
     </div>
 </template>
 
-<script>
+<script scoped>
 import LinkIcon from "@/Components/SVGs/icons/LinkIcon";
 
 export default {
-    methods:{
-        copy_text(){
-            this.pauta[3].select();
-            document.execCommand('copy');
+    data() {
+        return {};
+    },
+    methods: {
+        copy_text(which) {
+            //
         },
     },
-    props:{
+    props: {
         pauta: Array, // [[Pauta format], [title, resume, id, url, {'titulo de prop1': prop1, ...}]]
     },
-    components:{
+    components: {
         LinkIcon,
-    }
-}
+    },
+};
 </script>
 
-<style>
+<style lang="scss" scoped>
+.card_container{
+    width: 80%;
+    margin: auto;
 
+    .top{
+        display: flex;
+        flex-direction: column;
+
+        .header{
+            display: flex;
+
+            h2{
+
+            }
+            .card_share{
+                width: 20px;
+                height: 20px;
+
+            }
+        }
+        p{
+
+        }
+    }
+    .bottom{
+        ul{
+            li{
+
+            }
+        }
+        .id_card{
+
+        }
+    }
+}
 </style>

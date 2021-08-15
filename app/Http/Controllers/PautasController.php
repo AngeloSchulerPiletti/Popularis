@@ -53,19 +53,20 @@ class PautasController extends Controller
         }
 
         $escope = [$section];
-        $page_config = ["Essas são as pautas " . $escope_title, [["Pautas em votação: ", "Aproveite para votar enquanto estão disponíveis"], ["Pautas passadas: ", "Aqui você pode ver as pautas que já foram votadas e seus resultados"], ["Pautas futuras: ", "Leia um pouco sobre as pautas que aguardam aprovação técnica"]]];
+        $page_config = ["Essas são as pautas " . $escope_title, [["Pautas passadas: ", "Aqui você pode ver as pautas que já foram votadas e seus resultados"], ["Pautas em votação: ", "Aproveite para votar enquanto estão disponíveis"], ["Pautas futuras: ", "Leia um pouco sobre as pautas que aguardam aprovação técnica"]]];
 
-        return Inertia::render('public/Pautas/Pautas', ['db_data' => $db_data, 'escope' => $escope, 'page_config' => $page_config]);
+        return Inertia::render('public/Pautas/Pautas', ['db_data' => $db_data, 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
     }
     public function show_section_type($section, $type)
     {
         if ((!in_array($section, self::PAUTAS_SECTION) || (!in_array($type, self::PAUTAS_TYPE)))) {
             abort(404);
         }
+        $escope_title = $section == "federal" ? "Federais" : "Estaduais";
 
-        // $escope = [$section, $type];
-        // $db_data = DB::table('pautas')->;
-        // $page_config = [];
-
+        $escope = [$section, $type];
+        $page_config = ["Essas são as pautas " . $escope_title, "Caro cidadão, procure sempre se informar antes de qualquer decisão. Aja com responsabilidade."];
+        
+        return Inertia::render('public/Pautas/Pautas', ['db_data' => "\$db_data", 'escope' => $escope, 'page_config' => $page_config]);
     }
 }
