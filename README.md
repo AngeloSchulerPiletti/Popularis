@@ -1,15 +1,12 @@
 ## Next step ##
 - DONE **Must increase date when pauta request is approved**
-- Must increase more performance about the header
-- Need to style account page
 - Need to complete the project documentation
-- Usar diretivas v-for para links
 - DONE **Don't forget about which pauta an elector can vote considering his state**
 - DONE List pautas to be approved at "Pautas XXX Futuras"
 - DONE List elector's voted pautas on "Meus Votos"
 - Criar página com estatísticas das pautas do político para ele mesmo
 - Criar listagem do histórico de pautas do político
-- Create search system
+- DONE Create search system
  
 
 ### Ideias para o aperfeiçoamento futuro ### 
