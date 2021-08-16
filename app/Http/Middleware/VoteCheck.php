@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
 class VoteCheck
 {
     /**
-     * Handle an incoming request.
+     * Para caso de tentativa de voto duplo
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next

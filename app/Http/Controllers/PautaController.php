@@ -20,16 +20,16 @@ class PautaController extends Controller
         $votes = implode("", [$his_pos, $his_neg]);
         $votes = explode("-", $votes);
 
-        $votou = false;
+        $cannot_vote = false;
         foreach ($votes as $id) {
-            if($id == $pauta->id){
-                $votou = true;
+            if($id == $pauta->id || $pauta->status == 1){
+                $cannot_vote = true;
                 break;
             }    
         }
         
         if($pauta && (in_array($pauta->status, [1, 2, 3]))){
-            return Inertia::render('public/Pautas/PautaModel', ['status' => $props, 'pauta' => $pauta, 'votou' => $votou]);
+            return Inertia::render('public/Pautas/PautaModel', ['status' => $props, 'pauta' => $pauta, 'votou' => $cannot_vote]);
         }
         else if($pauta->status == 4){
             return Inertia::render('public/Unavailable', ['suggestions' => ['Página Inicial' => route('inicio'), 'Voltar para página anterior' => URL::previous() ], 'page_config' => ['Essa pauta ainda não está disponível', 'Essa pauta não está disponível porque aguarda aprovação do técnico. Para entender mais acesso nosso FAQ.']]);
