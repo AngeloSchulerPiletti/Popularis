@@ -10,6 +10,7 @@ use App\Http\Controllers\PoliticoController;
 use App\Http\Controllers\TecnicoController;
 use App\Http\Controllers\AdminPautasController;
 use App\Http\Controllers\PaginationController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,10 @@ Route::middleware('auth')->get('/pauta/{url}',                          [PautaCo
 Route::middleware(['auth', 'has_votted'])->post('/pauta/{url}',         [PautaController::class, 'store'])->name('pauta.store');
 
 Route::post('/paginacao',    [PaginationController::class, 'index'])->name('pagination.load');
+
+
+//---------------------------- SEARCH -------------------------------\\
+Route::get('/busca/{keywords}', [SearchController::class, 'index'])->name('busca.show');
 
 
 

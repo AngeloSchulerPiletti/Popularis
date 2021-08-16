@@ -100,14 +100,16 @@ export default {
             listing: {
                 perpage: 5,
                 actual_page: 1,
+                from_search: false,
             },
             pautas_save: [],
         };
     },
     methods: {
         setList(which) {
-            this.listing.actual_page = which;
-            this.$inertia.form(this.listing).post(route("pagination.load"));
+                this.listing.from_search = this.from_search ? this.from_search : false;
+                this.listing.actual_page = which;
+                this.$inertia.form(this.listing).post(route("pagination.load"));
         },
         refresh() {
             if (this.pautas_data && this.pautas_data != this.pautas_save) {
@@ -152,6 +154,7 @@ export default {
         ver_mais: String,
         list_name: Number,
         total_pautas: Number, 
+        from_search: Boolean,
     },
     components: {
         "pauta-card": PautaVoteCard,

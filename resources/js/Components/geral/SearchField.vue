@@ -28,8 +28,8 @@ export default {
                 wall = document.querySelector('#wall');
             var state = container.dataset.anim;
 
-            if(state == "on"){
-                console.log(input.value);
+            if(state == "on" && input.value != ""){
+                this.$inertia.get(route('busca.show', {keywords: input.value}));
             }
             else{
                 wall.style.display = "block";

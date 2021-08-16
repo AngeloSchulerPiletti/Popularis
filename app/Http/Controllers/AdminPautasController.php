@@ -18,7 +18,7 @@ class AdminPautasController extends Controller
         return $content;
     }
 
-    public function stringToURL($title)
+    static public function stringToURL($title)
     {
         $changes = array(
             'Š' => 's', 'š' => 's', 'Ð' => 'dj', '' => 'z', '' => 'z', 'À' => 'a', 'Á' => 'a', 'Â' => 'a', 'Ã' => 'a', 'Ä' => 'a',
@@ -166,7 +166,7 @@ class AdminPautasController extends Controller
         $escopo = Auth::user()->politico_tipo == 1 ? "estadual" : "federal";
         $autores = $this->AutorRegEx($request->autores);
         
-        $url = $this->stringToURL($request->titulo);
+        $url = $this::stringToURL($request->titulo);
         $url .= DB::table('pautas')->where('url', $url)->first() ? date('-d-m-Y-his') : "";
         
 
