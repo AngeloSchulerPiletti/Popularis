@@ -3,6 +3,7 @@
 - Must increase more performance about the header
 - Need to style account page
 - Need to complete the project documentation
+- Usar diretivas v-for para links
 - DONE **Don't forget about which pauta an elector can vote considering his state**
 - DONE List pautas to be approved at "Pautas XXX Futuras"
 - DONE List elector's voted pautas on "Meus Votos"

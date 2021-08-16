@@ -1,6 +1,7 @@
 <template>
     <div id="website">
         <messages-report :errors="$page.props.errors" :status="status" class="messages"/>
+
         <info-window id="info_window" :window_content="content_to_pass"/>
         <div id="header_container">
             <header-component />

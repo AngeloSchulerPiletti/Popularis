@@ -1,1 +1,6 @@
 $lateral_padding_top: 2.5vw;
+
+// SEARCH FIELD COMPONENT 
+$padding: 9px;
+$input: 250px;
+$transform_calc: -((2*$padding) + $input);

@@ -1,5 +1,7 @@
 <template>
     <app-public>
+        <search-field />
+
         <!-- MOSTRA ATUAL, PASSADA E FUTURA -->
         <section v-if="!has_type" class="section">
             <div class="header">
@@ -46,6 +48,7 @@
 <script>
 import AppPublic from "@/Layouts/AppPublic";
 import ListageVotePautas from "@/Components/geral/ListageVotePautas";
+import SearchField from "@/Components/geral/SearchField";
 
 export default {
     data() {
@@ -96,6 +99,7 @@ export default {
     components: {
         AppPublic,
         "listing-cards": ListageVotePautas,
+        SearchField,
     },
 };
 </script>
