@@ -58,16 +58,17 @@ class PautasController extends Controller
     }
     public function show_section_type($section, $type, Request $request)
     {
+        $status_arr = ['passadas' => 1, 'atuais' => 2, 'futuras' => 3];
+
         $escope = [$section, $type];
         $escope_title = $section == "federal" ? "Federais" : "Estaduais";
-        $page_config = ["Essas são as pautas " . $escope_title, "Caro cidadão, procure sempre se informar antes de qualquer decisão. Aja com responsabilidade."];
+        $page_config = [["Essas são as pautas " . $escope_title. " passadas", "Você pode acessá-las para verificar o resultado de uma votação passada."], ["Essas são as pautas " . $escope_title. " atuais", "Você pode acessar estas pautas e exercer a sua cidadania votando como acreditar ser melhor."], ["Essas são as pautas " . $escope_title. " futuras", "Tenha uma prévia de pautas que aguardam a análise de um técnico para serem aprovadas."]];
 
 
         if (null === $request->session()->get('pagination')) {
             if ((!in_array($section, self::PAUTAS_SECTION) || (!in_array($type, self::PAUTAS_TYPE)))) {
                 abort(404);
             }
-            $status_arr = ['passadas' => 1, 'atuais' => 2, 'futuras' => 3];
 
             $db_data_count = $section == "federal" ? DB::table('pautas')
                 ->where('escopo', $section)
@@ -94,13 +95,13 @@ class PautasController extends Controller
                 ->get();
 
             //$db_data: 1 array, pauta->local == auth->user->uf, pauta->status == $type(status);
-            return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
+            return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config[$status_arr[$type] - 1], 'escope_url' => $section]);
         } else {
             $pagination = $request->session()->get('pagination');
             $db_data = $pagination[0];
             $total_pautas = $pagination[1];
 
-            return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config, 'escope_url' => $section]);
+            return Inertia::render('public/Pautas/Pautas', ['total_pautas' => $total_pautas, 'db_data' => [$db_data], 'escope' => $escope, 'page_config' => $page_config[$status_arr[$type] - 1], 'escope_url' => $section]);
         }
     }
 }

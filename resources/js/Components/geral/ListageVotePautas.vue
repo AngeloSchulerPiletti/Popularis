@@ -84,7 +84,7 @@
         </div>
     </section>
     <section id="pagination_container" v-else>
-        <h3 class="warn">Por quanto não existem pautas para serem apresentadas</h3>
+        <h3 class="warn">Por enquanto não existem pautas para serem apresentadas</h3>
     </section>
 </template>
 

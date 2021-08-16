@@ -22857,7 +22857,7 @@ var _hoisted_16 = {
 
 var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h3", {
   "class": "warn"
-}, "Por quanto não existem pautas para serem apresentadas", -1
+}, "Por enquanto não existem pautas para serem apresentadas", -1
 /* HOISTED */
 );
 
