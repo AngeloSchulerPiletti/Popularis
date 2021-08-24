@@ -8,7 +8,46 @@
             <section class="body">
                 <div class="subject">
                     <h3>Resumo</h3>
-                    <p></p>
+                    <p>
+                        Popularis é uma plataforma online de caráter
+                        governamental que visa instituir uma democracia
+                        participativa contornando problemas de corrupção e
+                        supressão de minorias, como podem ser observados em
+                        sistemas de representatividade indireta. Atualmente, com
+                        82,7% dos brasileiros com acesso a internet, a
+                        implementação desse sistema fica cada vez mais viável.
+                        Além disso, essa solução é técnica e tecnologicamente
+                        mais segura que urnas eletrônicas e até mesmo o voto
+                        escrito. Isso porque a efetivação dessa tecnologia
+                        ocorrerá por meio do emprego de um sistema de
+                        blockchain, no qual cada Projeto de Lei (nomeado como
+                        Pauta), terá a sua própria blockchain. O eleitor, ao
+                        votar, receberá um Hash (uma sequência de caracteres
+                        resultantes de uma criptografia) como comprovante do seu
+                        voto, essa sequência mantém o anonimato do voto,
+                        evitando a compra de voto e atitudes fraudulentas.
+                        Todavia em caso de audição de votos, o Hash apontará se
+                        o voto registrado em nome do usuário condiz com o
+                        verdadeiro voto. O desenvolvimento desse projeto tem se
+                        mostrado comprovadamente possível. A título de exemplo:
+                        em junho de 2018, a União Europeia lançou um evento
+                        chamado “Blockathon”, no qual 11 equipe criaram e
+                        validaram ideias baseadas em blockchain ante a fraude de
+                        produtos. Da mesma forma, o protótipo desse projeto
+                        exprimiu sucesso em descrever o fluxo de trabalho que a
+                        aplicação efetiva deveria ter. Afim de principiar a
+                        aplicação desse projeto em uma situação real, é proposta
+                        a instalação gradativa primeiro municipalmente, e então
+                        governamental e federativamente. Detalhes como: a
+                        possiblidade de ver os votos durante a votação, poder ou
+                        não ver as pautas de outros estados, etc. São
+                        exclusivamente de caráter administrativo, isto é, são
+                        ajustes extremamente simples tecnicamente. Com isso,
+                        Popularis manifesta grande aptidão para estabelecer uma
+                        democracia verdadeiramente democrática, elevando o grau
+                        de liberdade da sociedade e, com isso, tornando-se ainda
+                        mais justa.
+                    </p>
                 </div>
                 <div class="subject">
                     <h3>Introdução</h3>
@@ -79,7 +118,10 @@
                                 uma <em>dashboard</em> que facilita seu acesso a
                                 algumas ferramentas da aplicação
                             </p>
-                            <p>Todos privilégios de um Eleitor, com excessão daqueles relacionados a votação.</p>
+                            <p>
+                                Todos privilégios de um Eleitor, com excessão
+                                daqueles relacionados a votação.
+                            </p>
                         </div>
                         <div class="subtopic">
                             <h5>Político</h5>
